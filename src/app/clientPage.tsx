@@ -49,10 +49,10 @@ export default function ClientHome({
   }
 
   return (
-    <div className="flex flex-col md:flex-row h-full">
+    <div className="flex flex-col md:flex-row h-[80vh]">
       <motion.div
         layout
-        className="bg-bg-dark flex-1"
+        className="bg-bg-dark flex-1 pb-20"
         transition={{ duration: 0.3 }}
       >
         <DecisionTreeHistory
