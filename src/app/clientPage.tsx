@@ -7,7 +7,7 @@ import DecisionTreeHistory, {
 import { DecisionTreeData } from '@/lib/getDecisionTree'
 import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 export default function ClientHome({
   treeData,
@@ -49,12 +49,8 @@ export default function ClientHome({
   }
 
   return (
-    <div className="flex flex-col md:flex-row h-[80vh]">
-      <motion.div
-        layout="size"
-        className="bg-bg-dark flex-1 pb-20"
-        transition={{ duration: 0.35 }}
-      >
+    <div className="flex flex-col md:flex-row h-[80vh] overflow-x-hidden relative">
+      <div className="bg-bg-dark flex-1 pb-20">
         <DecisionTreeHistory
           history={history}
           onItemPressed={(index) =>
@@ -78,16 +74,39 @@ export default function ClientHome({
             ])
           }}
         />
-      </motion.div>
-      {history.length === 0 && (
-        <motion.div
-          layout="position"
-          transition={{ duration: 0.3 }}
-          className="bg-green-200 flex-1"
-        >
-          b
-        </motion.div>
-      )}
+      </div>
+      <AnimatePresence initial={false} mode="popLayout">
+        {history.length === 0 ? (
+          <motion.div
+            key={1}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{
+              ease: 'easeOut',
+            }}
+            className="bg-green-200 flex-1"
+          >
+            b
+          </motion.div>
+        ) : (
+          <motion.div
+            key={2}
+            style={{
+              originX: 0,
+            }}
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            exit={{ scaleX: 0, opacity: 0 }}
+            transition={{
+              ease: 'easeOut',
+            }}
+            className="bg-bg-dark flex-1"
+          >
+            b
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

@@ -32,6 +32,7 @@ export default function DecisionTree({
           transition={{
             type: 'tween',
           }}
+          className="md:max-w-[50vw]"
         >
           <Heading variant="h1" className="text-white text-center">
             {treeData.title}
