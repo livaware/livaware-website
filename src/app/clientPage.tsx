@@ -51,7 +51,7 @@ export default function ClientHome({
   return (
     <div className="flex flex-col md:flex-row h-[80vh]">
       <motion.div
-        layout
+        layout="size"
         className="bg-bg-dark flex-1 pb-20"
         transition={{ duration: 0.3 }}
       >
@@ -81,7 +81,7 @@ export default function ClientHome({
       </motion.div>
       {history.length === 0 && (
         <motion.div
-          layout
+          layout="position"
           transition={{ duration: 0.3 }}
           className="bg-green-200 flex-1"
         >
