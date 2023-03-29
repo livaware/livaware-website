@@ -3,14 +3,15 @@ import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import ContentContainer from '@/components/Layout/ContentContainer'
 import Header from '@/components/Layout/Header'
+import getDecisionTree from '@/lib/getDecisionTree'
+import ClientHome from './clientPage'
 
-export default function Home() {
-  return (
-    <div className="grid md:grid-cols-2 h-full">
-      <div className="bg-red-200">a</div>
-      <div className="bg-green-200">b</div>
-    </div>
+export default async function Home() {
+  const decisionTree = await getDecisionTree(
+    '666769b6-060e-4d55-a8ad-154a5b3e7619'
   )
+
+  return <ClientHome treeData={decisionTree} />
 }
 
 export const metadata = {

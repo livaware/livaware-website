@@ -19,12 +19,16 @@ const headingVariant: Record<string, headingVariantConfig> = {
 export default function Heading({
   variant,
   children,
+  className,
 }: {
   variant: keyof typeof headingVariant
   children: ReactNode
+  className?: string
 }) {
   const props = headingVariant[variant]
   return (
-    <props.element className={props.tailwindStyle}>{children}</props.element>
+    <props.element className={`${props.tailwindStyle} ${className}`}>
+      {children}
+    </props.element>
   )
 }
