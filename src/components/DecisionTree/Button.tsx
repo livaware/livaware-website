@@ -16,7 +16,7 @@ export default function DecisionTreeButton({
   const Element = onClick ? 'button' : Link
   return (
     <Element
-      className="text-white bg-bg-dark hover:bg-brand-green text-left w-full p-4 border-white border-solid border rounded-sm grid grid-cols-[1fr_auto]"
+      className="text-white bg-bg-dark hover:bg-brand-green text-left w-full p-4 rounded-sm grid grid-cols-[1fr_auto]"
       onClick={onClick}
       href={href ?? ''}
     >
