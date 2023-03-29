@@ -18,13 +18,15 @@ function HeaderButton({
   )
 }
 
+const MENU_HEIGHT = 76
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [menuHeight, setMenuHeight] = useState(0)
+  const [menuHeight, setMenuHeight] = useState(MENU_HEIGHT)
   const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setMenuHeight(menuRef.current?.clientHeight ?? 0)
+    setMenuHeight(menuRef.current?.clientHeight ?? MENU_HEIGHT)
   }, [])
 
   return (

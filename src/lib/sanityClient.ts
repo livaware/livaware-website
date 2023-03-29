@@ -2,7 +2,7 @@ import { createClient } from 'next-sanity'
 import { FooterConfigData } from './sanityTypes/footerConfig'
 
 const sanityClient = createClient({
-  projectId: '42ps0jy0',
+  projectId: '41p617pr',
   dataset: 'livaware-website',
   apiVersion: '2023-03-25',
   useCdn: false,

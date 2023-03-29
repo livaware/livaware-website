@@ -1,0 +1,11 @@
+'use client'
+
+import ChatBot from '@/components/ChatBot'
+
+export default function FAQClient() {
+  return (
+    <>
+      <ChatBot />
+    </>
+  )
+}

@@ -6,9 +6,10 @@ import Header from '@/components/Layout/Header'
 
 export default function Home() {
   return (
-    <>
-      <Header />
-    </>
+    <div className="grid md:grid-cols-2 h-full">
+      <div className="bg-red-200">a</div>
+      <div className="bg-green-200">b</div>
+    </div>
   )
 }
 
