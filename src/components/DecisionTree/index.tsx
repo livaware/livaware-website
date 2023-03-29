@@ -39,12 +39,7 @@ export default function DecisionTree({
           </Heading>
           <div className="grid gap-5 px-8 opacity-90">
             {treeData.content && (
-              <div className="grid grid-cols-[auto_1fr] gap-4 text-white">
-                <div className="border border-white rounded-full w-8 h-8 text-center align-middle leading-7">
-                  {currentStepNumber}
-                </div>
-                <span className="leading-7">{treeData.content}</span>
-              </div>
+              <div className="text-white ml-4">{treeData.content}</div>
             )}
             {treeData.options.map((option, index) => (
               <div key={option._key}>
