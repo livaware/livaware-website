@@ -53,7 +53,7 @@ export default function ClientHome({
       <motion.div
         layout="size"
         className="bg-bg-dark flex-1 pb-20"
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.35 }}
       >
         <DecisionTreeHistory
           history={history}
