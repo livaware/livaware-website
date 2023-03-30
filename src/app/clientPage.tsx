@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import IntroAnimation from '@/components/IntroAnimation'
 import useIsMobile from '@/lib/useIsMobile'
+import DecisionTreeButton from '@/components/DecisionTree/Button'
 
 export default function ClientHome({
   treeData,
@@ -95,7 +96,15 @@ export default function ClientHome({
               }}
               className="bg-green-200 flex-1"
             >
-              b
+              <div className="aspect-video grid items-center justify-center text-white text-4xl bg-black">
+                <span>VIDEO</span>
+              </div>
+              <div className="mt-5 p-4">
+                <DecisionTreeButton
+                  text="Who we are, what we do, how we can help"
+                  href="#"
+                />
+              </div>
             </motion.div>
           ) : (
             <motion.div
@@ -111,9 +120,7 @@ export default function ClientHome({
                 duration: 1,
               }}
               className="bg-bg-dark flex-1"
-            >
-              b
-            </motion.div>
+            ></motion.div>
           )}
         </AnimatePresence>
       </div>

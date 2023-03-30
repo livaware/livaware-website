@@ -45,14 +45,10 @@ export default function Header() {
         ref={menuRef}
         className="fixed w-screen [background-color:rgba(255,255,255,0.9)] [backdrop-filter:blur(10px)] grid justify-items-center z-20"
       >
-        <div className="grid grid-cols-[4rem_auto_4rem] items-center md:grid-cols-3 max-w-site-width w-full px-8">
+        <div className="grid grid-cols-[auto_1fr] items-center md:grid-cols-3 w-full px-2 md:px-8">
           <MenuButton onClick={toggleMenu} active={menuOpen} />
-          <div className="py-4 grid justify-items-center items-center">
+          <div className="py-4 grid justify-items-end md:justify-items-center items-center">
             <LogoType variant="navy" onClick={toggleMenu} />
-          </div>
-          <div className="hidden md:grid grid-cols-2">
-            {/* <HeaderButton>Contact</HeaderButton>
-            <HeaderButton green>How can we help?</HeaderButton> */}
           </div>
         </div>
       </div>
