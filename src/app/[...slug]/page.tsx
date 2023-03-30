@@ -52,7 +52,7 @@ const GenericPage = async ({ params }: { params: GenericPageStaticParams }) => {
   }
 
   return (
-    <ContentContainer>
+    <ContentContainer key={params.slug}>
       <div className="px-5">
         <Heading variant="h1">{data.title}</Heading>
         {data.subTitle && <Heading variant="h2">{data.subTitle}</Heading>}

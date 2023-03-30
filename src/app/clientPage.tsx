@@ -1,17 +1,17 @@
 'use client'
 
 import DecisionTree from '@/components/DecisionTree'
+import DecisionTreeButton from '@/components/DecisionTree/Button'
 import DecisionTreeHistory, {
   DecisionTreeHistoryItem,
 } from '@/components/DecisionTree/History'
-import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
-import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import IntroAnimation from '@/components/IntroAnimation'
-import useIsMobile from '@/lib/useIsMobile'
-import DecisionTreeButton from '@/components/DecisionTree/Button'
 import ProgressBar from '@/components/ProgressBar'
 import { getDecisionTreeDepth } from '@/lib/getDecisionTree'
+import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
+import useIsMobile from '@/lib/useIsMobile'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useState } from 'react'
 
 export default function ClientHome({
   treeData,
@@ -26,8 +26,6 @@ export default function ClientHome({
   const currentTreeDepth = getDecisionTreeDepth(currentTree)
   const progress =
     currentTreeDepth === 1 ? 1 : 1 - currentTreeDepth / maximumTreeDepth
-
-  console.log(maximumTreeDepth, currentTreeDepth, progress)
 
   const selectOption = (currentTree: DecisionTreeItem, selection: number) => {
     const newState = currentTree.options[selection].nextStep
