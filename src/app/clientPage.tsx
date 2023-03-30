@@ -56,7 +56,7 @@ export default function ClientHome({
       <IntroAnimation />
       <div className="flex flex-col md:flex-row h-[80vh] overflow-x-hidden relative">
         <div className="bg-bg-dark flex-1 pb-20 flex justify-center">
-          <div className="max-w-lg w-full h-[60vh] md:h-[80vh]">
+          <div className="max-w-lg w-full min-h-[60vh] md:min-h-[80vh]">
             <DecisionTreeHistory
               history={history}
               onItemPressed={(index) =>
