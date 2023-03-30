@@ -14,7 +14,7 @@ export default function IntroAnimation() {
       await animate(
         '#letters > span',
         { opacity: 1 },
-        { duration: 0.1, delay: stagger(0.1) }
+        { duration: 0.1, delay: stagger(0.025) }
       )
       await animate('#underline', { scaleX: 0 }, { duration: 0 })
       await animate('#underline', { scaleX: 1 }, { duration: 1 })
