@@ -110,20 +110,24 @@ export default function ClientHome({
                 ease: 'easeOut',
                 duration: 1,
               }}
-              className="bg-brand-navy flex-1"
+              className="bg-white flex-1 grid grid-rows-[1fr_auto] items-center"
             >
-              <ExpandingVideo />
-              <div className="mt-5 p-4">
-                <QuoteFader className="text-white" quotes={quotes} />
+              <div className="p-4">
+                <div className="my-5">
+                  <QuoteFader className="text-brand-navy" quotes={quotes} />
+                </div>
+                <a
+                  className="text-brand-navy"
+                  href="https://www.doctify.com/uk/practice/livaware"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  See more on <span className="text-brand-green">Doctify</span>
+                </a>
               </div>
-              <a
-                className="text-white"
-                href="https://www.doctify.com/uk/practice/livaware"
-                target="_blank"
-                rel="noopener"
-              >
-                See more on <span className="text-brand-green">Doctify</span>
-              </a>
+              <video autoPlay muted loop className="w-full aspect-video">
+                <source src="/video/hero-video.mp4" type="video/mp4" />
+              </video>
             </motion.div>
           ) : (
             <motion.div

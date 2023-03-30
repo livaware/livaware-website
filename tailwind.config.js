@@ -7,8 +7,9 @@ module.exports = {
     },
     extend: {
       colors: {
-        'brand-navy': '#020121',
         'bg-light-primary': '#efe4e5',
+        'brand-navy': '#020121',
+        'brand-warm-grey': '#e4eaeb',
         'brand-green': '#00cd9a',
         'text-light': '#fff',
       },
