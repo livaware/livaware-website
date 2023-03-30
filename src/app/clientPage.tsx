@@ -76,6 +76,7 @@ export default function ClientHome({
           autoPlay
           muted
           loop
+          playsInline
           className="w-full h-full absolute top-0 left-0 object-cover"
         >
           <source src="/video/hero-video.mp4" type="video/mp4" />
