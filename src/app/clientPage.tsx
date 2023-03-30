@@ -4,24 +4,30 @@ import DecisionTree from '@/components/DecisionTree'
 import DecisionTreeHistory, {
   DecisionTreeHistoryItem,
 } from '@/components/DecisionTree/History'
-import { DecisionTreeData } from '@/lib/getDecisionTree'
 import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import IntroAnimation from '@/components/IntroAnimation'
 import useIsMobile from '@/lib/useIsMobile'
 import DecisionTreeButton from '@/components/DecisionTree/Button'
+import ProgressBar from '@/components/ProgressBar'
+import { getDecisionTreeDepth } from '@/lib/getDecisionTree'
 
 export default function ClientHome({
   treeData,
 }: {
-  treeData: DecisionTreeData
+  treeData: DecisionTreeItem
 }) {
-  const [currentTree, setCurrentTree] = useState(treeData.tree)
+  const [currentTree, setCurrentTree] = useState(treeData)
   const [history, setHistory] = useState<DecisionTreeHistoryItem[]>([])
   const isMobile = useIsMobile()
 
-  const progress = history.length / treeData.depth
+  const maximumTreeDepth = getDecisionTreeDepth(treeData)
+  const currentTreeDepth = getDecisionTreeDepth(currentTree)
+  const progress =
+    currentTreeDepth === 1 ? 1 : 1 - currentTreeDepth / maximumTreeDepth
+
+  console.log(maximumTreeDepth, currentTreeDepth, progress)
 
   const selectOption = (currentTree: DecisionTreeItem, selection: number) => {
     const newState = currentTree.options[selection].nextStep
@@ -33,7 +39,7 @@ export default function ClientHome({
   const replayDecisions = (decisions: number[]) => {
     setHistory([])
 
-    let current = treeData.tree
+    let current = treeData
 
     const newHistory: DecisionTreeHistoryItem[] = []
 
@@ -55,6 +61,8 @@ export default function ClientHome({
   return (
     <>
       <IntroAnimation />
+      <ProgressBar progress={progress} />
+
       <div className="flex flex-col md:flex-row min-h-[80vh] overflow-x-hidden relative">
         <div className="bg-bg-dark flex-1 pb-20 flex justify-center">
           <div className="max-w-lg w-full min-h-[60vh] md:min-h-[80vh]">

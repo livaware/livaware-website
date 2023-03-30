@@ -1,17 +1,20 @@
 import sanityClient from './sanityClient'
 import DecisionTreeItem from './sanityTypes/decisionTreeItem'
 
-export interface DecisionTreeData {
-  tree: DecisionTreeItem
-  depth: number
+export function getDecisionTreeDepth(
+  items: DecisionTreeItem | undefined
+): number {
+  if (!items) return 0
+  return (
+    1 +
+    Math.max(
+      0,
+      ...items.options.map((option) => getDecisionTreeDepth(option.nextStep))
+    )
+  )
 }
 
-export default async function getDecisionTree(
-  id: string,
-  currentDepth?: number
-) {
-  let depth = (currentDepth ?? 1) + 1
-
+export default async function getDecisionTree(id: string) {
   const tree = (
     await sanityClient.fetch<DecisionTreeItem[]>(`
         *[_type == "decisionTreeItem" && _id == "${id}"]
@@ -34,10 +37,9 @@ export default async function getDecisionTree(
   for (const option of tree.options) {
     if (option?.nextStep?._ref) {
       const expanded = await getDecisionTree(option.nextStep._ref)
-      option.nextStep = expanded.tree
-      depth = depth + expanded.depth
+      option.nextStep = expanded
     }
   }
 
-  return { tree: tree, depth } as DecisionTreeData
+  return tree
 }
