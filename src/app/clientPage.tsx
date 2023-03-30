@@ -71,8 +71,8 @@ export default function ClientHome({
       <IntroAnimation />
       <ProgressBar progress={progress} />
 
-      <div className="flex flex-col md:flex-row min-h-[80vh] overflow-x-hidden relative bg-bg-dark">
-        <div className="bg-bg-dark flex-1 pb-20 flex justify-center">
+      <div className="flex flex-col md:flex-row min-h-[80vh] overflow-x-hidden relative bg-brand-navy">
+        <div className="bg-brand-navy flex-1 pb-20 flex justify-center">
           <div className="max-w-lg w-full min-h-[60vh] md:min-h-[80vh]">
             <DecisionTreeHistory
               history={history}
@@ -110,7 +110,7 @@ export default function ClientHome({
                 ease: 'easeOut',
                 duration: 1,
               }}
-              className="bg-bg-dark flex-1"
+              className="bg-brand-navy flex-1"
             >
               <ExpandingVideo />
               <div className="mt-5 p-4">
@@ -138,7 +138,7 @@ export default function ClientHome({
                 ease: 'easeOut',
                 duration: 1,
               }}
-              className="bg-bg-dark flex-1"
+              className="bg-brand-navy flex-1"
             ></motion.div>
           )}
         </AnimatePresence>

@@ -10,7 +10,7 @@ export default function MenuButton({
   const [hovered, setHovered] = useState(false)
   const css =
     active || hovered
-      ? '[background-position:100%_100%] [background-size:100%_2px] text-bg-dark'
+      ? '[background-position:100%_100%] [background-size:100%_2px] text-brand-navy'
       : '[background-position:0_100%] [background-size:0%_2px]'
   return (
     <button

@@ -29,7 +29,7 @@ export default function IntroAnimation() {
     <div ref={scope}>
       <div
         id="container"
-        className="w-screen h-screen z-50 fixed top-0 left-0 bg-bg-dark opacity-1"
+        className="w-screen h-screen z-50 fixed top-0 left-0 bg-brand-navy opacity-1"
       >
         <div
           id="logo"
@@ -47,7 +47,7 @@ export default function IntroAnimation() {
             </div>
             <span
               id="underline"
-              className="absolute top-0 left-0 origin-left scale-x-0 text-bg-dark border-b-white border-b [z-index:-1]"
+              className="absolute top-0 left-0 origin-left scale-x-0 text-brand-navy border-b-white border-b [z-index:-1]"
             >
               Your
             </span>

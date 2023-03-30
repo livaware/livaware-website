@@ -7,7 +7,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        'bg-dark': '#020121',
+        'brand-navy': '#020121',
         'bg-light-primary': '#efe4e5',
         'brand-green': '#00cd9a',
         'text-light': '#fff',

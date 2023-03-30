@@ -14,7 +14,7 @@ export default function DecisionTreeButton({
   onClick?: () => void
 }) {
   const css =
-    'text-white bg-bg-dark hover:bg-brand-green text-left w-full p-4 rounded-sm grid grid-cols-[1fr_auto]'
+    'text-white bg-brand-navy hover:bg-brand-green text-left w-full p-4 rounded-sm grid grid-cols-[1fr_auto]'
   const content = (
     <>
       <span>{text}</span>
