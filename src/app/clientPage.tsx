@@ -5,18 +5,28 @@ import DecisionTreeButton from '@/components/DecisionTree/Button'
 import DecisionTreeHistory, {
   DecisionTreeHistoryItem,
 } from '@/components/DecisionTree/History'
+import ExpandingVideo from '@/components/ExpandingVideo'
 import IntroAnimation from '@/components/IntroAnimation'
+import ContentContainer from '@/components/Layout/ContentContainer'
 import ProgressBar from '@/components/ProgressBar'
+import QuoteFader from '@/components/QuoteFader'
+import Quotation from '@/components/Typography/Quotation'
 import { getDecisionTreeDepth } from '@/lib/getDecisionTree'
+import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
+import Quote from '@/lib/sanityTypes/quote'
 import useIsMobile from '@/lib/useIsMobile'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 
 export default function ClientHome({
   treeData,
+  quotes,
+  content,
 }: {
   treeData: DecisionTreeItem
+  quotes: Quote[]
+  content: any
 }) {
   const [currentTree, setCurrentTree] = useState(treeData)
   const [history, setHistory] = useState<DecisionTreeHistoryItem[]>([])
@@ -61,7 +71,7 @@ export default function ClientHome({
       <IntroAnimation />
       <ProgressBar progress={progress} />
 
-      <div className="flex flex-col md:flex-row min-h-[80vh] overflow-x-hidden relative">
+      <div className="flex flex-col md:flex-row min-h-[80vh] overflow-x-hidden relative bg-bg-dark">
         <div className="bg-bg-dark flex-1 pb-20 flex justify-center">
           <div className="max-w-lg w-full min-h-[60vh] md:min-h-[80vh]">
             <DecisionTreeHistory
@@ -100,17 +110,20 @@ export default function ClientHome({
                 ease: 'easeOut',
                 duration: 1,
               }}
-              className="bg-green-200 flex-1"
+              className="bg-bg-dark flex-1"
             >
-              <div className="aspect-video grid items-center justify-center text-white text-4xl bg-black">
-                <span>VIDEO</span>
-              </div>
+              <ExpandingVideo />
               <div className="mt-5 p-4">
-                <DecisionTreeButton
-                  text="Who we are, what we do, how we can help"
-                  href="#"
-                />
+                <QuoteFader className="text-white" quotes={quotes} />
               </div>
+              <a
+                className="text-white"
+                href="https://www.doctify.com/uk/practice/livaware"
+                target="_blank"
+                rel="noopener"
+              >
+                See more on <span className="text-brand-green">Doctify</span>
+              </a>
             </motion.div>
           ) : (
             <motion.div
@@ -130,6 +143,9 @@ export default function ClientHome({
           )}
         </AnimatePresence>
       </div>
+      <ContentContainer>
+        <PortableTextRenderer content={content} />
+      </ContentContainer>
     </>
   )
 }

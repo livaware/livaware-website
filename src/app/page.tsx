@@ -23,9 +23,17 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   const pageData = await getPageData()
+  if (!pageData) return null
+
   const decisionTree = await getDecisionTree(
     pageData?.decisionTreeRoot?._ref ?? ''
   )
 
-  return <ClientHome treeData={decisionTree} />
+  return (
+    <ClientHome
+      treeData={decisionTree}
+      quotes={pageData.quotes}
+      content={pageData.content}
+    />
+  )
 }

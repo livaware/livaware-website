@@ -1,14 +1,7 @@
+import splitCharacters from '@/lib/splitCharacters'
 import { motionValue, stagger, useAnimate } from 'framer-motion'
 import { useEffect, useMemo } from 'react'
 import Logo from '../Logo'
-
-function splitPhrase(input: string) {
-  return Array.from(input).map((x, i) => (
-    <span key={i} className="opacity-0">
-      {x}
-    </span>
-  ))
-}
 
 export default function IntroAnimation() {
   const [scope, animate] = useAnimate()
@@ -25,7 +18,7 @@ export default function IntroAnimation() {
       )
       await animate('#underline', { scaleX: 0 }, { duration: 0 })
       await animate('#underline', { scaleX: 1 }, { duration: 1 })
-      await animate('#container', { opacity: 0 }, { duration: 1, delay: 2 })
+      await animate('#container', { opacity: 0 }, { duration: 1, delay: 0.5 })
       await animate('#container', { display: 'none' }, { duration: 0 })
     }
 
@@ -50,7 +43,7 @@ export default function IntroAnimation() {
         >
           <div className="relative">
             <div id="letters" className="">
-              {...splitPhrase('Your Personal Healthcare Team')}
+              {...splitCharacters('Your Personal Healthcare Team')}
             </div>
             <span
               id="underline"
