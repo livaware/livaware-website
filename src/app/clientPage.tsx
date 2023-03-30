@@ -54,7 +54,7 @@ export default function ClientHome({
   return (
     <>
       <IntroAnimation />
-      <div className="flex flex-col md:flex-row h-[80vh] overflow-x-hidden relative">
+      <div className="flex flex-col md:flex-row min-h-[80vh] overflow-x-hidden relative">
         <div className="bg-bg-dark flex-1 pb-20 flex justify-center">
           <div className="max-w-lg w-full min-h-[60vh] md:min-h-[80vh]">
             <DecisionTreeHistory
