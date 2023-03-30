@@ -45,7 +45,7 @@ export default function IntroAnimation() {
         </div>
         <div
           id="letterContainer"
-          className="w-full h-full grid items-center justify-center text-white"
+          className="w-full h-full grid items-center justify-center text-white text-xl"
         >
           <div className="relative">
             <div id="letters" className="">

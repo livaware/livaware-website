@@ -53,30 +53,32 @@ export default function ClientHome({
     <>
       <IntroAnimation />
       <div className="flex flex-col md:flex-row h-[80vh] overflow-x-hidden relative">
-        <div className="bg-bg-dark flex-1 pb-20">
-          <DecisionTreeHistory
-            history={history}
-            onItemPressed={(index) =>
-              replayDecisions(history.slice(0, index).map((x) => x.option))
-            }
-          />
-          <DecisionTree
-            treeData={currentTree}
-            currentStepNumber={history.length + 1}
-            onOptionSelected={(index) => {
-              const newState = selectOption(currentTree, index)
-              if (newState.newState) {
-                setCurrentTree(newState.newState)
+        <div className="bg-bg-dark flex-1 pb-20 flex justify-center">
+          <div className="max-w-lg w-full">
+            <DecisionTreeHistory
+              history={history}
+              onItemPressed={(index) =>
+                replayDecisions(history.slice(0, index).map((x) => x.option))
               }
-              setHistory([
-                ...history,
-                {
-                  option: index,
-                  label: currentTree.historyTitle ?? currentTree.title,
-                },
-              ])
-            }}
-          />
+            />
+            <DecisionTree
+              treeData={currentTree}
+              currentStepNumber={history.length + 1}
+              onOptionSelected={(index) => {
+                const newState = selectOption(currentTree, index)
+                if (newState.newState) {
+                  setCurrentTree(newState.newState)
+                }
+                setHistory([
+                  ...history,
+                  {
+                    option: index,
+                    label: currentTree.historyTitle ?? currentTree.title,
+                  },
+                ])
+              }}
+            />
+          </div>
         </div>
         <AnimatePresence initial={false} mode="popLayout">
           {history.length === 0 ? (
@@ -87,6 +89,7 @@ export default function ClientHome({
               exit={{ opacity: 0 }}
               transition={{
                 ease: 'easeOut',
+                duration: 1,
               }}
               className="bg-green-200 flex-1"
             >
@@ -98,11 +101,12 @@ export default function ClientHome({
               style={{
                 originX: 0,
               }}
-              initial={{ scaleX: 0, opacity: 0 }}
+              initial={{ scaleX: 0, opacity: 1 }}
               animate={{ scaleX: 1, opacity: 1 }}
-              exit={{ scaleX: 0, opacity: 0 }}
+              exit={{ scaleX: 0, opacity: 1 }}
               transition={{
                 ease: 'easeOut',
+                duration: 1,
               }}
               className="bg-bg-dark flex-1"
             >

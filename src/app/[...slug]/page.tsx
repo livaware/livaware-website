@@ -1,3 +1,4 @@
+import ContentContainer from '@/components/Layout/ContentContainer'
 import Heading from '@/components/Typography/Heading'
 import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import sanityClient from '@/lib/sanityClient'
@@ -51,11 +52,13 @@ const GenericPage = async ({ params }: { params: GenericPageStaticParams }) => {
   }
 
   return (
-    <div className="px-5">
-      <Heading variant="h1">{data.title}</Heading>
-      {data.subTitle && <Heading variant="h2">{data.subTitle}</Heading>}
-      <PortableTextRenderer content={data.content} />
-    </div>
+    <ContentContainer>
+      <div className="px-5">
+        <Heading variant="h1">{data.title}</Heading>
+        {data.subTitle && <Heading variant="h2">{data.subTitle}</Heading>}
+        <PortableTextRenderer content={data.content} />
+      </div>
+    </ContentContainer>
   )
 }
 
