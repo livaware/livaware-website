@@ -23,7 +23,8 @@ export default function IntroAnimation() {
         { opacity: 1 },
         { duration: 0.1, delay: stagger(0.1) }
       )
-      await animate('#underline', { scaleX: 1.01, opacity: 1 }, { duration: 1 })
+      await animate('#underline', { scaleX: 0 }, { duration: 0 })
+      await animate('#underline', { scaleX: 1 }, { duration: 1 })
       await animate('#container', { opacity: 0 }, { duration: 1, delay: 2 })
       await animate('#container', { display: 'none' }, { duration: 0 })
     }
@@ -53,7 +54,7 @@ export default function IntroAnimation() {
             </div>
             <span
               id="underline"
-              className="absolute top-0 left-0 origin-left scale-x-0 opacity-0 text-bg-dark border-b-white border-b [z-index:-1]"
+              className="absolute top-0 left-0 origin-left scale-x-0 text-bg-dark border-b-white border-b [z-index:-1]"
             >
               Your
             </span>
