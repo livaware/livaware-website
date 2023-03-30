@@ -46,7 +46,7 @@ export default function Header() {
         className="fixed w-screen [background-color:rgba(255,255,255,0.9)] [backdrop-filter:blur(10px)] grid justify-items-center z-20"
       >
         <div className="grid grid-cols-[4rem_auto_4rem] items-center md:grid-cols-3 max-w-site-width w-full px-8">
-          <MenuButton onClick={toggleMenu} />
+          <MenuButton onClick={toggleMenu} active={menuOpen} />
           <div className="py-4 grid justify-items-center items-center">
             <LogoType variant="navy" onClick={toggleMenu} />
           </div>
