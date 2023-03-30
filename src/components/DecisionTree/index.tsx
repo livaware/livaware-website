@@ -23,7 +23,7 @@ export default function DecisionTree({
 
   return (
     <div className="overflow-x-hidden">
-      <AnimatePresence mode="popLayout" initial={false}>
+      <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={currentStepNumber}
           initial={{ x: 64, opacity: 0 }}

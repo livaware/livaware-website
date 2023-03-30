@@ -14,6 +14,7 @@ export default function DecisionTreeHistory({
 }) {
   return (
     <ol className="w-full text-white p-5 md:h-5">
+      {history.length === 0 && <div className="inline-block pl-4">&nbsp;</div>}
       <AnimatePresence initial={false}>
         {history.map((item, index) => (
           <motion.div

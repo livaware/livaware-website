@@ -9,6 +9,7 @@ import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import IntroAnimation from '@/components/IntroAnimation'
+import useIsMobile from '@/lib/useIsMobile'
 
 export default function ClientHome({
   treeData,
@@ -17,6 +18,7 @@ export default function ClientHome({
 }) {
   const [currentTree, setCurrentTree] = useState(treeData.tree)
   const [history, setHistory] = useState<DecisionTreeHistoryItem[]>([])
+  const isMobile = useIsMobile()
 
   const progress = history.length / treeData.depth
 
@@ -54,7 +56,7 @@ export default function ClientHome({
       <IntroAnimation />
       <div className="flex flex-col md:flex-row h-[80vh] overflow-x-hidden relative">
         <div className="bg-bg-dark flex-1 pb-20 flex justify-center">
-          <div className="max-w-lg w-full">
+          <div className="max-w-lg w-full h-[60vh] md:h-[80vh]">
             <DecisionTreeHistory
               history={history}
               onItemPressed={(index) =>
@@ -81,7 +83,7 @@ export default function ClientHome({
           </div>
         </div>
         <AnimatePresence initial={false} mode="popLayout">
-          {history.length === 0 ? (
+          {history.length === 0 || isMobile ? (
             <motion.div
               key={1}
               initial={{ opacity: 0 }}
