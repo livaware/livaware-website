@@ -30,6 +30,10 @@ export default function Header() {
     setMenuHeight(menuRef.current?.clientHeight ?? MENU_HEIGHT)
   }, [])
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen)
+  }
+
   return (
     <>
       <Menu
@@ -39,12 +43,12 @@ export default function Header() {
       />
       <div
         ref={menuRef}
-        className="fixed w-screen bg-white grid justify-items-center z-20"
+        className="fixed w-screen [background-color:rgba(255,255,255,0.9)] [backdrop-filter:blur(10px)] grid justify-items-center z-20"
       >
         <div className="grid grid-cols-[4rem_auto_4rem] items-center md:grid-cols-3 max-w-site-width w-full px-8">
-          <MenuButton onClick={() => setMenuOpen(!menuOpen)} />
+          <MenuButton onClick={toggleMenu} />
           <div className="py-4 grid justify-items-center items-center">
-            <LogoType variant="navy" />
+            <LogoType variant="navy" onClick={toggleMenu} />
           </div>
           <div className="hidden md:grid grid-cols-2">
             {/* <HeaderButton>Contact</HeaderButton>

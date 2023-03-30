@@ -9,11 +9,12 @@ const logoVariants = {
 
 export interface LogoTypeProps {
   variant: keyof typeof logoVariants
+  onClick?: () => void
 }
 
-export default function LogoType({ variant }: LogoTypeProps) {
+export default function LogoType({ variant, onClick }: LogoTypeProps) {
   const props = logoVariants[variant]
-  return (
+  const svg = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       x={0}
@@ -35,4 +36,6 @@ export default function LogoType({ variant }: LogoTypeProps) {
       />
     </svg>
   )
+
+  return onClick ? <button onClick={onClick}>{svg}</button> : svg
 }

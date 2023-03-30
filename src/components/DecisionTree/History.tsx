@@ -13,7 +13,7 @@ export default function DecisionTreeHistory({
   onItemPressed: (itemIndex: number) => void
 }) {
   return (
-    <ol className="w-full text-white p-5 h-5">
+    <ol className="w-full text-white p-5 md:h-5">
       <AnimatePresence initial={false}>
         {history.map((item, index) => (
           <motion.div

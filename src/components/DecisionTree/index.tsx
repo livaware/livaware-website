@@ -37,7 +37,7 @@ export default function DecisionTree({
           <Heading variant="h1" className="text-white text-center">
             {treeData.title}
           </Heading>
-          <div className="grid gap-5 px-8 opacity-90">
+          <div className="grid gap-5 md:px-8 opacity-90">
             {treeData.content && (
               <div className="text-white ml-4">{treeData.content}</div>
             )}

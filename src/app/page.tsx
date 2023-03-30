@@ -1,15 +1,31 @@
 import getDecisionTree from '@/lib/getDecisionTree'
+import sanityClient from '@/lib/sanityClient'
+import { HomePageData } from '@/lib/sanityTypes/homePageData'
+import { Metadata } from 'next'
 import ClientHome from './clientPage'
 
+async function getPageData() {
+  try {
+    const data = await sanityClient.fetch<HomePageData[]>(
+      `*[_type == "homePage"]`
+    )
+    return data?.[0] ? data[0] : null
+  } catch (error) {
+    console.error(error)
+    return null
+  }
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await getPageData()
+  return { title: data?.title, description: data?.description }
+}
+
 export default async function Home() {
+  const pageData = await getPageData()
   const decisionTree = await getDecisionTree(
-    '666769b6-060e-4d55-a8ad-154a5b3e7619'
+    pageData?.decisionTreeRoot?._ref ?? ''
   )
 
   return <ClientHome treeData={decisionTree} />
-}
-
-export const metadata = {
-  title: 'Home',
-  description: 'Welcome to Next.js',
 }

@@ -38,7 +38,7 @@ export default function ClientHome({
       if (newState.newState) {
         newHistory.push({
           option: decision,
-          label: current.title,
+          label: current.historyTitle ?? current.title,
         })
         current = newState.newState
       }
@@ -69,7 +69,7 @@ export default function ClientHome({
               ...history,
               {
                 option: index,
-                label: currentTree.title,
+                label: currentTree.historyTitle ?? currentTree.title,
               },
             ])
           }}

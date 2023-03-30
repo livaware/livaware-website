@@ -18,6 +18,7 @@ export default async function getDecisionTree(
         {
             _id,
             title,
+            historyTitle,
             content,
             options[] {
                 _key,
