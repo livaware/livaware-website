@@ -44,7 +44,9 @@ export default function DecisionTree({
             {treeData.options.map((option, index) => (
               <div key={option._key}>
                 <DecisionTreeButton
-                  onClick={() => handleAdvance(option, index)}
+                  onClick={
+                    option.link ? undefined : () => handleAdvance(option, index)
+                  }
                   href={option.link}
                   text={option.text}
                 />

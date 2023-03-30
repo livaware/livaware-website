@@ -19,6 +19,7 @@ export default function DecisionTreeButton({
       className="text-white bg-bg-dark hover:bg-brand-green text-left w-full p-4 rounded-sm grid grid-cols-[1fr_auto]"
       onClick={onClick}
       href={href ?? ''}
+      type="button"
     >
       <span>{text}</span>
       <Chevron />
