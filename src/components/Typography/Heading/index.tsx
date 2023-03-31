@@ -1,5 +1,5 @@
 import { ElementType, ReactNode } from 'react'
-
+import { twMerge } from 'tailwind-merge'
 interface headingVariantConfig {
   element: ElementType
   tailwindStyle: string
@@ -14,6 +14,14 @@ const headingVariant: Record<string, headingVariantConfig> = {
     element: 'h2',
     tailwindStyle: 'text-xl leading-7 pt-5 pb-2.5 my-4 font-bold',
   },
+  h3: {
+    element: 'h3',
+    tailwindStyle: 'text-xl leading-7 [&:not(:first-child)]:mt-4 font-bold',
+  },
+  h4: {
+    element: 'h4',
+    tailwindStyle: 'text-xl leading-7 [&:not(:first-child)]:mt-4 font-bold',
+  },
 }
 
 export default function Heading({
@@ -27,7 +35,7 @@ export default function Heading({
 }) {
   const props = headingVariant[variant]
   return (
-    <props.element className={`${props.tailwindStyle} ${className}`}>
+    <props.element className={twMerge(props.tailwindStyle, className)}>
       {children}
     </props.element>
   )

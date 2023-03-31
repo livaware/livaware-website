@@ -2,6 +2,7 @@ import Quote from '@/lib/sanityTypes/quote'
 import splitCharacters from '@/lib/splitCharacters'
 import { stagger, useAnimate } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { QuoteMark } from '../Typography/Quotation'
 
 const HOLD_TIME = 10000
@@ -73,7 +74,7 @@ export default function QuoteFader({
   const quote = quotes[currentQuote]
 
   return (
-    <blockquote className={`italic ${className}`} ref={scope}>
+    <blockquote className={twMerge(className, 'italic')} ref={scope}>
       <span id="m1" className="opacity-0">
         <QuoteMark />
       </span>
@@ -84,7 +85,7 @@ export default function QuoteFader({
         <QuoteMark close />
       </span>
       <cite
-        className="block mt-2 font-bold text-brand-green opacity-0"
+        className="mt-2 block font-bold text-brand-green opacity-0"
         id="cite"
       >
         — {quote.cite}
