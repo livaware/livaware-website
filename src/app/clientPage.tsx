@@ -126,7 +126,7 @@ export default function ClientHome({
               >
                 <Heading
                   variant="h1"
-                  className="text-center text-white md:my-14"
+                  className="text-center align-text-top text-white md:my-14 md:min-h-[3em]"
                 >
                   Who we are
                 </Heading>
