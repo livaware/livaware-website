@@ -1,10 +1,10 @@
 'use client'
 
+import ChatBot from '@/components/ChatBot'
 import DecisionTree from '@/components/DecisionTree'
 import DecisionTreeHistory, {
   DecisionTreeHistoryItem,
 } from '@/components/DecisionTree/History'
-import IntroAnimation from '@/components/IntroAnimation'
 import ContentContainer from '@/components/Layout/ContentContainer'
 import ProgressBar from '@/components/ProgressBar'
 import QuoteFader from '@/components/QuoteFader'
@@ -69,7 +69,6 @@ export default function ClientHome({
 
   return (
     <>
-      <IntroAnimation />
       <ProgressBar progress={progress} className="bg-brand-navy" />
       <div className="relative">
         <video
@@ -77,16 +76,16 @@ export default function ClientHome({
           muted
           loop
           playsInline
-          className="w-full h-full absolute top-0 left-0 object-cover"
+          className="absolute top-0 left-0 h-full w-full object-cover"
         >
           <source src="/video/hero-video.mp4" type="video/mp4" />
         </video>
 
-        <div className="flex flex-col md:flex-row min-h-[80vh] overflow-x-hidden relative bg-brand-navy bg-opacity-0">
+        <div className="relative flex min-h-[80vh] flex-col overflow-x-hidden bg-brand-navy bg-opacity-0 md:flex-row">
           <div
-            className={`bg-brand-navy flex-1 pb-20 flex justify-center ${dTreeOpacity}`}
+            className={`flex flex-1 justify-center bg-brand-navy pb-20 ${dTreeOpacity}`}
           >
-            <div className="max-w-lg w-full min-h-[60vh] md:min-h-[80vh]">
+            <div className="min-h-[60vh] w-full max-w-lg md:min-h-[80vh]">
               <DecisionTreeHistory
                 history={history}
                 onItemPressed={(index) =>
@@ -127,11 +126,11 @@ export default function ClientHome({
               >
                 <Heading
                   variant="h1"
-                  className="text-white md:mt-16 text-center"
+                  className="text-center text-white md:my-14"
                 >
                   Who we are
                 </Heading>
-                <div className="p-4 text-white mt-14">
+                <div className="p-4 text-white">
                   <Quotation
                     text={`Priding ourselves on anticipating and filling the gaps in
                   people's healthcare; we combine clinical excellence, precision
@@ -139,7 +138,7 @@ export default function ClientHome({
                     cite="Hemmen Jutla, Founding Clinician"
                   />
                 </div>
-                <div className="p-4 mt-8">
+                <div className="mt-8 p-4">
                   <QuoteFader className="text-white" quotes={quotes} />
                   <a
                     className="text-white"
@@ -165,12 +164,13 @@ export default function ClientHome({
                   ease: 'easeOut',
                   duration: 1,
                 }}
-                className="bg-brand-navy flex-1"
+                className="flex-1 bg-brand-navy"
               ></motion.div>
             )}
           </AnimatePresence>
         </div>
       </div>
+      <ChatBot />
       <ContentContainer>
         <PortableTextRenderer content={content} />
       </ContentContainer>

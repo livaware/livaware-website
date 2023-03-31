@@ -15,7 +15,7 @@ function ChatEntry({ isUser, message }: { isUser: boolean; message: string }) {
   const containerVariant = isUser ? 'justify-end' : 'justify-start'
   return (
     <div className={`${containerVariant} grid`}>
-      <span className={`${variant} p-4 w-fit block`}>{message}</span>
+      <span className={`${variant} block w-fit p-4`}>{message}</span>
     </div>
   )
 }
@@ -63,10 +63,12 @@ export default function ChatBot() {
   }
 
   return (
-    <div className="mx-2 md:mx-8">
-      <Heading variant="h1">Ask Livaware</Heading>
+    <div className=" bg-brand-warm-grey px-8 py-8">
+      <Heading variant="h1" className="my-0 py-0">
+        Ask Livaware
+      </Heading>
       <div
-        className="grid grid-cols-1 gap-4 overflow-y-scroll max-h-[50vh]"
+        className="grid max-h-[50vh] grid-cols-1 gap-4 overflow-y-scroll"
         ref={responseContainer}
       >
         <AnimatePresence>
@@ -86,7 +88,7 @@ export default function ChatBot() {
         </AnimatePresence>
       </div>
       <form
-        className="grid grid-cols-[1fr_6em] mt-4"
+        className="mt-4 grid grid-cols-[1fr_6em]"
         onSubmit={(e) => {
           e.preventDefault()
           fetchChatbotResponse(message)
@@ -97,11 +99,12 @@ export default function ChatBot() {
           type="text"
           value={message}
           onChange={(evt) => setMessage(evt.target.value)}
-          className="border-black border-2 border-solid p-2"
+          className="border-2 border-solid border-black p-2 active:rounded-none"
           disabled={loading}
+          placeholder="Ask a question..."
         />
         <button
-          className="border-black border-2 border-solid border-l-0 bg-brand-green text-white px-4"
+          className="border-2 border-l-0 border-solid border-black bg-brand-green px-4 text-white"
           type="submit"
           onClick={() => fetchChatbotResponse(message)}
           disabled={loading}

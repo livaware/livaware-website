@@ -1,6 +1,6 @@
 import splitCharacters from '@/lib/splitCharacters'
-import { motionValue, stagger, useAnimate } from 'framer-motion'
-import { useEffect, useMemo } from 'react'
+import { stagger, useAnimate } from 'framer-motion'
+import { useEffect } from 'react'
 import Logo from '../Logo'
 
 export default function IntroAnimation() {
@@ -29,17 +29,17 @@ export default function IntroAnimation() {
     <div ref={scope}>
       <div
         id="container"
-        className="w-screen h-screen z-50 fixed top-0 left-0 bg-brand-navy opacity-1"
+        className="opacity-1 fixed top-0 left-0 z-50 h-screen w-screen bg-brand-navy"
       >
         <div
           id="logo"
-          className="opacity-0 w-full h-full grid items-center justify-center"
+          className="grid h-full w-full items-center justify-center opacity-0"
         >
           <Logo variant="white" />
         </div>
         <div
           id="letterContainer"
-          className="w-full h-full grid items-center justify-center text-white text-xl"
+          className="grid h-full w-full items-center justify-center text-xl text-white"
         >
           <div className="relative">
             <div id="letters" className="">
@@ -47,7 +47,7 @@ export default function IntroAnimation() {
             </div>
             <span
               id="underline"
-              className="absolute top-0 left-0 origin-left scale-x-0 text-brand-navy border-b-white border-b [z-index:-1]"
+              className="absolute top-0 left-0 origin-left scale-x-0 border-b border-b-white text-brand-navy [z-index:-1]"
             >
               Your
             </span>

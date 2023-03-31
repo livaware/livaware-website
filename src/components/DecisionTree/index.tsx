@@ -34,12 +34,12 @@ export default function DecisionTree({
           }}
           className="md:max-w-[50vw]"
         >
-          <Heading variant="h1" className="text-white text-center">
+          <Heading variant="h1" className="my-14 text-center text-white">
             {treeData.title}
           </Heading>
-          <div className="grid gap-5 md:px-8 opacity-90">
+          <div className="grid gap-5 opacity-90 md:px-8">
             {treeData.content && (
-              <div className="text-white ml-4">{treeData.content}</div>
+              <div className="ml-4 text-white">{treeData.content}</div>
             )}
             {treeData.options.map((option, index) => (
               <div key={option._key}>
