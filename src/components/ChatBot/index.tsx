@@ -1,21 +1,31 @@
-import { AnimatePresence } from 'framer-motion'
-import { useMemo, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import Heading from '../Typography/Heading'
-import { motion } from 'framer-motion'
+import WaitingAnimation from './WaitingAnimation'
 
 interface ChatEntry {
   isQuestion: boolean
   message: string
 }
 
-function ChatEntry({ isUser, message }: { isUser: boolean; message: string }) {
+function ChatEntry({
+  isUser,
+  message,
+  waiting,
+}: {
+  isUser: boolean
+  message: string
+  waiting?: boolean
+}) {
   const variant = isUser
     ? 'bg-brand-green text-white'
     : 'bg-brand-navy text-white'
   const containerVariant = isUser ? 'justify-end' : 'justify-start'
   return (
     <div className={`${containerVariant} grid`}>
-      <span className={`${variant} block w-fit p-4`}>{message}</span>
+      <span className={`${variant} block w-fit p-4`}>
+        {waiting ? <WaitingAnimation variant="white" /> : message}
+      </span>
     </div>
   )
 }
@@ -56,12 +66,15 @@ export default function ChatBot({ apiEndpoint }: { apiEndpoint: string }) {
     setLoading(false)
     setTimeout(() => {
       questionInputBox.current?.focus()
-      responseContainer.current?.scrollTo({
-        top: responseContainer.current.scrollHeight,
-        behavior: 'smooth',
-      })
     }, 400)
   }
+
+  useEffect(() => {
+    responseContainer.current?.scrollTo({
+      top: responseContainer.current.scrollHeight,
+      behavior: 'smooth',
+    })
+  }, [loading])
 
   return (
     <div className=" bg-brand-warm-grey px-8 py-8">
@@ -96,6 +109,19 @@ export default function ChatBot({ apiEndpoint }: { apiEndpoint: string }) {
               <ChatEntry isUser={entry.isQuestion} message={entry.message} />
             </motion.div>
           ))}
+          {loading && (
+            <motion.div
+              key={history.length + 1}
+              initial={{ y: 32, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                ease: 'easeOut',
+                duration: 0.3,
+              }}
+            >
+              <ChatEntry isUser={false} message={''} waiting />
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
       <form
