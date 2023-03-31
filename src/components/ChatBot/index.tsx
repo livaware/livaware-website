@@ -20,7 +20,7 @@ function ChatEntry({ isUser, message }: { isUser: boolean; message: string }) {
   )
 }
 
-export default function ChatBot() {
+export default function ChatBot({ apiEndpoint }: { apiEndpoint: string }) {
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const [history, setHistory] = useState<ChatEntry[]>([])
@@ -37,7 +37,7 @@ export default function ChatBot() {
     ]
     setHistory(newHistory)
     setLoading(true)
-    const response = await fetch('/faq/api', {
+    const response = await fetch(apiEndpoint, {
       method: 'POST',
       body: JSON.stringify({
         query,
@@ -79,7 +79,7 @@ export default function ChatBot() {
         professional before taking any action.
       </p>
       <div
-        className="grid max-h-[50vh] grid-cols-1 gap-4 overflow-y-scroll"
+        className="mt-4 grid max-h-[50vh] grid-cols-1 gap-4 overflow-y-scroll"
         ref={responseContainer}
       >
         <AnimatePresence>

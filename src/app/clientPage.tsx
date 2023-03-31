@@ -170,7 +170,7 @@ export default function ClientHome({
           </AnimatePresence>
         </div>
       </div>
-      <ChatBot />
+      <ChatBot apiEndpoint="/faq/api" />
       <ContentContainer>
         <PortableTextRenderer content={content} />
       </ContentContainer>

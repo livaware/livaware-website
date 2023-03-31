@@ -2,5 +2,5 @@
 import ChatBot from '@/components/ChatBot'
 
 export default function ClientPage() {
-  return <ChatBot />
+  return <ChatBot apiEndpoint="faq/api" />
 }
