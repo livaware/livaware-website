@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import Heading from '../Typography/Heading'
 import { motion } from 'framer-motion'
 
@@ -25,6 +25,7 @@ export default function ChatBot() {
   const [loading, setLoading] = useState(false)
   const [history, setHistory] = useState<ChatEntry[]>([])
   const responseContainer = useRef<HTMLDivElement>(null)
+  const questionInputBox = useRef<HTMLInputElement>(null)
 
   const fetchChatbotResponse = async (query: string) => {
     const newHistory = [
@@ -52,14 +53,13 @@ export default function ChatBot() {
     ])
     setMessage('')
     setLoading(false)
-    setTimeout(
-      () =>
-        responseContainer.current?.scrollTo({
-          top: responseContainer.current.scrollHeight,
-          behavior: 'smooth',
-        }),
-      400
-    )
+    setTimeout(() => {
+      questionInputBox.current?.focus()
+      responseContainer.current?.scrollTo({
+        top: responseContainer.current.scrollHeight,
+        behavior: 'smooth',
+      })
+    }, 400)
   }
 
   return (
@@ -70,7 +70,7 @@ export default function ChatBot() {
         ref={responseContainer}
       >
         <AnimatePresence>
-          {history.reverse().map((entry, index) => (
+          {history.map((entry, index) => (
             <motion.div
               key={index}
               initial={{ y: 32, opacity: 0 }}
@@ -93,6 +93,7 @@ export default function ChatBot() {
         }}
       >
         <input
+          ref={questionInputBox}
           type="text"
           value={message}
           onChange={(evt) => setMessage(evt.target.value)}
