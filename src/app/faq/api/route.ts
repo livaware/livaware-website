@@ -40,7 +40,6 @@ export async function POST(request: Request) {
       message: `Sorry, I didn't like that question. Please try another.`,
     })
   }
-  console.log(moderation.data.results)
 
   const response = await openai.createChatCompletion({
     model: 'gpt-3.5-turbo',
@@ -52,5 +51,5 @@ export async function POST(request: Request) {
 
   return NextResponse.json({
     message: response.data.choices[0].message?.content,
-  })
+  } as ResponseData)
 }
