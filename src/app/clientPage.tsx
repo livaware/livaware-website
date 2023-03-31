@@ -85,7 +85,7 @@ export default function ClientHome({
           <div
             className={`flex flex-1 justify-center bg-brand-navy pb-20 ${dTreeOpacity}`}
           >
-            <div className="min-h-[60vh] w-full max-w-lg p-4 md:min-h-[80vh]">
+            <div className="min-h-[60vh] w-full max-w-lg px-4 md:min-h-[80vh]">
               <DecisionTreeHistory
                 history={history}
                 onItemPressed={(index) =>
