@@ -41,6 +41,7 @@ export default function ChatBot() {
       method: 'POST',
       body: JSON.stringify({
         query,
+        history,
       }),
     })
     const json = await response.json()

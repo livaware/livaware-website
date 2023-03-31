@@ -1,7 +1,12 @@
 import sanityClient from '@/lib/sanityClient'
 import { AIPromptData } from '@/lib/sanityTypes/aiPromptData'
+import { ChatMessage } from 'chatgpt'
 import { NextResponse } from 'next/server'
-import { Configuration, OpenAIApi } from 'openai'
+import {
+  ChatCompletionRequestMessageRoleEnum,
+  Configuration,
+  OpenAIApi,
+} from 'openai'
 
 const configuration = new Configuration({
   apiKey: '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',
@@ -9,6 +14,10 @@ const configuration = new Configuration({
 
 type RequestData = {
   query: string
+  history?: {
+    isQuestion: boolean
+    message: string
+  }[]
 }
 type ResponseData = {
   message: string
@@ -16,8 +25,7 @@ type ResponseData = {
 
 export async function POST(request: Request) {
   const req = await request.json()
-  console.log(req)
-  const { query } = req as RequestData
+  const { query, history } = req as RequestData
   const promptData = (
     await sanityClient.fetch<AIPromptData[]>(
       `*[_type == "aiPrompt" && name == "FAQ"]`
@@ -41,10 +49,21 @@ export async function POST(request: Request) {
     })
   }
 
+  const historyEntries =
+    history?.slice(-4)?.map((x) => ({
+      role: (x.isQuestion
+        ? 'user'
+        : 'assistant') as ChatCompletionRequestMessageRoleEnum,
+      content: x.message,
+    })) ?? []
+
+  console.log(historyEntries)
+
   const response = await openai.createChatCompletion({
     model: 'gpt-3.5-turbo',
     messages: [
       { role: 'system', content: systemMessage },
+      ...historyEntries,
       { role: 'user', content: query },
     ],
   })
