@@ -10,9 +10,9 @@ export default function IntroAnimation() {
   useEffect(() => {
     const playAnimation = async () => {
       try {
-        await animate('#logo', { opacity: 1 }, { duration: 1 })
-        await animate('#logo', { opacity: 0 }, { duration: 1 })
-        await animate('#logo', { display: 'none' }, { duration: 0 })
+        // await animate('#logo', { opacity: 1 }, { duration: 1 })
+        // await animate('#logo', { opacity: 0 }, { duration: 1 })
+        // await animate('#logo', { display: 'none' }, { duration: 0 })
         await animate(
           '#letters > span',
           { opacity: 1 },
@@ -20,8 +20,12 @@ export default function IntroAnimation() {
         )
         await animate('#underline', { scaleX: 0 }, { duration: 0 })
         await animate('#underline', { scaleX: 1 }, { duration: 1 })
-        await animate('#container', { opacity: 0 }, { duration: 1, delay: 0.5 })
-        await animate('#container', { display: 'none' }, { duration: 0 })
+        await animate(
+          '#container, #skip',
+          { opacity: 0 },
+          { duration: 1, delay: 0.5 }
+        )
+        await animate('#container, #skip', { display: 'none' }, { duration: 0 })
       } catch {}
     }
 
@@ -38,12 +42,12 @@ export default function IntroAnimation() {
         id="container"
         className="opacity-1 fixed top-0 left-0 z-50 h-screen w-screen bg-brand-navy"
       >
-        <div
+        {/* <div
           id="logo"
           className="grid h-full w-full items-center justify-center opacity-0"
         >
           <Logo variant="white" />
-        </div>
+        </div> */}
         <div
           id="letterContainer"
           className="grid h-full w-full items-center justify-center text-xl text-white"
@@ -62,6 +66,7 @@ export default function IntroAnimation() {
         </div>
       </div>
       <button
+        id="skip"
         type="button"
         className="fixed bottom-0 right-0 z-50 m-5 text-white"
         onClick={() => setCancelled(true)}
