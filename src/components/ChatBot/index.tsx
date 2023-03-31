@@ -68,6 +68,16 @@ export default function ChatBot() {
       <Heading variant="h1" className="my-0 py-0">
         Ask Livaware
       </Heading>
+      <p className="text-sm font-thin">
+        This is an AI-powered tool which has the potential to produce incorrect
+        or misleading information.
+        <br />
+        Its primary purpose is to provide information about us, our products,
+        and our services.
+        <br />
+        Use caution when asking medical questions, and always consult a medical
+        professional before taking any action.
+      </p>
       <div
         className="grid max-h-[50vh] grid-cols-1 gap-4 overflow-y-scroll"
         ref={responseContainer}
