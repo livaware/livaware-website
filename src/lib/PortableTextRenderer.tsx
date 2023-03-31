@@ -30,9 +30,9 @@ export default function PortableTextRenderer({ content }: { content: any }) {
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={img}
-                alt={value.alt ?? ' '}
+                alt={value.alt ?? ''}
                 loading="lazy"
-                className=" w-full object-cover"
+                className="w-full object-cover"
                 style={{
                   aspectRatio: width / height,
                 }}

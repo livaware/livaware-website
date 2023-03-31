@@ -1,29 +1,36 @@
 import splitCharacters from '@/lib/splitCharacters'
 import { stagger, useAnimate } from 'framer-motion'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Logo from '../Logo'
 
 export default function IntroAnimation() {
   const [scope, animate] = useAnimate()
+  const [cancelled, setCancelled] = useState(false)
 
   useEffect(() => {
     const playAnimation = async () => {
-      await animate('#logo', { opacity: 1 }, { duration: 1 })
-      await animate('#logo', { opacity: 0 }, { duration: 1 })
-      await animate('#logo', { display: 'none' }, { duration: 0 })
-      await animate(
-        '#letters > span',
-        { opacity: 1 },
-        { duration: 0.1, delay: stagger(0.025) }
-      )
-      await animate('#underline', { scaleX: 0 }, { duration: 0 })
-      await animate('#underline', { scaleX: 1 }, { duration: 1 })
-      await animate('#container', { opacity: 0 }, { duration: 1, delay: 0.5 })
-      await animate('#container', { display: 'none' }, { duration: 0 })
+      try {
+        await animate('#logo', { opacity: 1 }, { duration: 1 })
+        await animate('#logo', { opacity: 0 }, { duration: 1 })
+        await animate('#logo', { display: 'none' }, { duration: 0 })
+        await animate(
+          '#letters > span',
+          { opacity: 1 },
+          { duration: 0.1, delay: stagger(0.025) }
+        )
+        await animate('#underline', { scaleX: 0 }, { duration: 0 })
+        await animate('#underline', { scaleX: 1 }, { duration: 1 })
+        await animate('#container', { opacity: 0 }, { duration: 1, delay: 0.5 })
+        await animate('#container', { display: 'none' }, { duration: 0 })
+      } catch {}
     }
 
     playAnimation()
   }, [animate])
+
+  if (cancelled) {
+    return null
+  }
 
   return (
     <div ref={scope}>
@@ -54,6 +61,13 @@ export default function IntroAnimation() {
           </div>
         </div>
       </div>
+      <button
+        type="button"
+        className="fixed bottom-0 right-0 z-50 m-5 text-white"
+        onClick={() => setCancelled(true)}
+      >
+        Skip ➔
+      </button>
     </div>
   )
 }

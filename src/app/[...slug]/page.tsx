@@ -1,9 +1,11 @@
+import ChatBot from '@/components/ChatBot'
 import ContentContainer from '@/components/Layout/ContentContainer'
 import Heading from '@/components/Typography/Heading'
 import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import sanityClient from '@/lib/sanityClient'
 import { GenericPageData } from '@/lib/sanityTypes/genericPageData'
 import { Metadata } from 'next'
+import ClientPage from './clientPage'
 
 interface GenericPageStaticParams {
   slug: string
@@ -53,11 +55,12 @@ const GenericPage = async ({ params }: { params: GenericPageStaticParams }) => {
 
   return (
     <ContentContainer key={params.slug}>
-      <div className="px-5">
+      <div className="mb-8 px-5 md:mb-4">
         <Heading variant="h1">{data.title}</Heading>
         {data.subTitle && <Heading variant="h2">{data.subTitle}</Heading>}
         <PortableTextRenderer content={data.content} />
       </div>
+      <ClientPage />
     </ContentContainer>
   )
 }

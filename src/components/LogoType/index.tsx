@@ -37,5 +37,11 @@ export default function LogoType({ variant, onClick }: LogoTypeProps) {
     </svg>
   )
 
-  return onClick ? <button onClick={onClick}>{svg}</button> : svg
+  return onClick ? (
+    <button name="Livaware logo" onClick={onClick}>
+      {svg}
+    </button>
+  ) : (
+    svg
+  )
 }

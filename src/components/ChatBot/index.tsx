@@ -113,9 +113,10 @@ export default function ChatBot() {
           className="border-2 border-solid border-black p-2 active:rounded-none"
           disabled={loading}
           placeholder="Ask a question..."
+          autoComplete="none"
         />
         <button
-          className="border-2 border-l-0 border-solid border-black bg-brand-green px-4 text-white"
+          className="border-2 border-l-0 border-solid border-black bg-brand-navy px-4 text-white"
           type="submit"
           onClick={() => fetchChatbotResponse(message)}
           disabled={loading}
