@@ -47,21 +47,32 @@ export default function ChatBot({ apiEndpoint }: { apiEndpoint: string }) {
     ]
     setHistory(newHistory)
     setLoading(true)
-    const response = await fetch(apiEndpoint, {
-      method: 'POST',
-      body: JSON.stringify({
-        query,
-        history,
-      }),
-    })
-    const json = await response.json()
-    setHistory([
-      ...newHistory,
-      {
-        isQuestion: false,
-        message: json.message,
-      },
-    ])
+    try {
+      const response = await fetch(apiEndpoint, {
+        method: 'POST',
+        body: JSON.stringify({
+          query,
+          history,
+        }),
+      })
+      const json = await response.json()
+      setHistory([
+        ...newHistory,
+        {
+          isQuestion: false,
+          message: json.message,
+        },
+      ])
+    } catch {
+      setHistory([
+        ...newHistory,
+        {
+          isQuestion: false,
+          message:
+            'Sorry, something went wrong. Please try asking a different question.',
+        },
+      ])
+    }
     setMessage('')
     setLoading(false)
     setTimeout(() => {
