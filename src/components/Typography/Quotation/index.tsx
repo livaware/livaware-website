@@ -18,7 +18,7 @@ export default function Quotation({
       <span className="px-1 [line-height:1.5]">{text}</span>
       <QuoteMark close />
       {cite && (
-        <cite className="block mt-2 font-bold text-brand-green">— {cite}</cite>
+        <cite className="mt-2 block font-bold text-brand-green">— {cite}</cite>
       )}
     </blockquote>
   )

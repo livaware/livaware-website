@@ -21,7 +21,7 @@ function Overlay({
       transition={{
         type: 'tween',
       }}
-      className={`z-10 bg-black fixed inset-0`}
+      className={`fixed inset-0 z-10 bg-black`}
       style={{
         pointerEvents: open ? 'auto' : 'none',
       }}
@@ -53,7 +53,7 @@ export default function Menu({
         transition={{
           type: 'tween',
         }}
-        className={`w-screen bg-bg-light-primary max-w-md h-screen`}
+        className={`h-screen w-screen max-w-md bg-bg-light-primary`}
         style={{ marginTop: headerHeight }}
       ></motion.div>
     </Overlay>

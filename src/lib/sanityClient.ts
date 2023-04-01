@@ -13,9 +13,17 @@ export interface GlobalConfiguration {
 }
 
 export async function getGlobalConfiguration(): Promise<GlobalConfiguration> {
-  const footer = (
-    await sanityClient.fetch<FooterConfigData[]>(`*[_type == "footer"]`)
-  )[0]
+  let footer: FooterConfigData
+
+  try {
+    footer = (
+      await sanityClient.fetch<FooterConfigData[]>(`*[_type == "footer"]`)
+    )[0]
+  } catch (err) {
+    console.error(err)
+    throw new Error('Could not fetch footer data')
+  }
+
   const header = {}
 
   const globalConfig = {

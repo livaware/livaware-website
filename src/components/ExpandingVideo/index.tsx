@@ -7,7 +7,7 @@ export default function ExpandingVideo() {
     <>
       <motion.button
         layoutId="top-video"
-        className="w-full aspect-video grid items-center justify-center text-white text-4xl bg-black"
+        className="grid aspect-video w-full items-center justify-center bg-black text-4xl text-white"
         onClick={() => setExpanded(true)}
       >
         <span>VIDEO</span>
@@ -15,11 +15,11 @@ export default function ExpandingVideo() {
       {expanded && (
         <motion.div
           layoutId="top-video"
-          className="fixed top-0 left-0 bg-black w-screen h-screen z-50"
+          className="fixed top-0 left-0 z-50 h-screen w-screen bg-black"
           onClick={() => setExpanded(false)}
         >
           <iframe
-            className="w-full aspect-video"
+            className="aspect-video w-full"
             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
             title="Rick Astley - Never Gonna Give You Up (Official Music Video)"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

@@ -20,7 +20,6 @@ export default function ClientRootLayout({
   const path = usePathname()
   return (
     <>
-      {' '}
       <IntroAnimation />
       <PageLayout globalConfig={globalConfig} key={`l-${path}`}>
         <Template>{children}</Template>

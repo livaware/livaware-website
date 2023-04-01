@@ -4,8 +4,8 @@ import Logo from '../../Logo'
 
 export default function Footer({ config }: { config: FooterConfigData }) {
   return (
-    <footer className="bg-brand-navy grid justify-items-center text-white p-6 mt-5">
-      <div className="grid grid-cols-1 md:grid-cols-4 max-w-site-width w-full gap-5">
+    <footer className="mt-5 grid justify-items-center bg-brand-navy p-6 text-white">
+      <div className="grid w-full max-w-site-width grid-cols-1 gap-5 md:grid-cols-4">
         <div>
           <PortableTextRenderer content={config.column1Content} />
         </div>

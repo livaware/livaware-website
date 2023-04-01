@@ -6,7 +6,7 @@ export default function ContentContainer({
   children: ReactNode
 }) {
   return (
-    <main className="grid grid-cols-1 w-full justify-items-center">
+    <main className="grid w-full grid-cols-1 justify-items-center">
       <div className="w-full max-w-site-width">{children}</div>
     </main>
   )

@@ -6,9 +6,9 @@ export default function ProgressBar({
   className?: string
 }) {
   return (
-    <div className={`w-full h-1 ${className}`}>
+    <div className={`h-1 w-full ${className}`}>
       <div
-        className="bg-brand-green h-1 [transition:width_0.3s]"
+        className="h-1 bg-brand-green [transition:width_0.3s]"
         style={{ width: `${progress * 100}%` }}
       />
     </div>

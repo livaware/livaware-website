@@ -14,7 +14,7 @@ export default function MenuButton({
       : '[background-position:0_100%] [background-size:0%_2px]'
   return (
     <button
-      className={`w-min h-min [background-image:linear-gradient(#020121_0_0)] [transition:background-size_0.3s,background-position_0s_0.3s] [background-repeat:no-repeat] ${css}`}
+      className={`h-min w-min [background-image:linear-gradient(#020121_0_0)] [transition:background-size_0.3s,background-position_0s_0.3s] [background-repeat:no-repeat] ${css}`}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
