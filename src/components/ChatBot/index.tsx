@@ -1,49 +1,20 @@
+/* eslint-disable react/display-name */
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
-import TextInput from '../Forms/TextInput'
-import Chevron from '../Icons/Chevron'
 import Heading from '../Typography/Heading'
-import WaitingAnimation from './WaitingAnimation'
+import ChatEntry from './ChatEntry'
+import ChatBoxInput from './Input'
 
 interface ChatEntry {
   isQuestion: boolean
   message: string
 }
-
-function ChatEntry({
-  isUser,
-  message,
-  waiting,
-}: {
-  isUser: boolean
-  message: string
-  waiting?: boolean
-}) {
-  const variant = isUser
-    ? 'bg-brand-green text-white'
-    : 'bg-brand-navy text-white'
-  const containerVariant = isUser ? 'justify-end' : 'justify-start'
-  return (
-    <div className={`${containerVariant} grid`}>
-      <span className={`${variant} block w-fit whitespace-pre-wrap p-4`}>
-        {waiting ? <WaitingAnimation variant="white" /> : message}
-      </span>
-    </div>
-  )
-}
-
 export default function ChatBot({
   apiEndpoint,
-  collapsed,
-  onFocus,
-  onClose,
   className,
 }: {
   apiEndpoint: string
-  collapsed?: boolean
-  onFocus?: () => void
-  onClose?: () => void
   className?: string
 }) {
   const [message, setMessage] = useState('')
@@ -102,69 +73,26 @@ export default function ChatBot({
     })
   }, [loading])
 
-  useEffect(() => {
-    console.log(collapsed, questionInputBox.current)
-    if (collapsed === false) {
-      setTimeout(() => {
-        questionInputBox.current?.focus()
-      }, 400)
-    }
-  }, [collapsed])
-
   const inputBox = (
-    <motion.form
-      className="mt-4"
-      onSubmit={(e) => {
-        e.preventDefault()
+    <ChatBoxInput
+      ref={questionInputBox}
+      value={message}
+      onChange={(evt) => setMessage((evt.target as HTMLInputElement).value)}
+      onSubmit={() => {
         fetchChatbotResponse(message)
       }}
-    >
-      <TextInput
-        ref={questionInputBox}
-        value={message}
-        onChange={(evt) => setMessage((evt.target as HTMLInputElement).value)}
-        onFocus={() => onFocus?.()}
-        disabled={loading}
-        placeholder="Ask a question..."
-        autoComplete="none"
-        appendRight={
-          <button
-            className="bg-white px-4 text-brand-navy disabled:bg-brand-warm-grey"
-            type="submit"
-            onClick={() => fetchChatbotResponse(message)}
-            disabled={loading}
-          >
-            <Chevron />
-          </button>
-        }
-      />
-    </motion.form>
+      loading={loading}
+    />
   )
 
-  if (collapsed) {
-    return (
-      <motion.div
-        className={twMerge('px-8 py-8', className)}
-        layoutId="chatbotbox"
-        layout="preserve-aspect"
-      >
-        {inputBox}
-      </motion.div>
-    )
-  }
-
   return (
-    <motion.div
+    <div
+      key="expanded"
       className={twMerge('grid grid-rows-[auto_1fr_auto] px-8 py-8', className)}
-      layoutId="chatbotbox"
-      layout="preserve-aspect"
     >
       <div>
         <Heading variant="h1" className="my-0 py-0">
           Ask Livaware
-          <button className="float-right text-sm" onClick={() => onClose?.()}>
-            Close
-          </button>
         </Heading>
         <p className="text-sm font-thin">
           This is an AI-powered tool which has the potential to produce
@@ -211,6 +139,8 @@ export default function ChatBot({
         </AnimatePresence>
       </div>
       {inputBox}
-    </motion.div>
+    </div>
   )
 }
+
+ChatBot.Input = ChatBoxInput

@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import Chevron from '../Icons/Chevron'
 
 export interface DecisionTreeHistoryItem {
   option: number
@@ -27,7 +28,7 @@ export default function DecisionTreeHistory({
               type: 'tween',
             }}
           >
-            ← Go back
+            <Chevron reverse /> Go back
           </motion.button>
         )}
         {history.map((item, index) => (

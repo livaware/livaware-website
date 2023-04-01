@@ -1,10 +1,12 @@
 'use client'
 
 import ChatBot from '@/components/ChatBot'
+import ContentToggler from '@/components/ContentToggler'
 import DecisionTree from '@/components/DecisionTree'
 import DecisionTreeHistory, {
   DecisionTreeHistoryItem,
 } from '@/components/DecisionTree/History'
+import Chevron from '@/components/Icons/Chevron'
 import ContentContainer from '@/components/Layout/ContentContainer'
 import ProgressBar from '@/components/ProgressBar'
 import QuoteFader from '@/components/QuoteFader'
@@ -78,9 +80,9 @@ export default function ClientHome({
         <div
           className={`flex flex-1 justify-center bg-brand-taupe pb-20 ${dTreeOpacity}`}
         >
-          <div className="grid min-h-[60vh] w-full max-w-lg grid-rows-[1fr_auto] px-4 md:min-h-[90vh]">
-            {!chatFocused && (
-              <div>
+          <ContentToggler
+            initialContent={
+              <div className="grid h-full min-h-[60vh] w-full max-w-lg grid-rows-[1fr_auto] px-4 md:min-h-full">
                 <DecisionTreeHistory
                   history={history}
                   onItemPressed={(index) =>
@@ -106,18 +108,23 @@ export default function ClientHome({
                     ])
                   }}
                 />
+                <ChatBot.Input onFocus={() => setChatFocused(true)} />
               </div>
-            )}
-            <div className={chatFocused ? 'h-full' : ''}>
-              <ChatBot
-                apiEndpoint="/faq/api"
-                collapsed={!chatFocused}
-                onFocus={() => setChatFocused(true)}
-                onClose={() => setChatFocused(false)}
-                className="h-full"
-              />
-            </div>
-          </div>
+            }
+            activeContent={
+              <div className="h-full">
+                <button
+                  type="button"
+                  className="mx-6 mt-5"
+                  onClick={() => setChatFocused(false)}
+                >
+                  <Chevron reverse /> Go back
+                </button>
+                <ChatBot apiEndpoint="/faq/api" className="h-full" />
+              </div>
+            }
+            active={chatFocused}
+          />
         </div>
         <AnimatePresence initial={false} mode="popLayout">
           {history.length === 0 || isMobile ? (
