@@ -85,7 +85,7 @@ export default function QuoteFader({
         <QuoteMark close />
       </span>
       <cite
-        className="mt-2 block font-bold text-brand-green opacity-0"
+        className="mt-2 block font-bold text-brand-navy opacity-0"
         id="cite"
       >
         — {quote.cite}

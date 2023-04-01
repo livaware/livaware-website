@@ -1,8 +1,5 @@
 import Link from 'next/link'
-
-function Chevron() {
-  return <span className="ml-4 text-lg">➔</span>
-}
+import Chevron from '../Icons/Chevron'
 
 export default function DecisionTreeButton({
   text,

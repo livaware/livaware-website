@@ -11,6 +11,7 @@ module.exports = {
         'brand-navy': '#020121',
         'brand-warm-grey': '#e4eaeb',
         'brand-green': '#00cd9a',
+        'brand-taupe': '#Efe4e5',
         'text-light': '#fff',
       },
       maxWidth: {

@@ -1,5 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
+import TextInput from '../Forms/TextInput'
+import Chevron from '../Icons/Chevron'
 import Heading from '../Typography/Heading'
 import WaitingAnimation from './WaitingAnimation'
 
@@ -30,7 +33,19 @@ function ChatEntry({
   )
 }
 
-export default function ChatBot({ apiEndpoint }: { apiEndpoint: string }) {
+export default function ChatBot({
+  apiEndpoint,
+  collapsed,
+  onFocus,
+  onClose,
+  className,
+}: {
+  apiEndpoint: string
+  collapsed?: boolean
+  onFocus?: () => void
+  onClose?: () => void
+  className?: string
+}) {
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const [history, setHistory] = useState<ChatEntry[]>([])
@@ -87,23 +102,83 @@ export default function ChatBot({ apiEndpoint }: { apiEndpoint: string }) {
     })
   }, [loading])
 
+  useEffect(() => {
+    console.log(collapsed, questionInputBox.current)
+    if (collapsed === false) {
+      setTimeout(() => {
+        questionInputBox.current?.focus()
+      }, 400)
+    }
+  }, [collapsed])
+
+  const inputBox = (
+    <motion.form
+      className="mt-4"
+      onSubmit={(e) => {
+        e.preventDefault()
+        fetchChatbotResponse(message)
+      }}
+    >
+      <TextInput
+        ref={questionInputBox}
+        value={message}
+        onChange={(evt) => setMessage((evt.target as HTMLInputElement).value)}
+        onFocus={() => onFocus?.()}
+        disabled={loading}
+        placeholder="Ask a question..."
+        autoComplete="none"
+        appendRight={
+          <button
+            className="bg-white px-4 text-brand-navy disabled:bg-brand-warm-grey"
+            type="submit"
+            onClick={() => fetchChatbotResponse(message)}
+            disabled={loading}
+          >
+            <Chevron />
+          </button>
+        }
+      />
+    </motion.form>
+  )
+
+  if (collapsed) {
+    return (
+      <motion.div
+        className={twMerge('px-8 py-8', className)}
+        layoutId="chatbotbox"
+        layout="preserve-aspect"
+      >
+        {inputBox}
+      </motion.div>
+    )
+  }
+
   return (
-    <div className=" bg-brand-warm-grey px-8 py-8">
-      <Heading variant="h1" className="my-0 py-0">
-        Ask Livaware
-      </Heading>
-      <p className="text-sm font-thin">
-        This is an AI-powered tool which has the potential to produce incorrect
-        or misleading information.
-        <br />
-        Its primary purpose is to provide information about us, our products,
-        and our services.
-        <br />
-        Use caution when asking medical questions, and always consult a medical
-        professional before taking any action.
-      </p>
+    <motion.div
+      className={twMerge('grid grid-rows-[auto_1fr_auto] px-8 py-8', className)}
+      layoutId="chatbotbox"
+      layout="preserve-aspect"
+    >
+      <div>
+        <Heading variant="h1" className="my-0 py-0">
+          Ask Livaware
+          <button className="float-right text-sm" onClick={() => onClose?.()}>
+            Close
+          </button>
+        </Heading>
+        <p className="text-sm font-thin">
+          This is an AI-powered tool which has the potential to produce
+          incorrect or misleading information.
+          <br />
+          Its primary purpose is to provide information about us, our products,
+          and our services.
+          <br />
+          Use caution when asking medical questions, and always consult a
+          medical professional before taking any action.
+        </p>
+      </div>
       <div
-        className="mt-4 grid max-h-[50vh] grid-cols-1 gap-4 overflow-y-scroll"
+        className="mt-4 grid max-h-[50vh] grid-cols-1 content-start gap-4 overflow-y-scroll"
         ref={responseContainer}
       >
         <AnimatePresence>
@@ -135,32 +210,7 @@ export default function ChatBot({ apiEndpoint }: { apiEndpoint: string }) {
           )}
         </AnimatePresence>
       </div>
-      <form
-        className="mt-4 grid grid-cols-[1fr_6em]"
-        onSubmit={(e) => {
-          e.preventDefault()
-          fetchChatbotResponse(message)
-        }}
-      >
-        <input
-          ref={questionInputBox}
-          type="text"
-          value={message}
-          onChange={(evt) => setMessage(evt.target.value)}
-          className="border-2 border-solid border-black p-2 active:rounded-none"
-          disabled={loading}
-          placeholder="Ask a question..."
-          autoComplete="none"
-        />
-        <button
-          className="border-2 border-l-0 border-solid border-black bg-brand-navy px-4 text-white"
-          type="submit"
-          onClick={() => fetchChatbotResponse(message)}
-          disabled={loading}
-        >
-          {loading ? 'Loading' : 'Send'}
-        </button>
-      </form>
-    </div>
+      {inputBox}
+    </motion.div>
   )
 }
