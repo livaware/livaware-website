@@ -23,7 +23,7 @@ function ChatEntry({
   const containerVariant = isUser ? 'justify-end' : 'justify-start'
   return (
     <div className={`${containerVariant} grid`}>
-      <span className={`${variant} block w-fit p-4`}>
+      <span className={`${variant} block w-fit whitespace-pre-wrap p-4`}>
         {waiting ? <WaitingAnimation variant="white" /> : message}
       </span>
     </div>
