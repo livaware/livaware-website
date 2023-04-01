@@ -23,13 +23,15 @@ export default function ClientHome({
   quotes,
   content,
 }: {
-  treeData: DecisionTreeItem
+  treeData?: DecisionTreeItem | null
   quotes: Quote[]
   content: any
 }) {
   const [currentTree, setCurrentTree] = useState(treeData)
   const [history, setHistory] = useState<DecisionTreeHistoryItem[]>([])
   const isMobile = useIsMobile()
+
+  if (!treeData || !currentTree) return null
 
   const maximumTreeDepth = getDecisionTreeDepth(treeData)
   const currentTreeDepth = getDecisionTreeDepth(currentTree)
