@@ -1,6 +1,7 @@
 'use client'
 
-import ChatBot from '@/components/ChatBot'
+import ChatBot, { ChatBotRef } from '@/components/ChatBot'
+import ChatBoxInput from '@/components/ChatBot/Input'
 import ContentToggler from '@/components/ContentToggler'
 import DecisionTree from '@/components/DecisionTree'
 import DecisionTreeHistory, {
@@ -11,36 +12,31 @@ import ContentContainer from '@/components/Layout/ContentContainer'
 import ProgressBar from '@/components/ProgressBar'
 import QuoteFader from '@/components/QuoteFader'
 import Heading from '@/components/Typography/Heading'
-import Quotation from '@/components/Typography/Quotation'
 import VideoBackground from '@/components/VideoBackground'
 import { getDecisionTreeDepth } from '@/lib/getDecisionTree'
 import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
 import Quote from '@/lib/sanityTypes/quote'
-import useIsMobile from '@/lib/useIsMobile'
-import { AnimatePresence, motion } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-export default function ClientHome({
+function DecisionTreeColumn({
   treeData,
-  quotes,
-  content,
+  onProgress,
 }: {
-  treeData?: DecisionTreeItem | null
-  quotes: Quote[]
-  content: any
+  treeData: DecisionTreeItem
+  onProgress: (progress: number) => void
 }) {
   const [currentTree, setCurrentTree] = useState(treeData)
   const [history, setHistory] = useState<DecisionTreeHistoryItem[]>([])
-  const [chatFocused, setChatFocused] = useState(false)
-  const isMobile = useIsMobile()
-
-  if (!treeData || !currentTree) return null
 
   const maximumTreeDepth = getDecisionTreeDepth(treeData)
   const currentTreeDepth = getDecisionTreeDepth(currentTree)
   const progress =
     currentTreeDepth === 1 ? 1 : 1 - currentTreeDepth / maximumTreeDepth
+
+  useEffect(() => {
+    onProgress(progress)
+  }, [onProgress, progress])
 
   const selectOption = (currentTree: DecisionTreeItem, selection: number) => {
     const newState = currentTree.options[selection].nextStep
@@ -71,106 +67,115 @@ export default function ClientHome({
     setCurrentTree(current)
   }
 
-  const dTreeOpacity = history.length > 0 ? 'bg-opacity-100' : 'bg-opacity-80'
+  return (
+    <div className="grid h-full min-h-[60vh] grid-rows-[1fr_auto] md:min-h-full">
+      <DecisionTreeHistory
+        history={history}
+        onItemPressed={(index) =>
+          replayDecisions(history.slice(0, index).map((x) => x.option))
+        }
+      />
+      <DecisionTree
+        treeData={currentTree}
+        currentStepNumber={history.length + 1}
+        onOptionSelected={(index) => {
+          const newState = selectOption(currentTree, index)
+          if (newState.newState) {
+            setCurrentTree(newState.newState)
+          }
+          setHistory([
+            ...history,
+            {
+              option: index,
+              label: currentTree.historyTitle ?? currentTree.title,
+            },
+          ])
+        }}
+      />
+    </div>
+  )
+}
+
+function LeftColumn({
+  treeData,
+  onProgress,
+}: {
+  treeData?: DecisionTreeItem | null
+  onProgress: (progress: number) => void
+}) {
+  const [chatFocused, setChatFocused] = useState(false)
+  const [chatLoading, setChatLoading] = useState(false)
+  const [chatMessage, setChatMessage] = useState('')
+  const chatBotRef = useRef<ChatBotRef>(null)
+  const chatTextRef = useRef<HTMLInputElement>(null)
+
+  const chatSubmit = async () => {
+    setChatLoading(true)
+    await chatBotRef.current?.sendMessage(chatMessage)
+    setChatMessage('')
+    setTimeout(() => chatTextRef.current?.focus(), 400)
+    setChatLoading(false)
+  }
+
+  const dTree = !treeData ? undefined : (
+    <DecisionTreeColumn treeData={treeData} onProgress={onProgress} />
+  )
+  const chatBot = (
+    <div className="h-full">
+      <button
+        type="button"
+        className="my-5"
+        onClick={() => setChatFocused(false)}
+      >
+        <Chevron reverse /> Go back
+      </button>
+      <ChatBot ref={chatBotRef} apiEndpoint="/faq/api" className="h-full" />
+    </div>
+  )
+
+  return (
+    <div className="grid min-h-[100vh] w-full grid-cols-1 grid-rows-[1fr_auto] justify-center bg-brand-taupe px-5 pb-20">
+      <ContentToggler
+        initialContent={dTree}
+        activeContent={chatBot}
+        active={chatFocused}
+      />
+      <ChatBoxInput
+        ref={chatTextRef}
+        loading={chatLoading}
+        onChange={(evt) => setChatMessage(evt.target.value)}
+        onFocus={() => setChatFocused(true)}
+        value={chatMessage}
+        onSubmit={() => chatSubmit()}
+      />
+    </div>
+  )
+}
+
+export default function ClientHome({
+  treeData,
+  quotes,
+  content,
+}: {
+  treeData?: DecisionTreeItem | null
+  quotes: Quote[]
+  content: any
+}) {
+  const [progress, setProgress] = useState(0)
 
   return (
     <VideoBackground url="/video/hero-video.mp4">
       <ProgressBar progress={progress} className="bg-brand-taupe" />
-      <div className="relative flex min-h-[90vh] flex-col overflow-x-hidden bg-brand-taupe bg-opacity-0 md:flex-row">
-        <div
-          className={`flex flex-1 justify-center bg-brand-taupe pb-20 ${dTreeOpacity}`}
-        >
-          <ContentToggler
-            initialContent={
-              <div className="grid h-full min-h-[60vh] w-full max-w-lg grid-rows-[1fr_auto] px-4 md:min-h-full">
-                <DecisionTreeHistory
-                  history={history}
-                  onItemPressed={(index) =>
-                    replayDecisions(
-                      history.slice(0, index).map((x) => x.option)
-                    )
-                  }
-                />
-                <DecisionTree
-                  treeData={currentTree}
-                  currentStepNumber={history.length + 1}
-                  onOptionSelected={(index) => {
-                    const newState = selectOption(currentTree, index)
-                    if (newState.newState) {
-                      setCurrentTree(newState.newState)
-                    }
-                    setHistory([
-                      ...history,
-                      {
-                        option: index,
-                        label: currentTree.historyTitle ?? currentTree.title,
-                      },
-                    ])
-                  }}
-                />
-                <ChatBot.Input onFocus={() => setChatFocused(true)} />
-              </div>
-            }
-            activeContent={
-              <div className="h-full">
-                <button
-                  type="button"
-                  className="mx-6 mt-5"
-                  onClick={() => setChatFocused(false)}
-                >
-                  <Chevron reverse /> Go back
-                </button>
-                <ChatBot apiEndpoint="/faq/api" className="h-full" />
-              </div>
-            }
-            active={chatFocused}
-          />
+      <div className="relative grid min-h-[90vh] grid-rows-2 overflow-x-hidden bg-brand-taupe bg-opacity-0 md:grid-cols-2 md:grid-rows-1">
+        <LeftColumn
+          treeData={treeData}
+          onProgress={(newProgress) => setProgress(newProgress)}
+        />
+        <div className="grid items-center justify-center bg-brand-navy">
+          <Heading variant="h1" className="text-center text-white">
+            Who we are
+          </Heading>
         </div>
-        <AnimatePresence initial={false} mode="popLayout">
-          {history.length === 0 || isMobile ? (
-            <motion.div
-              key={1}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                ease: 'easeOut',
-                duration: 1,
-              }}
-              className={`bg-brand-navy ${dTreeOpacity} flex-1`}
-            >
-              <Heading
-                variant="h1"
-                className="text-center align-text-top text-white md:my-14 md:min-h-[3em]"
-              >
-                Who we are
-              </Heading>
-              <div className="p-4 text-white">
-                <Quotation
-                  text={`Priding ourselves on anticipating and filling the gaps in
-                  people's healthcare; we combine clinical excellence, precision
-                  organisation and compassion into an unrivalled service.`}
-                  cite="Hemmen Jutla, Founding Clinician"
-                />
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key={2}
-              style={{
-                originX: 0,
-              }}
-              initial={{ scaleX: 0, opacity: 1 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              exit={{ scaleX: 1, opacity: 0 }}
-              transition={{
-                ease: 'easeOut',
-                duration: 1,
-              }}
-              className="flex-1 bg-brand-navy"
-            ></motion.div>
-          )}
-        </AnimatePresence>
       </div>
       <div className="h-[70vh]"></div>
       <div className="bg-white">

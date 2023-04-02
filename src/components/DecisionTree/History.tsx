@@ -14,12 +14,12 @@ export default function DecisionTreeHistory({
   onItemPressed: (itemIndex: number) => void
 }) {
   return (
-    <div className="absolute top-0 w-full p-5 text-white md:h-5">
-      {history.length === 0 && <div className="inline-block pl-4">&nbsp;</div>}
+    <div className="absolute top-0 w-full py-5 text-brand-navy">
+      {history.length === 0 && <div className="inline-block">&nbsp;</div>}
       <AnimatePresence initial={false}>
         {history.length > 0 && (
           <motion.button
-            className="inline-block pl-4"
+            className="inline-block"
             onClick={() => onItemPressed(history.length - 1)}
             initial={{ y: -32, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

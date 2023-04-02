@@ -1,11 +1,9 @@
 import DecisionTreeItem, {
   DecisionTreeOption,
 } from '@/lib/sanityTypes/decisionTreeItem'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import Heading from '../Typography/Heading'
 import DecisionTreeButton from './Button'
-import { motion } from 'framer-motion'
-import DecisionTreeHistory from './History'
 
 export default function DecisionTree({
   treeData,
@@ -23,7 +21,7 @@ export default function DecisionTree({
   }
 
   return (
-    <div className="overflow-x-hidden">
+    <div className="w-full overflow-x-hidden">
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={currentStepNumber}
@@ -33,13 +31,12 @@ export default function DecisionTree({
           transition={{
             type: 'tween',
           }}
-          className="md:max-w-[50vw]"
         >
-          <Heading variant="h1" className="my-14 text-center">
+          <Heading variant="h1" className="my-14">
             {treeData.title}
           </Heading>
-          <div className="grid gap-5 opacity-90 md:px-8">
-            {treeData.content && <div className="ml-4">{treeData.content}</div>}
+          <div className="grid gap-5 opacity-90">
+            {treeData.content && <div className="">{treeData.content}</div>}
             {treeData.options.map((option, index) => (
               <div key={option._key}>
                 <DecisionTreeButton
