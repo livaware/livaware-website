@@ -28,6 +28,7 @@ const ChatBoxInput = forwardRef<HTMLInputElement, ChatBoxInputProps>(
           onFocus={(e) => {
             e.preventDefault()
             onFocus?.()
+            window.scrollTo(0, 0)
           }}
           disabled={loading}
           placeholder="Ask a question..."
