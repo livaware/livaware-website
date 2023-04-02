@@ -25,7 +25,10 @@ const ChatBoxInput = forwardRef<HTMLInputElement, ChatBoxInputProps>(
           ref={ref}
           value={value}
           onChange={onChange}
-          onFocus={() => onFocus?.()}
+          onFocus={(e) => {
+            e.preventDefault()
+            onFocus?.()
+          }}
           disabled={loading}
           placeholder="Ask a question..."
           autoComplete="none"
