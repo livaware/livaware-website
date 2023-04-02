@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import LogoType from '../../LogoType'
 import Menu from '../Menu'
 import MenuButton from './MenuButton'
@@ -16,31 +16,6 @@ export default function Header() {
     const doc = document.querySelector<HTMLBodyElement>(':root')
     doc?.style.setProperty('--headerHeight', `${height}px`)
   }, [menuRef.current?.clientHeight])
-
-  // This code sets the height of the SessionView component to the height of the
-  // visual viewport. A resize handler is set on the resize event of the
-  // visual viewport, and the height of the SessionView component is set to the
-  // height of the visual viewport
-  // it fixes a viewport height issue on mobile devices
-  useEffect(() => {
-    if (window.visualViewport) {
-      const resizeHandler = () => {
-        const eles = document.getElementsByClassName('SessionView')
-        eles
-          .item(0)
-          ?.setAttribute('style', `height: ${window.visualViewport?.height}px`)
-        document
-          .getElementsByTagName('html')[0]
-          .setAttribute('style', `height: ${window.visualViewport?.height}px`)
-      }
-
-      window.visualViewport?.addEventListener('resize', resizeHandler)
-
-      return () => {
-        window.visualViewport?.removeEventListener('resize', resizeHandler)
-      }
-    }
-  }, [])
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen)

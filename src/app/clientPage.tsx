@@ -17,6 +17,7 @@ import { getDecisionTreeDepth } from '@/lib/getDecisionTree'
 import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
 import Quote from '@/lib/sanityTypes/quote'
+import useIsMobile from '@/lib/useIsMobile'
 import { useEffect, useRef, useState } from 'react'
 
 function DecisionTreeColumn({
@@ -104,10 +105,21 @@ function LeftColumn({
   onProgress: (progress: number) => void
 }) {
   const [chatFocused, setChatFocused] = useState(false)
+  const [inputFocused, setInputFocused] = useState(false)
   const [chatLoading, setChatLoading] = useState(false)
   const [chatMessage, setChatMessage] = useState('')
+  const [viewportHeight, setViewportHeight] = useState(0)
+  const isMobile = useIsMobile()
   const chatBotRef = useRef<ChatBotRef>(null)
   const chatTextRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    const fn = () => {
+      setViewportHeight(window.visualViewport?.height ?? 0)
+    }
+    window.visualViewport?.addEventListener('resize', fn)
+    return () => window.visualViewport?.removeEventListener('resize', fn)
+  }, [])
 
   const chatSubmit = async () => {
     setChatLoading(true)
@@ -133,8 +145,21 @@ function LeftColumn({
     </div>
   )
 
+  var computedHeight = `calc(${viewportHeight} - var(--headerHeight))`
+
   return (
-    <div className="grid min-h-screen-minus-header w-full grid-cols-1 grid-rows-[1fr_auto] justify-center bg-brand-taupe bg-opacity-80 px-5 pb-10">
+    <div
+      className="grid min-h-screen-minus-header w-full grid-cols-1 grid-rows-[1fr_auto] justify-center bg-brand-taupe bg-opacity-80 px-5 pb-10"
+      style={
+        inputFocused && viewportHeight && isMobile
+          ? {
+              minHeight: computedHeight,
+              height: computedHeight,
+              maxHeight: computedHeight,
+            }
+          : {}
+      }
+    >
       <ContentToggler
         initialContent={dTree}
         activeContent={chatBot}
@@ -144,7 +169,22 @@ function LeftColumn({
         ref={chatTextRef}
         loading={chatLoading}
         onChange={(evt) => setChatMessage(evt.target.value)}
-        onFocus={() => setChatFocused(true)}
+        className={'sticky'}
+        onFocus={() => {
+          setChatFocused(true)
+          setInputFocused(true)
+          setTimeout(
+            () =>
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+              }),
+            100
+          )
+        }}
+        onBlur={() => {
+          setInputFocused(false)
+        }}
         value={chatMessage}
         onSubmit={() => chatSubmit()}
       />

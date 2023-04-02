@@ -6,13 +6,15 @@ import Chevron from '../Icons/Chevron'
 interface ChatBoxInputProps {
   onFocus?: () => void
   onChange?: (evt: React.ChangeEvent<HTMLInputElement>) => void
+  onBlur?: () => void
   value?: string
   loading?: boolean
   onSubmit?: () => void
+  className?: string
 }
 
 const ChatBoxInput = forwardRef<HTMLInputElement, ChatBoxInputProps>(
-  ({ onFocus, onChange, value, loading, onSubmit }, ref) => {
+  ({ onFocus, onChange, onBlur, className, value, loading, onSubmit }, ref) => {
     return (
       <form
         className="mt-4"
@@ -25,12 +27,10 @@ const ChatBoxInput = forwardRef<HTMLInputElement, ChatBoxInputProps>(
           ref={ref}
           value={value}
           onChange={onChange}
-          onFocus={(e) => {
-            e.preventDefault()
-            onFocus?.()
-            window.scrollTo(0, 0)
-          }}
+          onFocus={onFocus}
+          onBlur={onBlur}
           disabled={loading}
+          className={className}
           placeholder="Ask a question..."
           autoComplete="none"
           appendRight={

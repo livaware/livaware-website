@@ -127,7 +127,7 @@ const ChatBot = forwardRef<ChatBotRef, ChatBotProps>(
                   duration: 0.3,
                 }}
               >
-                <p className="mt-4 text-sm font-thin">
+                {/* <p className="mt-4 text-sm font-thin">
                   This is an AI-powered tool which has the potential to produce
                   incorrect or misleading information.
                   <br />
@@ -137,7 +137,7 @@ const ChatBot = forwardRef<ChatBotRef, ChatBotProps>(
                   <br />
                   Use caution when asking medical questions, and always consult
                   a medical professional before taking any action.
-                </p>
+                </p> */}
                 <p className="mt-4 text-lg">
                   Try asking about our services, or how we can help you with a
                   specific healthcare condition.
