@@ -92,17 +92,15 @@ const ChatBot = forwardRef<ChatBotRef, ChatBotProps>(
     )
 
     return (
-      <div
-        key="expanded"
-        className={twMerge('grid grid-rows-[auto_1fr]', className)}
-      >
+      <div key="expanded" className={twMerge('flex flex-col', className)}>
         <div>
           <Heading variant="h1" className="my-0 py-0">
             Ask Livaware
           </Heading>
         </div>
+        {/* ; */}
         <div
-          className="grid max-h-[65vh] grid-cols-1 content-start gap-4 overflow-y-scroll"
+          className="grid max-h-[calc(100vh-var(--headerHeight)-12em)] flex-1 gap-4 overflow-y-scroll"
           ref={responseContainer}
         >
           <AnimatePresence>

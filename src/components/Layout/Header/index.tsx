@@ -11,8 +11,11 @@ export default function Header() {
   const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setHeaderHeight(menuRef.current?.clientHeight ?? HEADER_HEIGHT)
-  }, [])
+    const height = menuRef.current?.clientHeight ?? HEADER_HEIGHT
+    setHeaderHeight(height)
+    const doc = document.querySelector<HTMLBodyElement>(':root')
+    doc?.style.setProperty('--headerHeight', `${height}px`)
+  }, [menuRef.current?.clientHeight])
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen)

@@ -14,7 +14,7 @@ export default function PageLayout({
   children,
 }: PageLayoutProps) {
   return (
-    <div className="grid min-h-screen grid-rows-[auto_1fr_auto]">
+    <div className="grid min-h-screen-minus-header grid-rows-[auto_1fr_auto]">
       <Header />
       {children}
       <Footer config={globalConfig.footer} />

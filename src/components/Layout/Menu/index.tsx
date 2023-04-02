@@ -53,7 +53,7 @@ export default function Menu({
         transition={{
           type: 'tween',
         }}
-        className={`h-screen w-screen max-w-md bg-bg-light-primary`}
+        className="h-screen w-screen max-w-md bg-bg-light-primary"
         style={{ marginTop: headerHeight }}
       ></motion.div>
     </Overlay>

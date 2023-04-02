@@ -68,7 +68,7 @@ function DecisionTreeColumn({
   }
 
   return (
-    <div className="grid h-full min-h-[60vh] grid-rows-[1fr_auto] md:min-h-full">
+    <div className="grid grid-rows-[1fr_auto]">
       <DecisionTreeHistory
         history={history}
         onItemPressed={(index) =>
@@ -121,7 +121,7 @@ function LeftColumn({
     <DecisionTreeColumn treeData={treeData} onProgress={onProgress} />
   )
   const chatBot = (
-    <div className="h-full">
+    <div>
       <button
         type="button"
         className="my-5"
@@ -134,7 +134,7 @@ function LeftColumn({
   )
 
   return (
-    <div className="grid min-h-[100vh] w-full grid-cols-1 grid-rows-[1fr_auto] justify-center bg-brand-taupe px-5 pb-20">
+    <div className="grid min-h-screen-minus-header w-full grid-cols-1 grid-rows-[1fr_auto] justify-center bg-brand-taupe bg-opacity-80 px-5 pb-10">
       <ContentToggler
         initialContent={dTree}
         activeContent={chatBot}
@@ -166,12 +166,12 @@ export default function ClientHome({
   return (
     <VideoBackground url="/video/hero-video.mp4">
       <ProgressBar progress={progress} className="bg-brand-taupe" />
-      <div className="relative grid min-h-[90vh] grid-rows-2 overflow-x-hidden bg-brand-taupe bg-opacity-0 md:grid-cols-2 md:grid-rows-1">
+      <div className="relative grid min-h-screen-minus-header grid-rows-2 overflow-x-hidden md:grid-cols-2 md:grid-rows-1">
         <LeftColumn
           treeData={treeData}
           onProgress={(newProgress) => setProgress(newProgress)}
         />
-        <div className="grid items-center justify-center bg-brand-navy">
+        <div className="grid items-center justify-center bg-brand-navy bg-opacity-80">
           <Heading variant="h1" className="text-center text-white">
             Who we are
           </Heading>
@@ -182,7 +182,7 @@ export default function ClientHome({
         <ContentContainer>
           <PortableTextRenderer content={content} />
         </ContentContainer>
-        <div className="grid min-h-screen items-center justify-center bg-brand-green">
+        <div className="grid min-h-screen-minus-header items-center justify-center bg-brand-green">
           <div className="max-w-[320px]">
             <QuoteFader className="text-white" quotes={quotes} />
             <a

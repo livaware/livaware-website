@@ -8,13 +8,13 @@ export default function VideoBackground({
   children: ReactNode
 }) {
   return (
-    <div className="relative min-h-screen w-screen">
+    <div className="min-screen-minus-header relative w-screen">
       <video
         autoPlay
         muted
         loop
         playsInline
-        className="fixed top-0 left-0 -z-10 h-screen w-screen object-cover"
+        className="fixed top-[var(--headerHeight)] left-0 -z-10 h-screen-minus-header w-screen object-cover"
       >
         <source src={url} type="video/mp4" />
       </video>

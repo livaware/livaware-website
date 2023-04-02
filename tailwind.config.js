@@ -17,6 +17,15 @@ module.exports = {
       maxWidth: {
         'site-width': '1080px',
       },
+      maxHeight: {
+        'screen-minus-header': 'calc(100vh - var(--headerHeight))',
+      },
+      height: {
+        'screen-minus-header': 'calc(100vh - var(--headerHeight))',
+      },
+      minHeight: {
+        'screen-minus-header': 'calc(100vh - var(--headerHeight))',
+      },
     },
   },
   plugins: [],
