@@ -1,19 +1,14 @@
-import ChatBot from '@/components/ChatBot'
+import { GenericPageStaticParams } from '@/app/[...slug]/page'
 import ContentContainer from '@/components/Layout/ContentContainer'
 import Heading from '@/components/Typography/Heading'
 import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import sanityClient from '@/lib/sanityClient'
 import { GenericPageData } from '@/lib/sanityTypes/genericPageData'
 import { Metadata } from 'next'
-import ClientPage from './clientPage'
-
-export interface GenericPageStaticParams {
-  slug: string
-}
 
 export async function generateStaticParams() {
   const pages = await sanityClient.fetch<GenericPageData[]>(
-    `*[_type == "standardPage"]`
+    `*[_type == "resourcePage"]`
   )
 
   const paths = pages.map((page) => ({
@@ -22,11 +17,10 @@ export async function generateStaticParams() {
   return paths as GenericPageStaticParams[]
 }
 
-async function getPageData(slug: string | string[]) {
-  const newSlug = Array.isArray(slug) ? slug.join('/') : slug
+async function getPageData(slug: string) {
   try {
     const data = await sanityClient.fetch<GenericPageData[]>(
-      `*[slug == "/${newSlug}"]`
+      `*[_type == "resourcePage" && slug == "${slug}"]`
     )
     return data?.[0] ? data[0] : null
   } catch (error) {
@@ -41,10 +35,14 @@ export async function generateMetadata({
   params: GenericPageStaticParams
 }): Promise<Metadata> {
   const data = await getPageData(params.slug)
-  return { title: data?.title, description: data?.description }
+  return { title: data?.title }
 }
 
-const GenericPage = async ({ params }: { params: GenericPageStaticParams }) => {
+export default async function ResourcePage({
+  params,
+}: {
+  params: GenericPageStaticParams
+}) {
   const data = await getPageData(params.slug)
 
   if (!data) {
@@ -54,15 +52,10 @@ const GenericPage = async ({ params }: { params: GenericPageStaticParams }) => {
   }
 
   return (
-    <ContentContainer key={params.slug}>
-      <div className="mb-8 px-5 md:mb-4">
-        <Heading variant="h1">{data.title}</Heading>
-        {data.subTitle && <Heading variant="h2">{data.subTitle}</Heading>}
-        <PortableTextRenderer content={data.content} />
-      </div>
-      <ClientPage />
+    <ContentContainer>
+      <Heading variant="h1">{data.title}</Heading>
+      <Heading variant="h2">{data.subTitle}</Heading>
+      <PortableTextRenderer content={data.content} />
     </ContentContainer>
   )
 }
-
-export default GenericPage

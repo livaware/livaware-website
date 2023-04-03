@@ -7,7 +7,7 @@ export default function ContentContainer({
 }) {
   return (
     <main className="grid w-full grid-cols-1 justify-items-center">
-      <div className="w-full max-w-site-width">{children}</div>
+      <div className="w-full max-w-site-width px-4">{children}</div>
     </main>
   )
 }
