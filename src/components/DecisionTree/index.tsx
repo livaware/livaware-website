@@ -11,12 +11,12 @@ export default function DecisionTree({
   currentStepNumber,
 }: {
   treeData: DecisionTreeItem
-  onOptionSelected: (index: number) => void
+  onOptionSelected: (index: number, option: DecisionTreeOption) => void
   currentStepNumber: number
 }) {
   const handleAdvance = (option: DecisionTreeOption, index: number) => {
-    if (option.nextStep) {
-      onOptionSelected(index)
+    if (option.nextStep || option.finalStep) {
+      onOptionSelected(index, option)
     }
   }
 

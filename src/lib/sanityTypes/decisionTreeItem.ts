@@ -1,9 +1,8 @@
-import { SanityReference } from '@sanity/client'
-
 export interface DecisionTreeOption {
   _key: string
   text: string
-  helpText?: string
+  breadcrumb: string
+  finalStep?: boolean
   nextStep?: DecisionTreeItem
   link?: string
 }

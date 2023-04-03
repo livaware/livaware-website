@@ -41,12 +41,12 @@ export default async function getDecisionTree(id: string) {
         {
             _id,
             title,
-            historyTitle,
             content,
             options[] {
                 _key,
                 text,
-                helpText,
+                breadcrumb,
+                finalStep,
                 nextStep,
                 link
             }
