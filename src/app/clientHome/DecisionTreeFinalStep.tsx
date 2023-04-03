@@ -103,7 +103,7 @@ export default function FinalStep({
               <FormLabel>Phone number</FormLabel>
               <TextInput
                 {...register('phone', { required: true })}
-                label="Name"
+                label="Phone number"
               />
               {errors.phone && (
                 <FormError>Please enter your phone number</FormError>

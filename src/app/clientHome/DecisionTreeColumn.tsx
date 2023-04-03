@@ -47,7 +47,7 @@ export default function DecisionTreeColumn({
       if (newState.newState) {
         newHistory.push({
           option: decision,
-          label: current.historyTitle ?? current.title,
+          label: current.options[decision].breadcrumb,
         })
         current = newState.newState
       }
@@ -58,40 +58,43 @@ export default function DecisionTreeColumn({
   }
 
   return (
-    <ContentToggler
-      initialContent={
-        <div className="grid grid-rows-[1fr_auto]">
-          <DecisionTreeHistory
-            history={history}
-            onItemPressed={(index) =>
-              replayDecisions(history.slice(0, index).map((x) => x.option))
-            }
-          />
-          <DecisionTree
-            treeData={currentTree}
-            currentStepNumber={history.length + 1}
-            onOptionSelected={(index, option) => {
-              if (option.finalStep) {
-                setIsFinalStep(true)
-                return
-              }
-              const newState = selectOption(currentTree, index)
-              if (newState.newState) {
-                setCurrentTree(newState.newState)
-              }
-              setHistory([
-                ...history,
-                {
-                  option: index,
-                  label: option.breadcrumb,
-                },
-              ])
-            }}
-          />
-        </div>
-      }
-      activeContent={<FinalStep history={history} />}
-      active={isFinalStep}
-    />
+    <>
+      <DecisionTreeHistory
+        history={history}
+        onItemPressed={(index) => {
+          setIsFinalStep(false)
+          replayDecisions(history.slice(0, index).map((x) => x.option))
+        }}
+      />
+      <ContentToggler
+        initialContent={
+          <div className="grid grid-rows-[1fr_auto]">
+            <DecisionTree
+              treeData={currentTree}
+              currentStepNumber={history.length + 1}
+              onOptionSelected={(index, option) => {
+                if (option.finalStep) {
+                  setIsFinalStep(true)
+                } else {
+                  const newState = selectOption(currentTree, index)
+                  if (newState.newState) {
+                    setCurrentTree(newState.newState)
+                  }
+                }
+                setHistory([
+                  ...history,
+                  {
+                    option: index,
+                    label: option.breadcrumb,
+                  },
+                ])
+              }}
+            />
+          </div>
+        }
+        activeContent={<FinalStep history={history} />}
+        active={isFinalStep}
+      />
+    </>
   )
 }
