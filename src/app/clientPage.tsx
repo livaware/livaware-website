@@ -18,7 +18,9 @@ import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
 import Quote from '@/lib/sanityTypes/quote'
 import useIsMobile from '@/lib/useIsMobile'
+import { useScroll, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
 
 function DecisionTreeColumn({
   treeData,
@@ -202,6 +204,12 @@ export default function ClientHome({
   content: any
 }) {
   const [progress, setProgress] = useState(0)
+  const mainContent = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: mainContent,
+    offset: ['25vh', '0'],
+  })
+  const contentOpacity = useTransform(scrollYProgress, [0, 1], [1, 0])
 
   return (
     <VideoBackground url="/video/hero-video.mp4">
@@ -217,11 +225,17 @@ export default function ClientHome({
           </Heading>
         </div>
       </div>
-      <div className="h-[70vh]"></div>
-      <div className="bg-white">
+      <div ref={mainContent} className="pt-[70vh]"></div>
+      <motion.div
+        style={{
+          opacity: contentOpacity,
+        }}
+        className="bg-white"
+      >
         <ContentContainer>
           <PortableTextRenderer content={content} />
         </ContentContainer>
+
         <div className="grid min-h-screen-minus-header items-center justify-center bg-brand-green">
           <div className="max-w-[320px]">
             <QuoteFader className="text-white" quotes={quotes} />
@@ -235,7 +249,7 @@ export default function ClientHome({
             </a>
           </div>
         </div>
-      </div>
+      </motion.div>
     </VideoBackground>
   )
 }
