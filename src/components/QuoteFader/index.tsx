@@ -1,7 +1,7 @@
 import Quote from '@/lib/sanityTypes/quote'
 import splitCharacters from '@/lib/splitCharacters'
-import { stagger, useAnimate } from 'framer-motion'
-import { useCallback, useEffect, useState } from 'react'
+import { stagger, useAnimate, useInView } from 'framer-motion'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { QuoteMark } from '../Typography/Quotation'
 
@@ -17,6 +17,7 @@ export default function QuoteFader({
   const [currentQuote, setCurrentQuote] = useState(0)
   const [scope, animate] = useAnimate()
   const [complete, setComplete] = useState(false)
+  const inView = useInView(scope)
 
   const clearAnimation = useCallback(async () => {
     try {
@@ -56,8 +57,10 @@ export default function QuoteFader({
   }, [currentQuote, quotes.length])
 
   useEffect(() => {
-    playAnimation()
-  }, [currentQuote, playAnimation])
+    if (inView) {
+      playAnimation()
+    }
+  }, [currentQuote, playAnimation, inView])
 
   useEffect(() => {
     const interval = 0
