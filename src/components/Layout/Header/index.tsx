@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import LogoType from '../../LogoType'
 import Menu from '../Menu'
@@ -35,7 +36,9 @@ export default function Header() {
         <div className="grid w-full grid-cols-[auto_1fr] items-center px-2 md:grid-cols-3 md:px-8">
           <MenuButton onClick={toggleMenu} active={menuOpen} />
           <div className="grid items-center justify-items-end py-4 md:justify-items-center">
-            <LogoType variant="navy" onClick={toggleMenu} />
+            <Link href="/">
+              <LogoType variant="navy" />
+            </Link>
           </div>
         </div>
       </div>

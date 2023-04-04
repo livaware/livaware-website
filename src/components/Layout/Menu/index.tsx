@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { motion } from 'framer-motion'
+import MenuLink from './MenuLink'
 
 function Overlay({
   children,
@@ -13,7 +14,7 @@ function Overlay({
   return (
     <motion.div
       animate={{
-        backgroundColor: `rgba(0,0,0,${open ? 0.5 : 0})`,
+        backgroundColor: `rgba(0,0,0,${open ? 0.8 : 0})`,
       }}
       initial={{
         backgroundColor: `rgba(0,0,0,0)`,
@@ -25,7 +26,10 @@ function Overlay({
       style={{
         pointerEvents: open ? 'auto' : 'none',
       }}
-      onClick={onClick}
+      onClick={(e) => {
+        onClick?.()
+        e.preventDefault()
+      }}
     >
       {children}
     </motion.div>
@@ -55,7 +59,12 @@ export default function Menu({
         }}
         className="h-screen w-screen max-w-md bg-bg-light-primary"
         style={{ marginTop: headerHeight }}
-      ></motion.div>
+      >
+        <div className="grid grid-cols-1 items-start gap-4 p-4">
+          <MenuLink href="/">Home</MenuLink>
+          <MenuLink href="/resources">Resources</MenuLink>
+        </div>
+      </motion.div>
     </Overlay>
   )
 }
