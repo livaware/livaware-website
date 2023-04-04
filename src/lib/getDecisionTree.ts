@@ -14,7 +14,7 @@ export function getDecisionTreeDepth(
     1 +
     Math.max(
       0,
-      ...items.options.map((option) => {
+      ...(items.options ?? []).map((option) => {
         try {
           return getDecisionTreeDepth(option.nextStep)
         } catch (error) {
@@ -58,7 +58,7 @@ export default async function getDecisionTree(id: string) {
     return null
   }
 
-  for (const option of tree.options) {
+  for (const option of tree?.options ?? []) {
     if (option?.nextStep?._ref) {
       const expanded = await getDecisionTree(option.nextStep._ref)
 

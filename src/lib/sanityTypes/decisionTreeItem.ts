@@ -13,5 +13,5 @@ export default interface DecisionTreeItem {
   title: string
   historyTitle: string
   content?: string
-  options: DecisionTreeOption[]
+  options?: DecisionTreeOption[]
 }

@@ -37,7 +37,7 @@ export default function DecisionTree({
           </Heading>
           <div className="grid gap-5 opacity-90">
             {treeData.content && <div className="">{treeData.content}</div>}
-            {treeData.options.map((option, index) => (
+            {treeData.options?.map((option, index) => (
               <div key={option._key}>
                 <DecisionTreeButton
                   onClick={

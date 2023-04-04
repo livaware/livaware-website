@@ -29,7 +29,7 @@ export default function DecisionTreeColumn({
   }, [onProgress, progress])
 
   const selectOption = (currentTree: DecisionTreeItem, selection: number) => {
-    const newState = currentTree.options[selection].nextStep
+    const newState = currentTree.options?.[selection].nextStep
     const label = newState?.title
 
     return { newState, label }
@@ -47,7 +47,7 @@ export default function DecisionTreeColumn({
       if (newState.newState) {
         newHistory.push({
           option: decision,
-          label: current.options[decision].breadcrumb,
+          label: current.options?.[decision].breadcrumb ?? '',
         })
         current = newState.newState
       }
