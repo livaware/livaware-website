@@ -97,7 +97,9 @@ export default function FinalStep({
                 })}
                 label="Email"
               />
-              {errors.email && <FormError>{errors.email.message}</FormError>}
+              {errors.email && (
+                <FormError>Please enter a valid email address</FormError>
+              )}
             </fieldset>
             <fieldset>
               <FormLabel>Phone number</FormLabel>

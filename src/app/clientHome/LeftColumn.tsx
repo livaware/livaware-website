@@ -42,6 +42,7 @@ export default function LeftColumn({
   const dTree = !treeData ? undefined : (
     <DecisionTreeColumn treeData={treeData} onProgress={onProgress} />
   )
+
   const chatBot = (
     <div>
       <button
