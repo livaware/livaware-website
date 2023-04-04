@@ -55,7 +55,9 @@ export default async function ResourcePage({
 
   return (
     <ContentContainer>
-      <SanityImage value={data.coverImage} className="max-h-[50vh]" />
+      {data.coverImage && (
+        <SanityImage value={data.coverImage} className="max-h-[50vh]" />
+      )}
       <Heading variant="h1">{data.title}</Heading>
       <Heading variant="h2">{data.subTitle}</Heading>
       <PortableTextRenderer content={data.content} />
