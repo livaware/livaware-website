@@ -2,6 +2,7 @@ import ContentContainer from '@/components/Layout/ContentContainer'
 import Heading from '@/components/Typography/Heading'
 import sanityClient from '@/lib/sanityClient'
 import { GenericPageData } from '@/lib/sanityTypes/genericPageData'
+import { Metadata } from 'next'
 import Link from 'next/link'
 
 async function getPageData() {
@@ -36,4 +37,10 @@ export default async function ResourcesPage() {
       </div>
     </ContentContainer>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'Resources',
+  description:
+    'Helpful resources created by Livaware to help you on your journey to a healthier lifestyle.',
 }
