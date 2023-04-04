@@ -1,3 +1,5 @@
+import Logo from '@/components/Logo'
+import useIsMobile from '@/lib/useIsMobile'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import LogoType from '../../LogoType'
@@ -10,6 +12,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [headerHeight, setHeaderHeight] = useState(HEADER_HEIGHT)
   const menuRef = useRef<HTMLDivElement>(null)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const height = menuRef.current?.clientHeight ?? HEADER_HEIGHT
@@ -33,12 +36,15 @@ export default function Header() {
         ref={menuRef}
         className="fixed z-20 grid w-screen justify-items-center [background-color:rgba(255,255,255,0.9)] [backdrop-filter:blur(10px)]"
       >
-        <div className="grid w-full grid-cols-[auto_1fr] items-center px-2 md:grid-cols-3 md:px-8">
+        <div className="grid w-full grid-cols-3 items-center px-4 md:px-8">
           <MenuButton onClick={toggleMenu} active={menuOpen} />
-          <div className="grid items-center justify-items-end py-4 md:justify-items-center">
+          <div className="grid items-center justify-items-center py-4">
             <Link href="/">
-              <LogoType variant="navy" />
+              {isMobile ? <Logo variant="navy" /> : <LogoType variant="navy" />}
             </Link>
+          </div>
+          <div className="grid justify-items-end">
+            <Link href="/contact">Contact</Link>
           </div>
         </div>
       </div>

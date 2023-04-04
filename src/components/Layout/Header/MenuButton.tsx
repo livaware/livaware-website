@@ -4,7 +4,7 @@ export default function MenuButton({
   onClick,
   active,
 }: {
-  onClick: () => void
+  onClick?: () => void
   active?: boolean
 }) {
   const [hovered, setHovered] = useState(false)
