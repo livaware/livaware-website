@@ -16,7 +16,7 @@ export default function DecisionTreeHistory({
   return (
     <div className="absolute top-0 w-full py-5 text-brand-navy">
       {history.length === 0 && <div className="inline-block">&nbsp;</div>}
-      <AnimatePresence initial={false}>
+      <AnimatePresence initial={false} mode="popLayout">
         {history.length > 0 && (
           <motion.button
             className="inline-block"
@@ -28,30 +28,27 @@ export default function DecisionTreeHistory({
               type: 'tween',
             }}
           >
-            <Chevron reverse /> Go back
+            <Chevron reverse />
           </motion.button>
         )}
-        {history.map((item, index) => (
+        {history.slice(-3).map((item, index) => (
           <motion.div
-            key={index}
-            initial={{ y: -32, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -32, opacity: 0 }}
+            key={item.label}
+            initial={{ x: '100%', opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -32, opacity: 0 }}
             transition={{
               type: 'tween',
+              ease: 'easeInOut',
             }}
             style={{
               display: 'inline-block',
             }}
           >
             {index > 0 && <span className="pl-4">›</span>}
-            <button
-              className="inline-block pl-4"
-              key={index}
-              onClick={() => onItemPressed(index)}
-            >
+            <span className="inline-block pl-4" key={index}>
               {item.label}
-            </button>
+            </span>
           </motion.div>
         ))}
       </AnimatePresence>

@@ -26,8 +26,6 @@ export function getDecisionTreeDepth(
   )
 }
 
-const refCounts: Record<string, number> = {}
-
 // This function is used to fetch a decision tree from Sanity
 // It takes an ID and fetches the tree from Sanity
 // The tree is returned as a decisionTreeItem, which is a custom type
@@ -62,13 +60,6 @@ export default async function getDecisionTree(id: string) {
 
   for (const option of tree?.options ?? []) {
     if (option?.nextStep?._ref) {
-      refCounts[option.nextStep._ref] =
-        (refCounts[option.nextStep._ref] ?? 0) + 1
-      if (refCounts[option.nextStep._ref] > 5) {
-        console.error('Too many references to', option.nextStep._ref, tree)
-        return null
-      }
-
       const expanded = await getDecisionTree(option.nextStep._ref)
 
       if (!expanded) {

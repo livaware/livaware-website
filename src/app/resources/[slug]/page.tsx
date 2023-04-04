@@ -3,11 +3,13 @@ import ContentContainer from '@/components/Layout/ContentContainer'
 import Heading from '@/components/Typography/Heading'
 import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import sanityClient from '@/lib/sanityClient'
+import SanityImage from '@/lib/SanityImage'
 import { GenericPageData } from '@/lib/sanityTypes/genericPageData'
+import { ResourcePageData } from '@/lib/sanityTypes/resourcePageData'
 import { Metadata } from 'next'
 
 export async function generateStaticParams() {
-  const pages = await sanityClient.fetch<GenericPageData[]>(
+  const pages = await sanityClient.fetch<ResourcePageData[]>(
     `*[_type == "resourcePage"]`
   )
 
@@ -19,7 +21,7 @@ export async function generateStaticParams() {
 
 async function getPageData(slug: string) {
   try {
-    const data = await sanityClient.fetch<GenericPageData[]>(
+    const data = await sanityClient.fetch<ResourcePageData[]>(
       `*[_type == "resourcePage" && slug == "${slug}"]`
     )
     return data?.[0] ? data[0] : null
@@ -53,6 +55,7 @@ export default async function ResourcePage({
 
   return (
     <ContentContainer>
+      <SanityImage value={data.coverImage} className="max-h-[50vh]" />
       <Heading variant="h1">{data.title}</Heading>
       <Heading variant="h2">{data.subTitle}</Heading>
       <PortableTextRenderer content={data.content} />

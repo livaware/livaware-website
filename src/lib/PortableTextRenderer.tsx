@@ -5,6 +5,7 @@ import { PortableText } from '@portabletext/react'
 import { getImageDimensions } from '@sanity/asset-utils'
 import urlBuilder from '@sanity/image-url'
 import sanityClient from './sanityClient'
+import SanityImage from './SanityImage'
 
 export default function PortableTextRenderer({ content }: { content: any }) {
   return (
@@ -18,27 +19,7 @@ export default function PortableTextRenderer({ content }: { content: any }) {
           h4: ({ children }) => <Heading variant="h4">{children}</Heading>,
         },
         types: {
-          image: ({ value }) => {
-            const { width, height } = getImageDimensions(value)
-            const img = urlBuilder(sanityClient)
-              .image(value)
-              .width(800)
-              .fit('max')
-              .auto('format')
-              .url()
-            return (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={img}
-                alt={value.alt ?? ''}
-                loading="lazy"
-                className="w-full object-cover"
-                style={{
-                  aspectRatio: width / height,
-                }}
-              />
-            )
-          },
+          image: ({ value }) => <SanityImage value={value} maintainAspect />,
           columnsBlock: ({ value }) => (
             <ColumnsBlock
               leftContent={value.leftContent}
