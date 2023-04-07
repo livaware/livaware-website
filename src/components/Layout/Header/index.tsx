@@ -36,9 +36,9 @@ export default function Header() {
         ref={menuRef}
         className="fixed z-20 grid w-screen justify-items-center [background-color:rgba(255,255,255,0.9)] [backdrop-filter:blur(10px)]"
       >
-        <div className="grid w-full grid-cols-3 items-center px-4 md:px-8">
+        <div className="grid w-full grid-cols-3 items-center px-4 py-5 md:px-10">
           <MenuButton onClick={toggleMenu} active={menuOpen} />
-          <div className="grid items-center justify-items-center py-4">
+          <div className="grid items-center justify-items-center">
             <Link href="/">
               {isMobile ? <Logo variant="navy" /> : <LogoType variant="navy" />}
             </Link>

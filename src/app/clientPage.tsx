@@ -16,10 +16,12 @@ export default function ClientHome({
   treeData,
   quotes,
   content,
+  headline,
 }: {
   treeData?: DecisionTreeItem | null
   quotes: Quote[]
   content: any
+  headline: string
 }) {
   const [progress, setProgress] = useState(0)
   const mainContent = useRef<HTMLDivElement>(null)
@@ -39,7 +41,7 @@ export default function ClientHome({
         />
         <div className="grid items-center justify-center bg-brand-navy bg-opacity-80">
           <Heading variant="h1" className="text-center text-white">
-            Who we are
+            {headline}
           </Heading>
         </div>
       </div>

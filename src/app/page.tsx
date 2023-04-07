@@ -34,6 +34,7 @@ export default async function Home() {
       treeData={decisionTree}
       quotes={pageData.quotes}
       content={pageData.content}
+      headline={pageData.headline}
     />
   )
 }

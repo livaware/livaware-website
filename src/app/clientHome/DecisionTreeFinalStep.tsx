@@ -2,14 +2,15 @@ import DecisionTreeButton from '@/components/DecisionTree/Button'
 import { DecisionTreeHistoryItem } from '@/components/DecisionTree/History'
 import FormError from '@/components/Forms/FormError'
 import FormLabel from '@/components/Forms/FormLabel'
+import SelectInput from '@/components/Forms/SelectInput'
 import TextInput from '@/components/Forms/TextInput'
 import Heading from '@/components/Typography/Heading'
-import { AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { motion } from 'framer-motion'
 import { horizontalSlideFade } from '@/lib/animations'
+import { format } from 'date-fns'
+import { AnimatePresence, motion } from 'framer-motion'
 import Script from 'next/script'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 const reCaptchaSiteKey = '6Lch1FYlAAAAAHXm-71fJcKil2M0WVVPX7iGbcbo'
 
@@ -18,6 +19,7 @@ interface FormData {
   email: string
   phone: string
   message: string
+  time: string
 }
 
 function getCaptchaToken() {
@@ -40,12 +42,28 @@ export default function FinalStep({
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormData>()
   const [loading, setLoading] = useState(false)
   const [complete, setComplete] = useState(false)
+  const [appointments, setAppointments] = useState<
+    {
+      start: Date
+      end: Date
+    }[]
+  >([])
+
   const historyStr = history.map((x) => x.label).join(', ')
+
+  const loadAppointments = async () => {
+    const response = await fetch('/api/appointments')
+    const data = await response.json()
+    setAppointments(data.availability ?? [])
+  }
+
+  useEffect(() => {
+    loadAppointments()
+  }, [])
 
   const onSubmit = async (data: FormData) => {
     setLoading(true)
@@ -109,6 +127,22 @@ export default function FinalStep({
               />
               {errors.phone && (
                 <FormError>Please enter your phone number</FormError>
+              )}
+            </fieldset>
+            <fieldset>
+              <FormLabel>Appointment Time</FormLabel>
+              <SelectInput {...register('time', { required: true })}>
+                {appointments.map((x) => (
+                  <option
+                    key={new Date(x.start).toISOString()}
+                    value={new Date(x.start).toISOString()}
+                  >
+                    {format(new Date(x.start), 'PPPPp')}
+                  </option>
+                ))}
+              </SelectInput>
+              {errors.time && (
+                <FormError>Please select a convenient time</FormError>
               )}
             </fieldset>
             <DecisionTreeButton
