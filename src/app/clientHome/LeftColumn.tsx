@@ -52,7 +52,7 @@ export default function LeftColumn({
       >
         <Chevron reverse /> Go back
       </button>
-      <ChatBot ref={chatBotRef} apiEndpoint="/faq/api" className="h-full" />
+      <ChatBot ref={chatBotRef} apiEndpoint="/api/faq" className="h-full" />
     </div>
   )
 

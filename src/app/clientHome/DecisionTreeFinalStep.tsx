@@ -50,7 +50,7 @@ export default function FinalStep({
   const onSubmit = async (data: FormData) => {
     setLoading(true)
     const captchaToken = await getCaptchaToken()
-    await fetch('/contactForm', {
+    await fetch('/api/contactForm', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
