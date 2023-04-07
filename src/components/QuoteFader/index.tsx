@@ -77,20 +77,17 @@ export default function QuoteFader({
   const quote = quotes[currentQuote]
 
   return (
-    <blockquote className={twMerge(className, 'italic')} ref={scope}>
+    <blockquote className={className} ref={scope}>
       <span id="m1" className="opacity-0">
         <QuoteMark />
       </span>
-      <span className="px-1 [line-height:1.5]" id="quote">
+      <span className="px-1 text-2xl [line-height:1.5]" id="quote">
         {...splitCharacters(quote.text)}
       </span>
       <span id="m2" className="opacity-0">
         <QuoteMark close />
       </span>
-      <cite
-        className="mt-2 block font-bold text-brand-navy opacity-0"
-        id="cite"
-      >
+      <cite className="mt-2 block px-10 text-left text-2xl opacity-0" id="cite">
         — {quote.cite}
       </cite>
     </blockquote>

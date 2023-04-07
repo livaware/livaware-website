@@ -1,9 +1,5 @@
 import { NextResponse } from 'next/server'
-import verifyCaptcha from '../verifyCaptcha'
-import { bookingOrgId, staffID } from './config'
-import getAccessToken from './getAccessToken'
-import * as uuid from 'uuid'
-import { UuidTool } from 'uuid-tool'
+import { bookingOrgId } from './config'
 import graphClient from './graphClient'
 
 type RequestData = {

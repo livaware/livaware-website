@@ -2,8 +2,8 @@ import DecisionTreeItem, {
   DecisionTreeOption,
 } from '@/lib/sanityTypes/decisionTreeItem'
 import { AnimatePresence, motion } from 'framer-motion'
+import CTAButton from '../CTAButton'
 import Heading from '../Typography/Heading'
-import DecisionTreeButton from './Button'
 
 export default function DecisionTree({
   treeData,
@@ -39,7 +39,7 @@ export default function DecisionTree({
             {treeData.content && <div className="">{treeData.content}</div>}
             {treeData.options?.map((option, index) => (
               <div key={option._key}>
-                <DecisionTreeButton
+                <CTAButton
                   onClick={
                     option.link ? undefined : () => handleAdvance(option, index)
                   }

@@ -1,4 +1,4 @@
-import DecisionTreeButton from '@/components/DecisionTree/Button'
+import CTAButton from '@/components/CTAButton'
 import { DecisionTreeHistoryItem } from '@/components/DecisionTree/History'
 import FormError from '@/components/Forms/FormError'
 import FormLabel from '@/components/Forms/FormLabel'
@@ -100,6 +100,7 @@ export default function FinalStep({
               <TextInput
                 {...register('name', { required: true, minLength: 3 })}
                 label="Name"
+                placeholder="Your name"
               />
               {errors.name && <FormError>Please enter your name</FormError>}
             </fieldset>
@@ -114,6 +115,7 @@ export default function FinalStep({
                   },
                 })}
                 label="Email"
+                placeholder="abc@example.com"
               />
               {errors.email && (
                 <FormError>Please enter a valid email address</FormError>
@@ -124,6 +126,7 @@ export default function FinalStep({
               <TextInput
                 {...register('phone', { required: true })}
                 label="Phone number"
+                placeholder="07123456789"
               />
               {errors.phone && (
                 <FormError>Please enter your phone number</FormError>
@@ -145,10 +148,7 @@ export default function FinalStep({
                 <FormError>Please select a convenient time</FormError>
               )}
             </fieldset>
-            <DecisionTreeButton
-              onClick={handleSubmit(onSubmit)}
-              text="Submit"
-            />
+            <CTAButton onClick={handleSubmit(onSubmit)} text="Submit" />
           </motion.form>
         )}
         {loading && (

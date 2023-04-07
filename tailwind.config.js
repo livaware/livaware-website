@@ -3,7 +3,7 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     fontFamily: {
-      sans: ['Kumbh-Sans', 'Helvetica', 'Arial', 'Sans-Serif'],
+      sans: ['MetroSans-Book', 'Helvetica', 'Arial', 'Sans-Serif'],
     },
     extend: {
       colors: {
@@ -12,6 +12,7 @@ module.exports = {
         'brand-warm-grey': '#e4eaeb',
         'brand-green': '#00cd9a',
         'brand-taupe': '#Efe4e5',
+        'brand-light-blue': '#E6EAEE',
         'text-light': '#fff',
       },
       maxWidth: {

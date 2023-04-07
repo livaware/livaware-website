@@ -12,14 +12,14 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     return (
       <div
         className={twMerge(
-          'grid grid-cols-[1fr_auto] border-2 border-solid border-black',
+          'grid grid-cols-[1fr_auto] border-b border-solid border-b-black',
           className
         )}
       >
         <input
           ref={ref}
           type="text"
-          className="p-2 active:rounded-none disabled:bg-brand-warm-grey"
+          className="p-4 active:rounded-none disabled:bg-brand-warm-grey"
           {...props}
         />
         {appendRight}

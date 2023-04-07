@@ -52,22 +52,25 @@ export default function ClientHome({
         }}
         className="bg-white"
       >
-        <ContentContainer>
-          <PortableTextRenderer content={content} />
-        </ContentContainer>
+        <PortableTextRenderer content={content} />
 
-        <div className="grid min-h-screen-minus-header items-center justify-center bg-brand-green">
-          <div className="max-w-[320px]">
+        <div className="grid min-h-screen-minus-header items-center justify-center bg-brand-green text-center text-white">
+          <Heading variant="h3">Testimonials</Heading>
+
+          <div className="max-w-3xl px-8">
             <QuoteFader className="text-white" quotes={quotes} />
+          </div>
+          <Heading variant="h3">
+            Read independently verified reviews on{' '}
             <a
-              className="text-white"
+              className="underline"
               href="https://www.doctify.com/uk/practice/livaware"
               target="_blank"
               rel="noopener"
             >
-              See more on <span className="text-brand-navy">Doctify</span>
+              Doctify
             </a>
-          </div>
+          </Heading>
         </div>
       </motion.div>
     </VideoBackground>

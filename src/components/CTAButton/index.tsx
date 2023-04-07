@@ -1,17 +1,22 @@
 import Link from 'next/link'
+import { twMerge } from 'tailwind-merge'
 import Chevron from '../Icons/Chevron'
 
-export default function DecisionTreeButton({
+export default function CTAButton({
   text,
   onClick,
   href,
+  className,
 }: {
   text: string
   href?: string
   onClick?: () => void
+  className?: string
 }) {
-  const css =
-    'text-white bg-brand-navy hover:bg-brand-green text-left w-full p-4 rounded-sm grid grid-cols-[1fr_auto]'
+  const css = twMerge(
+    'hover:bg-brand-green text-left w-full p-4 grid grid-cols-[1fr_auto] border-b border-b-black',
+    className
+  )
   const content = (
     <>
       <span>{text}</span>

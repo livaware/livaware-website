@@ -1,6 +1,6 @@
 export function QuoteMark({ close }: { close?: boolean }) {
-  const char = close ? '”' : '“'
-  return <span className="text-3xl [line-height:0.2]">{char}</span>
+  const char = close ? '❞' : '❝'
+  return <span className="text-4xl [line-height:8px]">{char}</span>
 }
 
 export default function Quotation({

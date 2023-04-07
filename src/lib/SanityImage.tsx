@@ -8,12 +8,10 @@ export default function SanityImage({
   value,
   className,
   maintainAspect,
-  cover,
 }: {
   value: any
   className?: string
   maintainAspect?: boolean
-  cover?: boolean
 }) {
   const { width, height } = useMemo(() => getImageDimensions(value), [value])
   const img = useMemo(
@@ -33,7 +31,7 @@ export default function SanityImage({
       src={img}
       alt={value.alt ?? ''}
       loading="lazy"
-      className={twMerge('w-full object-cover', className)}
+      className={twMerge('h-full w-full object-cover', className)}
       style={{
         aspectRatio: maintainAspect ? width / height : undefined,
       }}

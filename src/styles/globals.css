@@ -22,3 +22,8 @@
   font-style: normal;
   font-display: swap;
 }
+
+p {
+  font-size: 18px;
+  line-height: 23px;
+}

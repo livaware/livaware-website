@@ -8,15 +8,15 @@ interface headingVariantConfig {
 const headingVariant: Record<string, headingVariantConfig> = {
   h1: {
     element: 'h1',
-    tailwindStyle: 'text-4xl leading-10 py-5 my-6 font-bold',
+    tailwindStyle: 'text-4xl leading-8 py-5 font-light',
   },
   h2: {
     element: 'h2',
-    tailwindStyle: 'text-xl leading-7 pt-5 pb-2.5 my-4 font-bold',
+    tailwindStyle: 'text-xl leading-7 pt-5 pb-2.5 font-light',
   },
   h3: {
     element: 'h3',
-    tailwindStyle: 'text-xl leading-7 [&:not(:first-child)]:mt-4 font-bold',
+    tailwindStyle: 'text-xl leading-7 [&:not(:first-child)]:mt-4 font-light',
   },
   h4: {
     element: 'h4',

@@ -13,7 +13,7 @@ const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>(
       <select
         ref={ref}
         className={twMerge(
-          'grid w-full grid-cols-[1fr_auto] border-2 border-solid border-black p-2 active:rounded-none disabled:bg-brand-warm-grey',
+          'grid w-full grid-cols-[1fr_auto] border-b border-r-[16px] border-solid border-b-black border-r-transparent p-4 active:rounded-none disabled:bg-brand-warm-grey',
           className
         )}
         {...props}
