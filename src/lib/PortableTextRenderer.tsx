@@ -1,5 +1,9 @@
+import Accordion from '@/components/Accordion'
 import BigTextBlock from '@/components/BigTextBlock'
+import Columns from '@/components/Columns'
+import Column from '@/components/Columns/Column'
 import ColumnsBlock from '@/components/ColumnsBlock'
+import HeroHeader from '@/components/HeroHeader'
 import Heading from '@/components/Typography/Heading'
 import TextLink from '@/components/Typography/Link'
 import { PortableText } from '@portabletext/react'
@@ -35,6 +39,49 @@ export default function PortableTextRenderer({ content }: { content: any }) {
               value={value.image}
             />
           ),
+          heroHeader: ({ value }) => {
+            const url = urlBuilder(sanityClient)
+              .image(value.image)
+              .width(800)
+              .fit('max')
+              .auto('format')
+              .url()
+            return (
+              <HeroHeader
+                mainText={value.mainText}
+                subTitleText={value.subTitleText}
+                topText={value.topText}
+                underlineColor={value.underlineColor}
+                imageUrl={url}
+              />
+            )
+          },
+          columnsContainer: ({ value }) => {
+            return (
+              <Columns>
+                {value.columns.map((column: any) => (
+                  <Column
+                    key={column._key}
+                    title={column.title}
+                    content={<PortableTextRenderer content={column.content} />}
+                    cta={column.cta}
+                  />
+                ))}
+              </Columns>
+            )
+          },
+          accordion: ({ value }) => {
+            return (
+              <Accordion
+                backgroundColor={value.backgroundColor}
+                title={value.title}
+                items={value.items.map((item: any) => ({
+                  title: item.title,
+                  content: <PortableTextRenderer content={item.content} />,
+                }))}
+              />
+            )
+          },
         },
         marks: {
           link: ({ children, value }) => (
