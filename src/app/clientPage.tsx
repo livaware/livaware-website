@@ -8,6 +8,7 @@ import VideoBackground from '@/components/VideoBackground'
 import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
 import Quote from '@/lib/sanityTypes/quote'
+import useIsMobile from '@/lib/useIsMobile'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef, useState } from 'react'
 import LeftColumn from './clientHome/LeftColumn'
@@ -32,7 +33,10 @@ export default function ClientHome({
   const contentOpacity = useTransform(mainContentScrollProgress, [0, 1], [1, 0])
 
   return (
-    <VideoBackground url="/video/hero-video.mp4">
+    <VideoBackground
+      url="/video/website-hero-desktop.mp4"
+      mobileUrl="/video/website-hero-mobile.mp4"
+    >
       <ProgressBar progress={progress} className="bg-brand-taupe" />
       <div className="relative grid min-h-screen-minus-header grid-rows-2 overflow-x-hidden md:grid-cols-2 md:grid-rows-1">
         <LeftColumn
