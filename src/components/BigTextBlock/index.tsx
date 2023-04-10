@@ -14,7 +14,7 @@ export default function BigTextBlock({
       <div className="h-32">
         {topText && <p className="my-10">{topText}</p>}
       </div>
-      <Heading variant="h1" className="whitespace-pre-line">
+      <Heading variant="h1" className="max-w-3xl whitespace-pre-line">
         {mainText}
       </Heading>
       <div className="flex h-32 flex-row items-end">

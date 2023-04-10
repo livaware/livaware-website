@@ -3,6 +3,7 @@
 import ContentContainer from '@/components/Layout/ContentContainer'
 import ProgressBar from '@/components/ProgressBar'
 import QuoteFader from '@/components/QuoteFader'
+import ScrollFader from '@/components/ScrollFader'
 import Heading from '@/components/Typography/Heading'
 import VideoBackground from '@/components/VideoBackground'
 import PortableTextRenderer from '@/lib/PortableTextRenderer'
@@ -25,12 +26,6 @@ export default function ClientHome({
   headline: string
 }) {
   const [progress, setProgress] = useState(0)
-  const mainContent = useRef<HTMLDivElement>(null)
-  const { scrollYProgress: mainContentScrollProgress } = useScroll({
-    target: mainContent,
-    offset: ['25vh', '0'],
-  })
-  const contentOpacity = useTransform(mainContentScrollProgress, [0, 1], [1, 0])
 
   return (
     <VideoBackground
@@ -49,13 +44,8 @@ export default function ClientHome({
           </Heading>
         </div>
       </div>
-      <div ref={mainContent} className="pt-[70vh]"></div>
-      <motion.div
-        style={{
-          opacity: contentOpacity,
-        }}
-        className="bg-white"
-      >
+      <div className="pt-[70vh]"></div>
+      <div className="bg-white">
         <PortableTextRenderer content={content} />
 
         <div className="grid min-h-screen-minus-header items-center justify-center bg-brand-green text-center text-white">
@@ -76,7 +66,7 @@ export default function ClientHome({
             </a>
           </Heading>
         </div>
-      </motion.div>
+      </div>
     </VideoBackground>
   )
 }
