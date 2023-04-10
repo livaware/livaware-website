@@ -1,17 +1,13 @@
 'use client'
 
-import ContentContainer from '@/components/Layout/ContentContainer'
 import ProgressBar from '@/components/ProgressBar'
 import QuoteFader from '@/components/QuoteFader'
-import ScrollFader from '@/components/ScrollFader'
 import Heading from '@/components/Typography/Heading'
 import VideoBackground from '@/components/VideoBackground'
 import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
 import Quote from '@/lib/sanityTypes/quote'
-import useIsMobile from '@/lib/useIsMobile'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import LeftColumn from './clientHome/LeftColumn'
 
 export default function ClientHome({

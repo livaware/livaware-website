@@ -1,12 +1,10 @@
 'use client'
 
+import IntroAnimation from '@/components/IntroAnimation'
 import PageLayout from '@/components/Layout/PageLayout'
 import { GlobalConfiguration } from '@/lib/sanityClient'
-import { AnimatePresence } from 'framer-motion'
 import { usePathname } from 'next/navigation'
-import { motion } from 'framer-motion'
 import Template from './template'
-import IntroAnimation from '@/components/IntroAnimation'
 
 export default function ClientRootLayout({
   // Layouts must accept a children prop.

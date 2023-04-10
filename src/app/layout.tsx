@@ -21,3 +21,10 @@ export default async function RootLayout({
     </html>
   )
 }
+
+export const metadata = {
+  icons: {
+    icon: { url: '/favicon.png', type: 'image/png' },
+    shortcut: { url: '/favicon.png', type: 'image/png' },
+  },
+}
