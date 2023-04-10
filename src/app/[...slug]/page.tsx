@@ -38,7 +38,7 @@ export async function generateMetadata({
   params: GenericPageStaticParams
 }): Promise<Metadata> {
   const data = await getPageData(params.slug)
-  return { title: data?.title, description: data?.description }
+  return { title: `Livaware - ${data?.title}`, description: data?.description }
 }
 
 const GenericPage = async ({ params }: { params: GenericPageStaticParams }) => {

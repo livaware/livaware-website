@@ -40,7 +40,7 @@ export default async function ResourcesPage() {
 }
 
 export const metadata: Metadata = {
-  title: 'Resources',
+  title: 'Livaware - Resources',
   description:
     'Helpful resources created by Livaware to help you on your journey to a healthier lifestyle.',
 }
