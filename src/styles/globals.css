@@ -4,13 +4,27 @@
 
 @font-face {
   font-family: 'MetroSans-Book';
-  src: url('/font/metro-sans/metro-sans-book.eot');
-  src: url('/font/metro-sans/metro-sans-book.eot?#iefix')
+  src: url('/font/metro-sans-book/metro-sans-book.eot');
+  src: url('/font/metro-sans-book/metro-sans-book.eot?#iefix')
       format('embedded-opentype'),
-    url('/font/metro-sans/metro-sans-book.woff2') format('woff2'),
-    url('/font/metro-sans/metro-sans-book.woff') format('woff'),
-    url('/font/metro-sans/metro-sans-book.ttf') format('truetype'),
-    url('/font/metro-sans/metro-sans-book.svg#youworkforthem') format('svg');
+    url('/font/metro-sans-book/metro-sans-book.woff2') format('woff2'),
+    url('/font/metro-sans-book/metro-sans-book.woff') format('woff'),
+    url('/font/metro-sans-book/metro-sans-book.ttf') format('truetype'),
+    url('/font/metro-sans-book/metro-sans-book.svg#youworkforthem')
+      format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'MetroSans-Light';
+  src: url('/font/metro-sans-light/metro-sans-light.eot');
+  src: url('/font/metro-sans-light/metro-sans-light.eot?#iefix')
+      format('embedded-opentype'),
+    url('/font/metro-sans-light/metro-sans-light.woff2') format('woff2'),
+    url('/font/metro-sans-light/metro-sans-light.woff') format('woff'),
+    url('/font/metro-sans-light/metro-sans-light.ttf') format('truetype'),
+    url('/font/metro-sans-light/metro-sans-light.svg#youworkforthem')
+      format('svg');
   font-weight: normal;
   font-style: normal;
 }

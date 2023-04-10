@@ -4,6 +4,7 @@ import Columns from '@/components/Columns'
 import Column from '@/components/Columns/Column'
 import ColumnsBlock from '@/components/ColumnsBlock'
 import HeroHeader from '@/components/HeroHeader'
+import HeroProduct from '@/components/HeroProduct'
 import Heading from '@/components/Typography/Heading'
 import TextLink from '@/components/Typography/Link'
 import { PortableText } from '@portabletext/react'
@@ -56,15 +57,37 @@ export default function PortableTextRenderer({ content }: { content: any }) {
               />
             )
           },
+          heroProduct: ({ value }) => {
+            const url = urlBuilder(sanityClient)
+              .image(value.image)
+              .width(800)
+              .fit('max')
+              .auto('format')
+              .url()
+            return (
+              <HeroProduct
+                mainText={value.mainText}
+                content={<PortableTextRenderer content={value.content} />}
+                topText={value.topText}
+                backgroundColor={value.backgroundColor}
+                cta={value.cta}
+                imageUrl={url}
+              />
+            )
+          },
           columnsContainer: ({ value }) => {
             return (
-              <Columns>
-                {value.columns.map((column: any) => (
+              <Columns
+                title={value.title}
+                backgroundColor={value.backgroundColor}
+              >
+                {value.columns.map((column: any, index: number) => (
                   <Column
                     key={column._key}
                     title={column.title}
                     content={<PortableTextRenderer content={column.content} />}
                     cta={column.cta}
+                    number={value.showNumbers ? `${index + 1}` : undefined}
                   />
                 ))}
               </Columns>

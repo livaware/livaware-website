@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ['MetroSans-Book', 'Helvetica', 'Arial', 'Sans-Serif'],
+      light: ['MetroSans-Light', 'Helvetica', 'Arial', 'Sans-Serif'],
     },
     extend: {
       colors: {
@@ -13,6 +14,7 @@ module.exports = {
         'brand-green': '#00cd9a',
         'brand-taupe': '#Efe4e5',
         'brand-light-blue': '#E6EAEE',
+        'brand-orange': '#dd5a2e',
         'text-light': '#fff',
       },
       maxWidth: {
