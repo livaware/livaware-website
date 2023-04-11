@@ -1,8 +1,7 @@
+import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import { GlobalConfiguration } from '@/lib/sanityClient'
+import { Footer, Header } from 'livaware-react-components'
 import { ReactNode } from 'react'
-import ContentContainer from '../ContentContainer'
-import Footer from '../Footer'
-import Header from '../Header'
 
 export interface PageLayoutProps {
   globalConfig: GlobalConfiguration
@@ -17,7 +16,29 @@ export default function PageLayout({
     <div className="grid min-h-screen-minus-header grid-rows-[auto_1fr_auto]">
       <Header />
       {children}
-      <Footer config={globalConfig.footer} />
+      <Footer
+        columns={[
+          <PortableTextRenderer
+            key={1}
+            content={globalConfig.footer.column1Content}
+          />,
+          <PortableTextRenderer
+            key={2}
+            content={globalConfig.footer.column2Content}
+          />,
+          <PortableTextRenderer
+            key={3}
+            content={globalConfig.footer.column3Content}
+          />,
+          <PortableTextRenderer
+            key={4}
+            content={globalConfig.footer.column4Content}
+          />,
+        ]}
+        bottom={
+          <PortableTextRenderer content={globalConfig.footer.bottomContent} />
+        }
+      />
     </div>
   )
 }

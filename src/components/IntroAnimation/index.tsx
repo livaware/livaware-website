@@ -1,7 +1,7 @@
 import splitCharacters from '@/lib/splitCharacters'
 import { stagger, useAnimate } from 'framer-motion'
+import { Logo } from 'livaware-react-components'
 import { useEffect, useState } from 'react'
-import Logo from '../Logo'
 
 export default function IntroAnimation() {
   const [scope, animate] = useAnimate()
@@ -42,12 +42,12 @@ export default function IntroAnimation() {
         id="container"
         className="opacity-1 fixed top-0 left-0 z-50 h-screen w-screen bg-brand-navy"
       >
-        {/* <div
+        <div
           id="logo"
           className="grid h-full w-full items-center justify-center opacity-0"
         >
           <Logo variant="white" />
-        </div> */}
+        </div>
         <div
           id="letterContainer"
           className="grid h-full w-full items-center justify-center text-xl text-white"

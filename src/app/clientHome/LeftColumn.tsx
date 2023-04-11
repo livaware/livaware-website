@@ -1,9 +1,12 @@
-import ChatBot, { ChatBotRef } from '@/components/ChatBot'
-import ChatBoxInput from '@/components/ChatBot/Input'
-import ContentToggler from '@/components/ContentToggler'
-import Chevron from '@/components/Icons/Chevron'
 import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
 import useIsMobile from '@/lib/useIsMobile'
+import {
+  ChatBot,
+  ChatBotRef,
+  ChatBoxInput,
+  Chevron,
+  ContentToggler,
+} from 'livaware-react-components'
 import { useEffect, useRef, useState } from 'react'
 import DecisionTreeColumn from './DecisionTreeColumn'
 

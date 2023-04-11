@@ -1,15 +1,17 @@
-import Accordion from '@/components/Accordion'
-import BigTextBlock from '@/components/BigTextBlock'
-import Columns from '@/components/Columns'
-import Column from '@/components/Columns/Column'
-import ColumnsBlock from '@/components/ColumnsBlock'
-import HeroHeader from '@/components/HeroHeader'
-import HeroProduct from '@/components/HeroProduct'
-import Heading from '@/components/Typography/Heading'
-import TextLink from '@/components/Typography/Link'
+'use client'
 import { PortableText } from '@portabletext/react'
-import { getImageDimensions } from '@sanity/asset-utils'
 import urlBuilder from '@sanity/image-url'
+import {
+  Accordion,
+  BigTextBlock,
+  Column,
+  Columns,
+  ColumnsBlock,
+  Heading,
+  HeroHeader,
+  HeroProduct,
+  Link,
+} from 'livaware-react-components'
 import sanityClient from './sanityClient'
 import SanityImage from './SanityImage'
 
@@ -26,13 +28,28 @@ export default function PortableTextRenderer({ content }: { content: any }) {
         },
         types: {
           image: ({ value }) => <SanityImage value={value} />,
-          columnsBlock: ({ value }) => (
-            <ColumnsBlock
-              leftContent={value.leftContent}
-              rightContent={value.rightContent}
-              cta={value.cta}
-            />
-          ),
+          columnsBlock: ({ value }) => {
+            const leftContentHasImage = JSON.stringify(
+              value.leftContent
+            ).includes('image')
+            const rightContentHasImage = JSON.stringify(
+              value.rightContent
+            ).includes('image')
+
+            return (
+              <ColumnsBlock
+                leftContent={
+                  <PortableTextRenderer content={value.leftContent} />
+                }
+                leftContentHasImage={leftContentHasImage}
+                rightContent={
+                  <PortableTextRenderer content={value.rightContent} />
+                }
+                rightContentHasImage={rightContentHasImage}
+                cta={value.cta}
+              />
+            )
+          },
           bigTextBlock: ({ value }) => <BigTextBlock {...value} />,
           fullScreenImage: ({ value }) => (
             <SanityImage
@@ -108,7 +125,7 @@ export default function PortableTextRenderer({ content }: { content: any }) {
         },
         marks: {
           link: ({ children, value }) => (
-            <TextLink url={value.href}>{children}</TextLink>
+            <Link url={value.href}>{children}</Link>
           ),
           strong: ({ children }) => (
             <strong className="font-bold">{children}</strong>

@@ -1,14 +1,8 @@
 import { GenericPageStaticParams } from '@/app/[...slug]/page'
-import Chevron from '@/components/Icons/Chevron'
-import ContentContainer from '@/components/Layout/ContentContainer'
-import Heading from '@/components/Typography/Heading'
-import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import sanityClient from '@/lib/sanityClient'
-import SanityImage from '@/lib/SanityImage'
-import { GenericPageData } from '@/lib/sanityTypes/genericPageData'
 import { ResourcePageData } from '@/lib/sanityTypes/resourcePageData'
 import { Metadata } from 'next'
-import Link from 'next/link'
+import ClientPage from './clientPage'
 
 export async function generateStaticParams() {
   const pages = await sanityClient.fetch<ResourcePageData[]>(
@@ -55,19 +49,5 @@ export default async function ResourcePage({
     }
   }
 
-  return (
-    <ContentContainer>
-      <div className="mb-4">
-        <Link href="/resources">
-          <Chevron reverse /> Back to Resources
-        </Link>
-      </div>
-      {data.coverImage && (
-        <SanityImage value={data.coverImage} className="max-h-[50vh]" />
-      )}
-      <Heading variant="h1">{data.title}</Heading>
-      {data.subTitle && <Heading variant="h2">{data.subTitle}</Heading>}
-      <PortableTextRenderer content={data.content} />
-    </ContentContainer>
-  )
+  return <ClientPage data={data} />
 }

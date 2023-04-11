@@ -1,10 +1,7 @@
 'use client'
 
-import PageLayout from '@/components/Layout/PageLayout'
-import { GlobalConfiguration } from '@/lib/sanityClient'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
-import { motion } from 'framer-motion'
 
 export default function Template({
   // Layouts must accept a children prop.

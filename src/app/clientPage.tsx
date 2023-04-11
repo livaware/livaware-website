@@ -1,12 +1,14 @@
 'use client'
 
-import ProgressBar from '@/components/ProgressBar'
-import QuoteFader from '@/components/QuoteFader'
-import Heading from '@/components/Typography/Heading'
-import VideoBackground from '@/components/VideoBackground'
 import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
 import Quote from '@/lib/sanityTypes/quote'
+import {
+  Heading,
+  ProgressBar,
+  QuoteFader,
+  VideoBackground,
+} from 'livaware-react-components'
 import { useState } from 'react'
 import LeftColumn from './clientHome/LeftColumn'
 

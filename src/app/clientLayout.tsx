@@ -5,6 +5,7 @@ import PageLayout from '@/components/Layout/PageLayout'
 import { GlobalConfiguration } from '@/lib/sanityClient'
 import { usePathname } from 'next/navigation'
 import Template from './template'
+import Link from 'next/link'
 
 export default function ClientRootLayout({
   // Layouts must accept a children prop.

@@ -1,10 +1,11 @@
-import ContentToggler from '@/components/ContentToggler'
-import DecisionTree from '@/components/DecisionTree'
-import DecisionTreeHistory, {
-  DecisionTreeHistoryItem,
-} from '@/components/DecisionTree/History'
 import { getDecisionTreeDepth } from '@/lib/getDecisionTree'
 import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
+import {
+  ContentToggler,
+  DecisionTree,
+  DecisionTreeHistory,
+  DecisionTreeHistoryItem,
+} from 'livaware-react-components'
 import { useEffect, useState } from 'react'
 import FinalStep from './DecisionTreeFinalStep'
 

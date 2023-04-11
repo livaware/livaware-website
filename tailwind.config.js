@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    './node_modules/livaware-react-components/dist/**/*.{js,jsx,ts,tsx}',
+  ],
   theme: {
     fontFamily: {
       sans: ['MetroSans-Book', 'Helvetica', 'Arial', 'Sans-Serif'],

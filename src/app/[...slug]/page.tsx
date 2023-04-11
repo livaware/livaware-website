@@ -52,8 +52,7 @@ const GenericPage = async ({ params }: { params: GenericPageStaticParams }) => {
 
   return (
     <>
-      <PortableTextRenderer content={data.content} />
-      <ClientPage />
+      <ClientPage content={data.content} />
     </>
   )
 }
