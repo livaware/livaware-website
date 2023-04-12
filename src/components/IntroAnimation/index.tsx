@@ -1,6 +1,5 @@
-import splitCharacters from '@/lib/splitCharacters'
+import SplitCharacters from '@/lib/splitCharacters'
 import { stagger, useAnimate } from 'framer-motion'
-import { Logo } from 'livaware-react-components'
 import { useEffect, useState } from 'react'
 
 export default function IntroAnimation() {
@@ -42,19 +41,19 @@ export default function IntroAnimation() {
         id="container"
         className="opacity-1 fixed top-0 left-0 z-50 h-screen w-screen bg-brand-navy"
       >
-        <div
+        {/* <div
           id="logo"
           className="grid h-full w-full items-center justify-center opacity-0"
         >
           <Logo variant="white" />
-        </div>
+        </div> */}
         <div
           id="letterContainer"
           className="grid h-full w-full items-center justify-center text-xl text-white"
         >
           <div className="relative">
             <div id="letters" className="">
-              {...splitCharacters('Your Personal Healthcare Team')}
+              <SplitCharacters input="Your Personal Healthcare Team" />
             </div>
             <span
               id="underline"
