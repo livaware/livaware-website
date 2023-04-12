@@ -1,4 +1,4 @@
-const reCaptchaKey = '6Lch1FYlAAAAABhJggSEMS3K1l0kQlb4o18zpMMq'
+const reCaptchaKey = process.env.RECAPTCHA_KEY
 
 export default async function verifyCaptcha(token: string) {
   const response = await fetch(

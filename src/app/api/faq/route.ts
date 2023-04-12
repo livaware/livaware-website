@@ -8,7 +8,7 @@ import {
 } from 'openai'
 
 const configuration = new Configuration({
-  apiKey: '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',
+  apiKey: process.env.OPENAI_KEY,
 })
 
 type RequestData = {
