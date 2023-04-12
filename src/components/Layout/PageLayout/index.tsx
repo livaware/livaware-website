@@ -1,6 +1,6 @@
 import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import { GlobalConfiguration } from '@/lib/sanityClient'
-import { Footer, Header } from 'livaware-react-components'
+import { Footer, Header, MenuButton } from 'livaware-react-components'
 import { ReactNode } from 'react'
 
 export interface PageLayoutProps {
@@ -14,7 +14,10 @@ export default function PageLayout({
 }: PageLayoutProps) {
   return (
     <div className="grid min-h-screen-minus-header grid-rows-[auto_1fr_auto]">
-      <Header />
+      <Header
+        leftSlot={<MenuButton />}
+        rightSlot={<a href="/contact">Contact</a>}
+      />
       {children}
       <Footer
         columns={[
