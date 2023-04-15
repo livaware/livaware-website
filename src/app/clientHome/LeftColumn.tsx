@@ -63,7 +63,7 @@ export default function LeftColumn({
 
   return (
     <div
-      className="grid min-h-screen-minus-header w-full grid-cols-1 grid-rows-[1fr_auto] justify-center bg-brand-taupe bg-opacity-80 px-5 pb-10"
+      className="grid min-h-screen-minus-header w-full grid-cols-1 grid-rows-[1fr_auto] justify-center bg-brand-taupe bg-opacity-[95%] px-5 pb-10"
       style={
         inputFocused && viewportHeight && isMobile
           ? {

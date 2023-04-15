@@ -36,7 +36,7 @@ export default function ClientHome({
           treeData={treeData}
           onProgress={(newProgress) => setProgress(newProgress)}
         />
-        <div className="grid items-center justify-center bg-brand-navy bg-opacity-80">
+        <div className="grid items-center justify-center bg-brand-navy bg-opacity-[95%]">
           <Heading variant="h1" className="text-center text-white">
             {headline}
           </Heading>
