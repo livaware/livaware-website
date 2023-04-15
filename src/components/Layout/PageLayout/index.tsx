@@ -15,6 +15,7 @@ export default function PageLayout({
   return (
     <div className="grid min-h-screen-minus-header grid-rows-[auto_1fr_auto]">
       <Header
+        fixed
         leftSlot={<MenuButton />}
         rightSlot={<a href="/contact">Contact</a>}
       />

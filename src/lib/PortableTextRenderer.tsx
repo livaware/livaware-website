@@ -7,10 +7,12 @@ import {
   Column,
   Columns,
   ColumnsBlock,
+  ComparisonBlock,
   Heading,
   HeroHeader,
   HeroProduct,
   Link,
+  TextBlock,
 } from 'livaware-react-components'
 import sanityClient from './sanityClient'
 import SanityImage from './SanityImage'
@@ -111,13 +113,40 @@ export default function PortableTextRenderer({ content }: { content: any }) {
             )
           },
           accordion: ({ value }) => {
+            console.log(value)
             return (
               <Accordion
                 backgroundColor={value.backgroundColor}
                 title={value.title}
                 items={value.items.map((item: any) => ({
                   title: item.title,
-                  content: <PortableTextRenderer content={item.content} />,
+                  content: item.content ? (
+                    <PortableTextRenderer content={item.content} />
+                  ) : undefined,
+                }))}
+              />
+            )
+          },
+          textBlock: ({ value }) => {
+            return (
+              <TextBlock
+                title={value.title}
+                content={<PortableTextRenderer content={value.content} />}
+              />
+            )
+          },
+          comparisonBlock: ({ value }) => {
+            console.log(value)
+            return (
+              <ComparisonBlock
+                backgroundColor={value.backgroundColor}
+                mainText={value.mainText}
+                bottomText={value.bottomText}
+                topText={value.topText}
+                columns={value.columns.map((x: any) => ({
+                  title: x.title,
+                  cta: x.cta,
+                  content: <PortableTextRenderer content={x.content} />,
                 }))}
               />
             )

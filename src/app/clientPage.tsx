@@ -46,7 +46,13 @@ export default function ClientHome({
       <div className="bg-white">
         <PortableTextRenderer content={content} />
 
-        <div className="grid min-h-screen-minus-header items-center justify-center bg-brand-green text-center text-white">
+        <div
+          className="grid min-h-screen-minus-header items-center justify-center  text-center text-white"
+          style={{
+            backgroundImage:
+              'linear-gradient(to top right, rgba(30,103,85,1) 0%, rgba(66,148,124,1) 35%, rgba(0,205,154,1) 100%)',
+          }}
+        >
           <Heading variant="h3">Testimonials</Heading>
 
           <div className="max-w-3xl px-8">

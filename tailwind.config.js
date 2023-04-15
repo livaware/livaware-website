@@ -15,6 +15,8 @@ module.exports = {
         'brand-navy': '#020121',
         'brand-warm-grey': '#e4eaeb',
         'brand-green': '#00cd9a',
+        'brand-scrubs': '#42947c',
+        'brand-amethyst': '#3e076c',
         'brand-taupe': '#Efe4e5',
         'brand-light-blue': '#E6EAEE',
         'brand-orange': '#dd5a2e',
