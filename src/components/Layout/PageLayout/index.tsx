@@ -16,7 +16,14 @@ export default function PageLayout({
     <div className="grid min-h-screen-minus-header grid-rows-[auto_1fr_auto]">
       <Header
         fixed
-        leftSlot={<MenuButton />}
+        leftSlot={
+          <MenuButton
+            links={globalConfig.header.links.map((x) => ({
+              text: x.title,
+              url: x.url,
+            }))}
+          />
+        }
         rightSlot={<a href="/contact">Contact</a>}
       />
       {children}

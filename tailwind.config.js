@@ -33,6 +33,10 @@ module.exports = {
       },
       minHeight: {
         'screen-minus-header': 'calc(100vh - var(--headerHeight))',
+        'screen-minus-header-partial': 'calc(80vh - var(--headerHeight))',
+      },
+      backgroundOpacity: {
+        95: '0.95',
       },
     },
   },

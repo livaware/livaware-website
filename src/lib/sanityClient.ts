@@ -1,5 +1,6 @@
 import { createClient } from 'next-sanity'
 import { FooterConfigData } from './sanityTypes/footerConfig'
+import { HeaderConfigData } from './sanityTypes/headerConfig'
 
 const sanityClient = createClient({
   projectId: '41p617pr',
@@ -10,24 +11,28 @@ const sanityClient = createClient({
 
 export interface GlobalConfiguration {
   footer: FooterConfigData
+  header: HeaderConfigData
 }
 
 export async function getGlobalConfiguration(): Promise<GlobalConfiguration> {
   let footer: FooterConfigData
+  let header: HeaderConfigData
 
   try {
     footer = (
       await sanityClient.fetch<FooterConfigData[]>(`*[_type == "footer"]`)
+    )[0]
+    header = (
+      await sanityClient.fetch<HeaderConfigData[]>(`*[_type == "header"]`)
     )[0]
   } catch (err) {
     console.error(err)
     throw new Error('Could not fetch footer data')
   }
 
-  const header = {}
-
   const globalConfig = {
     footer,
+    header,
   }
 
   return globalConfig

@@ -11,6 +11,7 @@ import {
 } from 'livaware-react-components'
 import { useState } from 'react'
 import LeftColumn from './clientHome/LeftColumn'
+import AskLivaware from '@/components/AskLivaware'
 
 export default function ClientHome({
   treeData,
@@ -31,23 +32,28 @@ export default function ClientHome({
       mobileUrl="/video/website-hero-mobile.mp4"
     >
       <ProgressBar progress={progress} className="bg-brand-taupe" />
-      <div className="relative grid min-h-screen-minus-header grid-rows-2 overflow-x-hidden md:grid-cols-2 md:grid-rows-1">
+      <div className="relative grid min-h-screen-minus-header-partial grid-rows-2 overflow-x-hidden md:grid-cols-2 md:grid-rows-1">
         <LeftColumn
           treeData={treeData}
           onProgress={(newProgress) => setProgress(newProgress)}
         />
-        <div className="grid items-center justify-center bg-brand-navy bg-opacity-90">
+        <div className="row-start-1 grid items-center justify-center bg-brand-navy bg-opacity-90 p-4 md:row-start-auto">
           <Heading variant="h1" className="text-center text-white">
             {headline}
           </Heading>
         </div>
       </div>
+      <AskLivaware
+        headingText="Ask our AI assistant anything"
+        className="bg-brand-taupe bg-opacity-95"
+      />
+
       <div className="pt-[70vh]"></div>
       <div className="bg-white">
         <PortableTextRenderer content={content} />
 
         <div
-          className="grid min-h-screen-minus-header items-center justify-center  text-center text-white"
+          className="grid min-h-screen-minus-header-partial items-center justify-center  text-center text-white"
           style={{
             backgroundImage:
               'linear-gradient(to top right, rgba(30,103,85,1) 0%, rgba(66,148,124,1) 35%, rgba(0,205,154,1) 100%)',

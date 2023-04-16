@@ -86,13 +86,15 @@ export default function DecisionTreeColumn({
 
   return (
     <>
-      <DecisionTreeHistory
-        history={history}
-        onItemPressed={(index) => {
-          setIsFinalStep(false)
-          replayDecisions(history.slice(0, index).map((x) => x.option))
-        }}
-      />
+      <div>
+        <DecisionTreeHistory
+          history={history}
+          onItemPressed={(index) => {
+            setIsFinalStep(false)
+            replayDecisions(history.slice(0, index).map((x) => x.option))
+          }}
+        />
+      </div>
       <ContentToggler
         initialContent={decisionTree}
         activeContent={<FinalStep history={history} />}
