@@ -22,7 +22,7 @@
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "framer-motion": "^10.9.1",
-    "livaware-react-components": "^0.2.19",
+    "livaware-react-components": "^0.2.21",
     "next": "13.2.4",
     "next-sanity": "^4.1.5",
     "openai": "^3.2.1",

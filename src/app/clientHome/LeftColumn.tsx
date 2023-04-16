@@ -13,7 +13,7 @@ export default function LeftColumn({
   )
 
   return (
-    <div className="row-start-2 grid min-h-screen-minus-header-partial w-full grid-cols-1 grid-rows-[auto_1fr] justify-center bg-brand-taupe bg-opacity-95 px-5 pb-10 md:row-start-auto">
+    <div className="row-start-2 grid min-h-screen-minus-header w-full grid-cols-1 grid-rows-[auto_1fr] justify-center bg-brand-taupe bg-opacity-95 px-5 pb-10 md:row-start-auto">
       {dTree}
     </div>
   )

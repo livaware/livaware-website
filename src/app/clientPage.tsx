@@ -32,7 +32,7 @@ export default function ClientHome({
       mobileUrl="/video/website-hero-mobile.mp4"
     >
       <ProgressBar progress={progress} className="bg-brand-taupe" />
-      <div className="relative grid min-h-screen-minus-header-partial grid-rows-2 overflow-x-hidden md:grid-cols-2 md:grid-rows-1">
+      <div className="relative grid min-h-screen-minus-header grid-rows-2 overflow-x-hidden md:grid-cols-2 md:grid-rows-1">
         <LeftColumn
           treeData={treeData}
           onProgress={(newProgress) => setProgress(newProgress)}
@@ -53,7 +53,7 @@ export default function ClientHome({
         <PortableTextRenderer content={content} />
 
         <div
-          className="grid min-h-screen-minus-header-partial items-center justify-center  text-center text-white"
+          className="grid min-h-screen-minus-header items-center justify-center  text-center text-white"
           style={{
             backgroundImage:
               'linear-gradient(to top right, rgba(30,103,85,1) 0%, rgba(66,148,124,1) 35%, rgba(0,205,154,1) 100%)',
