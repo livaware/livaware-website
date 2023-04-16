@@ -1,24 +1,17 @@
-import { ChatBot, ChatBotRef, ChatBoxInput } from 'livaware-react-components'
-import { useRef, useState } from 'react'
+import useChatState from '@/lib/useChatState'
+import { ChatBot, ChatBoxInput } from 'livaware-react-components'
 import { twMerge } from 'tailwind-merge'
 
 export default function AskLivaware({
   headingText,
   className,
+  onFocus,
 }: {
   headingText?: string
   className?: string
+  onFocus?: () => void
 }) {
-  const chatBotRef = useRef<ChatBotRef>(null)
-  const [chatLoading, setChatLoading] = useState(false)
-  const [chatMessage, setChatMessage] = useState('')
-
-  const chatSubmit = async () => {
-    setChatLoading(true)
-    await chatBotRef.current?.sendMessage(chatMessage)
-    setChatMessage('')
-    setChatLoading(false)
-  }
+  const state = useChatState()
 
   return (
     <div
@@ -30,19 +23,13 @@ export default function AskLivaware({
       <div className="m-10 grid w-full max-w-3xl grid-rows-[1fr_auto]">
         <div className="max-h-[80vh] overflow-y-scroll">
           <ChatBot
-            ref={chatBotRef}
+            ref={state.chatBotRef}
             apiEndpoint="/api/faq"
             className="h-full"
             headingText={headingText}
           />
         </div>
-        <ChatBoxInput
-          loading={chatLoading}
-          onChange={(evt) => setChatMessage(evt.target.value)}
-          className={'sticky'}
-          value={chatMessage}
-          onSubmit={() => chatSubmit()}
-        />
+        {state.inputElement}
       </div>
     </div>
   )

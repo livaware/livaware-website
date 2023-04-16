@@ -4,6 +4,9 @@ import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
 import Quote from '@/lib/sanityTypes/quote'
 import {
+  ChatBot,
+  Chevron,
+  ContentToggler,
   Heading,
   ProgressBar,
   QuoteFader,
@@ -12,6 +15,8 @@ import {
 import { useState } from 'react'
 import LeftColumn from './clientHome/LeftColumn'
 import AskLivaware from '@/components/AskLivaware'
+import useChatState from '@/lib/useChatState'
+import { AnimatePresence, motion } from 'framer-motion'
 
 export default function ClientHome({
   treeData,
@@ -25,6 +30,8 @@ export default function ClientHome({
   headline: string
 }) {
   const [progress, setProgress] = useState(0)
+  const [chatActive, setChatActive] = useState(false)
+  const chatState = useChatState(() => setChatActive(true))
 
   return (
     <VideoBackground
@@ -32,22 +39,60 @@ export default function ClientHome({
       mobileUrl="/video/website-hero-mobile.mp4"
     >
       <ProgressBar progress={progress} className="bg-brand-taupe" />
-      <div className="relative grid grid-rows-3 overflow-x-hidden md:min-h-screen-minus-header md:grid-cols-3 md:grid-rows-1">
-        <div className="items-center justify-center bg-brand-navy bg-opacity-90 p-10">
-          <Heading variant="h1" className="m-0 mb-4 p-0 text-white">
-            Livaware
-          </Heading>
-          <Heading variant="h2" className="whitespace-pre-wrap text-white">
-            {headline}
-          </Heading>
+      <div className="relative grid grid-rows-2 overflow-x-hidden md:min-h-screen-minus-header md:grid-cols-2 md:grid-rows-1">
+        <div className="grid grid-rows-[1fr_auto] items-start justify-center bg-brand-navy bg-opacity-90 p-10">
+          <ContentToggler
+            initialContent={
+              <>
+                <Heading variant="h1" className="m-0 mt-8 mb-4 p-0 text-white">
+                  Livaware
+                </Heading>
+                <Heading
+                  variant="h2"
+                  className="whitespace-pre-wrap text-white"
+                >
+                  {headline}
+                </Heading>
+              </>
+            }
+            activeContent={
+              <div className=" text-white">
+                <button type="button" onClick={() => setChatActive(false)}>
+                  <Chevron reverse /> Go back
+                </button>
+                <ChatBot
+                  ref={chatState.chatBotRef}
+                  apiEndpoint="/api/faq"
+                  className="h-full"
+                  headingText="Ask our AI assistant anything"
+                />
+              </div>
+            }
+            active={chatActive}
+          />
+          <AnimatePresence mode="popLayout">
+            {!chatActive && (
+              <motion.div
+                key="heading"
+                initial={{ y: 32, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{
+                  ease: 'easeOut',
+                  duration: 0.3,
+                }}
+                className="w-full"
+              >
+                <Heading variant="h2" className="text-white">
+                  Or you can ask our AI assistant anything
+                </Heading>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          {chatState.inputElement}
         </div>
         <LeftColumn
           treeData={treeData}
           onProgress={(newProgress) => setProgress(newProgress)}
-        />
-        <AskLivaware
-          headingText="Ask our AI assistant anything"
-          className="h-full bg-brand-taupe bg-opacity-95"
         />
       </div>
 
