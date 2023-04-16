@@ -27,7 +27,7 @@ export default function AskLivaware({
         className
       )}
     >
-      <div className="m-10 w-full max-w-3xl">
+      <div className="m-10 grid w-full max-w-3xl grid-rows-[1fr_auto]">
         <div className="max-h-[80vh] overflow-y-scroll">
           <ChatBot
             ref={chatBotRef}

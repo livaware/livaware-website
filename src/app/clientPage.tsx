@@ -32,21 +32,24 @@ export default function ClientHome({
       mobileUrl="/video/website-hero-mobile.mp4"
     >
       <ProgressBar progress={progress} className="bg-brand-taupe" />
-      <div className="relative grid min-h-screen-minus-header grid-rows-2 overflow-x-hidden md:grid-cols-2 md:grid-rows-1">
+      <div className="relative grid grid-rows-3 overflow-x-hidden md:min-h-screen-minus-header md:grid-cols-3 md:grid-rows-1">
+        <div className="items-center justify-center bg-brand-navy bg-opacity-90 p-10">
+          <Heading variant="h1" className="m-0 mb-4 p-0 text-white">
+            Livaware
+          </Heading>
+          <Heading variant="h2" className="whitespace-pre-wrap text-white">
+            {headline}
+          </Heading>
+        </div>
         <LeftColumn
           treeData={treeData}
           onProgress={(newProgress) => setProgress(newProgress)}
         />
-        <div className="row-start-1 grid items-center justify-center bg-brand-navy bg-opacity-90 p-4 md:row-start-auto">
-          <Heading variant="h1" className="text-center text-white">
-            {headline}
-          </Heading>
-        </div>
+        <AskLivaware
+          headingText="Ask our AI assistant anything"
+          className="h-full bg-brand-taupe bg-opacity-95"
+        />
       </div>
-      <AskLivaware
-        headingText="Ask our AI assistant anything"
-        className="bg-brand-taupe bg-opacity-95"
-      />
 
       <div className="pt-[70vh]"></div>
       <div className="bg-white">
