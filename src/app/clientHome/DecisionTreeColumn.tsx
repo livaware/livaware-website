@@ -80,7 +80,7 @@ export default function DecisionTreeColumn({
   )
 
   return (
-    <>
+    <div className="m-10">
       <ProgressBar
         progress={isFinalStep ? 1 : progress}
         className="fixed left-0 top-[4.3rem] z-20 w-full md:top-[4rem]"
@@ -100,6 +100,6 @@ export default function DecisionTreeColumn({
         activeContent={<FinalStep history={history} />}
         active={isFinalStep}
       />
-    </>
+    </div>
   )
 }

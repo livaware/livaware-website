@@ -96,7 +96,7 @@ export default function FinalStep({
           <motion.form
             key="form"
             onSubmit={handleSubmit(onSubmit)}
-            className="grid grid-cols-1 gap-4"
+            className="grid max-w-sm grid-cols-1 gap-4"
             {...horizontalSlideFade}
           >
             <fieldset>
@@ -139,6 +139,7 @@ export default function FinalStep({
             <fieldset>
               <FormLabel>Appointment Time</FormLabel>
               <SelectInput {...register('time', { required: true })}>
+                <option value="">Please select</option>
                 {appointments.map((x) => (
                   <option
                     key={new Date(x.start).toISOString()}
@@ -153,27 +154,34 @@ export default function FinalStep({
               )}
             </fieldset>
             <CTAButton onClick={handleSubmit(onSubmit)} text="Submit" />
-            <p className="text-sm">
-              Your data will be transmitted over an encrypted connection and
-              held securely on Livaware systems. We collect this data for the
-              sole purpose of contacting you about our services. We take
-              information security seriously, and this data will be erased
-              immediately upon your stating disinterest in our services
-              following contact, or at your request, whichever is sooner.
-            </p>
           </motion.form>
         )}
         {loading && (
           <motion.div key="loading" {...horizontalSlideFade}>
-            <Heading variant="h1">Loading...</Heading>
+            <Heading variant="h1">Sending...</Heading>
           </motion.div>
         )}
         {complete && (
           <motion.div key="complete" {...horizontalSlideFade}>
             <Heading variant="h1">Thank you for your submission!</Heading>
+            <p className="mt-4">
+              We look forward to speaking with you, and will be in touch at the
+              selected appointment time.
+            </p>
+            <p className="mt-4">
+              You will receive a confirmation email shortly.
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
+      <p className="mt-10 text-sm">
+        Your data will be transmitted over an encrypted connection and held
+        securely on Livaware systems. We collect this data for the sole purpose
+        of contacting you about our services. We take information security
+        seriously, and this data will be erased immediately upon your stating
+        disinterest in our services following contact, or at your request,
+        whichever is sooner.
+      </p>
     </div>
   )
 }

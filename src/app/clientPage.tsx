@@ -116,7 +116,7 @@ export default function ClientHome({
       </div>
       {treeData && (
         <div className="grid min-h-screen-minus-header w-full grid-cols-1 justify-items-center bg-brand-taupe bg-opacity-95">
-          <div className="m-10 w-full max-w-copy">
+          <div className="w-full max-w-copy">
             <DecisionTreeColumn treeData={treeData} />
           </div>
         </div>
