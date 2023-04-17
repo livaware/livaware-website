@@ -18,7 +18,7 @@ export default function SanityImage({
     () =>
       urlBuilder(sanityClient)
         .image(value)
-        .width(800)
+        .width(1920)
         .fit('max')
         .auto('format')
         .url(),
