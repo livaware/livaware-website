@@ -34,8 +34,8 @@ export default function ClientHome({
   return (
     <>
       <Intro />
-      <div className="relative grid justify-items-center bg-brand-navy bg-opacity-90 text-white">
-        <div className="grid min-h-[80vh] max-w-copy grid-rows-[1fr_auto] items-start p-10">
+      <div className="relative grid grid-cols-1 justify-items-center bg-brand-navy bg-opacity-90 text-white">
+        <div className="m-10 grid min-h-[80vh] w-full max-w-copy grid-rows-[1fr_auto] items-start">
           <ContentToggler
             initialContent={
               <>
@@ -85,7 +85,7 @@ export default function ClientHome({
               </motion.div>
             )}
           </AnimatePresence>
-          {chatState.inputElement}
+          <div className="w-full text-brand-navy">{chatState.inputElement}</div>
         </div>
       </div>
       <div className="bg-white">
@@ -115,7 +115,7 @@ export default function ClientHome({
         </div>
       </div>
       {treeData && (
-        <div className="grid min-h-screen-minus-header w-full grid-cols-1 justify-items-center bg-brand-taupe bg-opacity-95 p-10">
+        <div className="m-10 grid min-h-screen-minus-header w-full grid-cols-1 justify-items-center bg-brand-taupe bg-opacity-95">
           <div className="w-full max-w-copy">
             <DecisionTreeColumn treeData={treeData} />
           </div>
