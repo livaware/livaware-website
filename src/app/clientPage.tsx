@@ -11,6 +11,7 @@ import {
   Chevron,
   ContentToggler,
   Heading,
+  Quotation,
   QuoteFader,
 } from 'livaware-react-components'
 import { useState } from 'react'
@@ -33,18 +34,14 @@ export default function ClientHome({
   return (
     <>
       <Intro />
-
-      <div className="relative grid grid-rows-2 overflow-x-hidden bg-brand-navy bg-opacity-90 md:min-h-screen-minus-header md:grid-cols-2 md:grid-rows-1">
-        <div className="grid grid-rows-[1fr_auto] items-start p-10">
+      <div className="relative grid justify-items-center bg-brand-navy bg-opacity-90 text-white">
+        <div className="grid min-h-[80vh] max-w-copy grid-rows-[1fr_auto] items-start p-10">
           <ContentToggler
             initialContent={
               <>
-                <Heading variant="h1" className="m-0 mt-8 mb-4 p-0 text-white">
-                  Livaware
-                </Heading>
                 <Heading
                   variant="h2"
-                  className="whitespace-pre-wrap text-white"
+                  className="m-0 mt-8 mb-4 whitespace-pre-wrap p-0"
                 >
                   {headline}
                 </Heading>
@@ -82,7 +79,7 @@ export default function ClientHome({
                 }}
                 className="w-full"
               >
-                <Heading variant="h2" className="text-white">
+                <Heading variant="h2" className="mt-20 text-white">
                   Questions? You can ask our AI assistant anything
                 </Heading>
               </motion.div>
@@ -94,15 +91,14 @@ export default function ClientHome({
       <div className="bg-white">
         <PortableTextRenderer content={content} />
         <div
-          className="grid min-h-screen-minus-header items-center justify-center  text-center text-white"
+          className="grid min-h-screen-minus-header grid-rows-[auto_1fr_auto] items-center justify-center py-20 text-center text-white"
           style={{
             backgroundImage:
               'linear-gradient(to top right, rgba(30,103,85,1) 0%, rgba(66,148,124,1) 35%, rgba(0,205,154,1) 100%)',
           }}
         >
           <Heading variant="h3">Testimonials</Heading>
-
-          <div className="max-w-3xl px-8">
+          <div className="max-w-copy px-8">
             <QuoteFader className="text-white" quotes={quotes} />
           </div>
           <Heading variant="h3">
@@ -119,11 +115,10 @@ export default function ClientHome({
         </div>
       </div>
       {treeData && (
-        <div className="grid min-h-screen-minus-header w-full grid-cols-1 justify-center bg-brand-taupe bg-opacity-95 p-10 md:grid-cols-2">
-          <div>
+        <div className="grid min-h-screen-minus-header w-full grid-cols-1 justify-items-center bg-brand-taupe bg-opacity-95 p-10">
+          <div className="w-full max-w-copy">
             <DecisionTreeColumn treeData={treeData} />
           </div>
-          <div></div>
         </div>
       )}
     </>

@@ -86,9 +86,11 @@ export default function FinalStep({
       <Script
         src={`https://www.google.com/recaptcha/api.js?render=${reCaptchaSiteKey}`}
       />
-      <Heading variant="h1" className="my-14">
-        Thank you, we know what you need.
-      </Heading>
+      <Heading variant="h1">Thank you, we know what you need.</Heading>
+      <p className="mb-10">
+        Let us know how to contact you, select a conveinent time, and we will be
+        in touch.
+      </p>
       <AnimatePresence mode="wait">
         {!loading && !complete && (
           <motion.form
@@ -151,6 +153,14 @@ export default function FinalStep({
               )}
             </fieldset>
             <CTAButton onClick={handleSubmit(onSubmit)} text="Submit" />
+            <p className="text-sm">
+              Your data will be transmitted over an encrypted connection and
+              held securely on Livaware systems. We collect this data for the
+              sole purpose of contacting you about our services. We take
+              information security seriously, and this data will be erased
+              immediately upon your stating disinterest in our services
+              following contact, or at your request, whichever is sooner.
+            </p>
           </motion.form>
         )}
         {loading && (

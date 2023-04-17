@@ -36,7 +36,7 @@ export default function Intro() {
       mobileUrl="/video/website-hero-mobile.mp4"
     >
       <div
-        className="relative h-screen-minus-header w-screen [font-size:6vw]"
+        className="relative h-screen-minus-header w-screen [font-size:min(3rem,6vw)]"
         ref={scope}
       >
         <div
@@ -58,7 +58,7 @@ export default function Intro() {
         </div>
         <div
           id="letterContainer"
-          className="absolute top-0 left-0 ml-10 grid h-full w-full items-end justify-start pb-12 text-white"
+          className="absolute top-0 left-0 grid h-full w-full items-end justify-center pb-12 text-white"
         >
           <div className="relative">
             <div

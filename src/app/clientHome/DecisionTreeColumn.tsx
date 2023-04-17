@@ -54,7 +54,7 @@ export default function DecisionTreeColumn({
   }
 
   const decisionTree = (
-    <div className="grid grid-rows-[1fr_auto]">
+    <div className="grid w-full grid-rows-[1fr_auto]">
       <DecisionTree
         treeData={currentTree}
         currentStepNumber={history.length + 1}
@@ -85,7 +85,7 @@ export default function DecisionTreeColumn({
         progress={isFinalStep ? 1 : progress}
         className="fixed left-0 top-[4.3rem] z-20 w-full md:top-[4rem]"
       />
-      <div>
+      <div className="w-full">
         <DecisionTreeHistory
           className="mb-8"
           history={history}
