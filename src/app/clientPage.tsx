@@ -17,6 +17,7 @@ import LeftColumn from './clientHome/LeftColumn'
 import AskLivaware from '@/components/AskLivaware'
 import useChatState from '@/lib/useChatState'
 import { AnimatePresence, motion } from 'framer-motion'
+import Intro from '@/components/Intro'
 
 export default function ClientHome({
   treeData,
@@ -34,11 +35,12 @@ export default function ClientHome({
   const chatState = useChatState(() => setChatActive(true))
 
   return (
-    <VideoBackground
-      url="/video/website-hero-desktop.mp4"
-      mobileUrl="/video/website-hero-mobile.mp4"
-    >
-      <ProgressBar progress={progress} className="bg-brand-taupe" />
+    <>
+      <Intro />
+      <ProgressBar
+        progress={progress}
+        className="fixed left-0 top-[4.2rem] z-20 w-full"
+      />
       <div className="relative grid grid-rows-2 overflow-x-hidden md:min-h-screen-minus-header md:grid-cols-2 md:grid-rows-1">
         <div className="grid grid-rows-[1fr_auto] items-start justify-center bg-brand-navy bg-opacity-90 p-10">
           <ContentToggler
@@ -76,6 +78,7 @@ export default function ClientHome({
                 key="heading"
                 initial={{ y: 32, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 32, opacity: 0 }}
                 transition={{
                   ease: 'easeOut',
                   duration: 0.3,
@@ -83,7 +86,7 @@ export default function ClientHome({
                 className="w-full"
               >
                 <Heading variant="h2" className="text-white">
-                  Or you can ask our AI assistant anything
+                  Questions? You can ask our AI assistant anything
                 </Heading>
               </motion.div>
             )}
@@ -95,8 +98,6 @@ export default function ClientHome({
           onProgress={(newProgress) => setProgress(newProgress)}
         />
       </div>
-
-      <div className="pt-[70vh]"></div>
       <div className="bg-white">
         <PortableTextRenderer content={content} />
 
@@ -125,6 +126,6 @@ export default function ClientHome({
           </Heading>
         </div>
       </div>
-    </VideoBackground>
+    </>
   )
 }
