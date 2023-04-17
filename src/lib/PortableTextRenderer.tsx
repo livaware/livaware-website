@@ -13,6 +13,7 @@ import {
   HeroProduct,
   Link,
   TextBlock,
+  ImageContentOverlay,
 } from 'livaware-react-components'
 import sanityClient from './sanityClient'
 import SanityImage from './SanityImage'
@@ -52,6 +53,25 @@ export default function PortableTextRenderer({ content }: { content: any }) {
               />
             )
           },
+          imageContentOverlay: ({ value }) => {
+            const url = urlBuilder(sanityClient)
+              .image(value.image)
+              .width(1920)
+              .fit('max')
+              .auto('format')
+              .url()
+            return (
+              <ImageContentOverlay
+                backgroundUrl={url}
+                content={<PortableTextRenderer content={value.content} />}
+                title={value.title}
+                cta={value.cta}
+                flipContent={value.flip}
+                backgroundColor={value.backgroundColor}
+                invertText={value.invertText}
+              />
+            )
+          },
           bigTextBlock: ({ value }) => <BigTextBlock {...value} />,
           fullScreenImage: ({ value }) => (
             <SanityImage
@@ -62,7 +82,7 @@ export default function PortableTextRenderer({ content }: { content: any }) {
           heroHeader: ({ value }) => {
             const url = urlBuilder(sanityClient)
               .image(value.image)
-              .width(800)
+              .width(1920)
               .fit('max')
               .auto('format')
               .url()
@@ -79,7 +99,7 @@ export default function PortableTextRenderer({ content }: { content: any }) {
           heroProduct: ({ value }) => {
             const url = urlBuilder(sanityClient)
               .image(value.image)
-              .width(800)
+              .width(1920)
               .fit('max')
               .auto('format')
               .url()
@@ -113,11 +133,11 @@ export default function PortableTextRenderer({ content }: { content: any }) {
             )
           },
           accordion: ({ value }) => {
-            console.log(value)
             return (
               <Accordion
                 backgroundColor={value.backgroundColor}
                 title={value.title}
+                invert={value.invert}
                 items={value.items.map((item: any) => ({
                   title: item.title,
                   content: item.content ? (
@@ -136,7 +156,6 @@ export default function PortableTextRenderer({ content }: { content: any }) {
             )
           },
           comparisonBlock: ({ value }) => {
-            console.log(value)
             return (
               <ComparisonBlock
                 backgroundColor={value.backgroundColor}

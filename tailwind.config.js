@@ -24,6 +24,7 @@ module.exports = {
       },
       maxWidth: {
         'site-width': '1080px',
+        copy: '48rem',
       },
       maxHeight: {
         'screen-minus-header': 'calc(100vh - var(--headerHeight))',
@@ -34,9 +35,6 @@ module.exports = {
       minHeight: {
         'screen-minus-header': 'calc(100vh - var(--headerHeight))',
         'screen-minus-header-partial': 'calc(80vh - var(--headerHeight))',
-      },
-      maxWidth: {
-        copy: '48rem',
       },
       backgroundOpacity: {
         95: '0.95',

@@ -9,7 +9,6 @@ export default function filterTimeSlots(
 
   for (const timeSlot of timeSlots) {
     const available = availability.some((entry) => {
-      console.log(entry)
       const start = new Date(entry.startDateTime.dateTime + 'Z')
       const end = new Date(entry.endDateTime.dateTime + 'Z')
       return timeSlot.start >= start && timeSlot.end <= end
