@@ -1,23 +1,20 @@
 'use client'
 
+import Intro from '@/components/Intro'
 import PortableTextRenderer from '@/lib/PortableTextRenderer'
 import DecisionTreeItem from '@/lib/sanityTypes/decisionTreeItem'
 import Quote from '@/lib/sanityTypes/quote'
+import useChatState from '@/lib/useChatState'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
   ChatBot,
   Chevron,
   ContentToggler,
   Heading,
-  ProgressBar,
   QuoteFader,
-  VideoBackground,
 } from 'livaware-react-components'
 import { useState } from 'react'
-import LeftColumn from './clientHome/LeftColumn'
-import AskLivaware from '@/components/AskLivaware'
-import useChatState from '@/lib/useChatState'
-import { AnimatePresence, motion } from 'framer-motion'
-import Intro from '@/components/Intro'
+import DecisionTreeColumn from './clientHome/DecisionTreeColumn'
 
 export default function ClientHome({
   treeData,
@@ -30,19 +27,15 @@ export default function ClientHome({
   content: any
   headline: string
 }) {
-  const [progress, setProgress] = useState(0)
   const [chatActive, setChatActive] = useState(false)
   const chatState = useChatState(() => setChatActive(true))
 
   return (
     <>
       <Intro />
-      <ProgressBar
-        progress={progress}
-        className="fixed left-0 top-[4.2rem] z-20 w-full"
-      />
-      <div className="relative grid grid-rows-2 overflow-x-hidden md:min-h-screen-minus-header md:grid-cols-2 md:grid-rows-1">
-        <div className="grid grid-rows-[1fr_auto] items-start justify-center bg-brand-navy bg-opacity-90 p-10">
+
+      <div className="relative grid grid-rows-2 overflow-x-hidden bg-brand-navy bg-opacity-90 md:min-h-screen-minus-header md:grid-cols-2 md:grid-rows-1">
+        <div className="grid grid-rows-[1fr_auto] items-start p-10">
           <ContentToggler
             initialContent={
               <>
@@ -58,8 +51,12 @@ export default function ClientHome({
               </>
             }
             activeContent={
-              <div className=" text-white">
-                <button type="button" onClick={() => setChatActive(false)}>
+              <div className="w-full text-white">
+                <button
+                  type="button"
+                  onClick={() => setChatActive(false)}
+                  className="mb-10"
+                >
                   <Chevron reverse /> Go back
                 </button>
                 <ChatBot
@@ -93,14 +90,9 @@ export default function ClientHome({
           </AnimatePresence>
           {chatState.inputElement}
         </div>
-        <LeftColumn
-          treeData={treeData}
-          onProgress={(newProgress) => setProgress(newProgress)}
-        />
       </div>
       <div className="bg-white">
         <PortableTextRenderer content={content} />
-
         <div
           className="grid min-h-screen-minus-header items-center justify-center  text-center text-white"
           style={{
@@ -126,6 +118,14 @@ export default function ClientHome({
           </Heading>
         </div>
       </div>
+      {treeData && (
+        <div className="grid min-h-screen-minus-header w-full grid-cols-1 justify-center bg-brand-taupe bg-opacity-95 p-10 md:grid-cols-2">
+          <div>
+            <DecisionTreeColumn treeData={treeData} />
+          </div>
+          <div></div>
+        </div>
+      )}
     </>
   )
 }

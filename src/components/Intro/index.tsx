@@ -42,27 +42,36 @@ export default function Intro() {
         <div
           id="background"
           className="opacity-1 absolute top-0 left-0 h-screen w-screen bg-brand-navy"
+          role="none"
         />
         <div
           id="gradient"
-          className="absolute bottom-0 left-0 h-32 w-screen bg-gradient-to-t from-brand-navy to-transparent"
+          className="absolute bottom-0 left-0 h-[50vh] w-screen bg-gradient-to-t from-brand-navy opacity-90"
+          role="none"
         />
         <div
           id="logo"
           className="absolute top-0 left-0 grid h-full w-full items-center justify-center opacity-0"
+          role="none"
         >
           <Logo variant="white" />
         </div>
         <div
           id="letterContainer"
-          className="absolute top-0 left-0 grid h-full w-full items-end justify-center pb-12 text-white"
+          className="absolute top-0 left-0 ml-10 grid h-full w-full items-end justify-start pb-12 text-white"
         >
           <div className="relative">
-            <div id="letters" className="relative z-20">
+            <div
+              id="letters"
+              className="relative z-[11]"
+              role="heading"
+              aria-level={1}
+            >
               <SplitCharacters input="Your Personal Healthcare Team" />
             </div>
             <span
               id="underline"
+              role="none"
               className="absolute top-0 left-0 z-10 origin-left scale-x-0 border-b border-b-white text-brand-navy"
             >
               Your

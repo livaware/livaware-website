@@ -5,16 +5,15 @@ import {
   DecisionTree,
   DecisionTreeHistory,
   DecisionTreeHistoryItem,
+  ProgressBar,
 } from 'livaware-react-components'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import FinalStep from './DecisionTreeFinalStep'
 
 export default function DecisionTreeColumn({
   treeData,
-  onProgress,
 }: {
   treeData: DecisionTreeItem
-  onProgress: (progress: number) => void
 }) {
   const [currentTree, setCurrentTree] = useState(treeData)
   const [history, setHistory] = useState<DecisionTreeHistoryItem[]>([])
@@ -24,10 +23,6 @@ export default function DecisionTreeColumn({
   const currentTreeDepth = getDecisionTreeDepth(currentTree)
   const progress =
     currentTreeDepth === 1 ? 1 : 1 - currentTreeDepth / maximumTreeDepth
-
-  useEffect(() => {
-    onProgress(isFinalStep ? 1 : progress)
-  }, [onProgress, progress, isFinalStep])
 
   const selectOption = (currentTree: DecisionTreeItem, selection: number) => {
     const newState = currentTree.options?.[selection].nextStep
@@ -86,8 +81,13 @@ export default function DecisionTreeColumn({
 
   return (
     <>
+      <ProgressBar
+        progress={isFinalStep ? 1 : progress}
+        className="fixed left-0 top-[4.3rem] z-20 w-full md:top-[4rem]"
+      />
       <div>
         <DecisionTreeHistory
+          className="mb-8"
           history={history}
           onItemPressed={(index) => {
             setIsFinalStep(false)
