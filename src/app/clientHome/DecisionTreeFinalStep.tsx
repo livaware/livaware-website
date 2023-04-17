@@ -86,11 +86,8 @@ export default function FinalStep({
       <Script
         src={`https://www.google.com/recaptcha/api.js?render=${reCaptchaSiteKey}`}
       />
-      <Heading variant="h1">Thank you, we know what you need.</Heading>
-      <p className="mb-10">
-        Let us know how to contact you, select a conveinent time, and we will be
-        in touch.
-      </p>
+      <Heading variant="h1">Thank you, we know how to help.</Heading>
+      <p className="mb-10">Let&apos;s get in touch at a convenient time:</p>
       <AnimatePresence mode="wait">
         {!loading && !complete && (
           <motion.form
