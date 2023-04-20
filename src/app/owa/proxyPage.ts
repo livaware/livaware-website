@@ -1,7 +1,6 @@
-import { NextRequest } from 'next/server'
-import rebuildHeaders from '../rebuildHeaders'
+import rebuildHeaders from './rebuildHeaders'
 
-export async function ProcessRequest(req: Request) {
+export async function ProxyPage(req: Request) {
   const reqBase = req.url.split('/owa/')[1]
   const reqUrl = `https://outlook.office365.com/owa/${reqBase}`
 
@@ -18,11 +17,4 @@ export async function ProcessRequest(req: Request) {
     status: 200,
     headers: rebuildHeaders(response.headers),
   })
-}
-
-export async function GET(req: NextRequest) {
-  return ProcessRequest(req)
-}
-export async function POST(req: NextRequest) {
-  return ProcessRequest(req)
 }
