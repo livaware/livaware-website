@@ -16,6 +16,7 @@ export default function ContactPage() {
       const iHeight =
         iFrame.current?.contentWindow!.document.body.scrollHeight ?? 0
       setHeight(iHeight)
+      return () => clearInterval(interval)
     }, 333)
   }, [])
 
@@ -30,7 +31,8 @@ export default function ContactPage() {
       <p></p>
       <iframe
         ref={iFrame}
-        src="/owa/calendar/Livaware@livaware.co.uk/bookings/"
+        // src="/owa/calendar/Livaware@livaware.co.uk/bookings/"
+        src="https://outlook.office365.com/owa/calendar/Livaware@livaware.co.uk/bookings/"
         className="min-h-screen-minus-header w-full overflow-hidden"
         scrolling="no"
         seamless
