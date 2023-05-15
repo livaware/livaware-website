@@ -8,6 +8,7 @@ module.exports = {
     fontFamily: {
       sans: ['MetroSans-Book', 'Helvetica', 'Arial', 'Sans-Serif'],
       light: ['MetroSans-Light', 'Helvetica', 'Arial', 'Sans-Serif'],
+      heading: ['larken-bold', 'Helvetica', 'Arial', 'Sans-Serif'],
     },
     extend: {
       colors: {
