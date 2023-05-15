@@ -7,7 +7,7 @@ export default function ClientPage({ pages }: { pages: GenericPageData[] }) {
   return (
     <ContentContainer>
       <Heading variant="h1">Resources</Heading>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="mb-10 grid grid-cols-1 gap-4 md:grid-cols-3">
         {pages.map((page) => (
           <Link
             href={`/resources/${page.slug}`}
