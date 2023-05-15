@@ -119,6 +119,7 @@ export default function PortableTextRenderer({ content }: { content: any }) {
               <Columns
                 title={value.title}
                 backgroundColor={value.backgroundColor}
+                invertText={value.invertText}
               >
                 {value.columns.map((column: any, index: number) => (
                   <Column
@@ -127,6 +128,7 @@ export default function PortableTextRenderer({ content }: { content: any }) {
                     content={<PortableTextRenderer content={column.content} />}
                     cta={column.cta}
                     number={value.showNumbers ? `${index + 1}` : undefined}
+                    invert={value.invertText}
                   />
                 ))}
               </Columns>

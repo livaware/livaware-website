@@ -43,3 +43,51 @@ p {
   font-size: 18px;
   line-height: 23px;
 }
+
+@font-face {
+  font-family: 'larken-bold';
+  src: url('/font/larken-bold/larken-bold.eot');
+  src: url('/font/larken-bold/larken-bold.eot?#iefix')
+      format('embedded-opentype'),
+    url('/font/larken-bold/larken-bold.woff2') format('woff2'),
+    url('/font/larken-bold/larken-bold.woff') format('woff'),
+    url('/font/larken-bold/larken-bold.ttf') format('truetype'),
+    url('/font/larken-bold/larken-bold.svg#youworkforthem') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+p {
+  font-size: 18px;
+  line-height: 23px;
+}
+
+footer a {
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+}
+footer a:hover {
+  text-decoration: underline !important;
+  text-decoration-line: underline !important;
+}
+
+ol {
+  padding: 4em 2em;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+ul {
+  padding: 1em;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+li {
+  white-space: pre-line;
+}
+
+ul li {
+  list-style-type: circle;
+}

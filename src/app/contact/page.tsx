@@ -33,8 +33,8 @@ export default function ContactPage() {
         ref={iFrame}
         // src="/owa/calendar/Livaware@livaware.co.uk/bookings/"
         src="https://outlook.office365.com/owa/calendar/Livaware@livaware.co.uk/bookings/"
-        className="min-h-screen-minus-header w-full overflow-hidden"
-        scrolling="no"
+        className="min-h-screen-minus-header w-full overflow-scroll"
+        scrolling="yes"
         seamless
         style={{
           height,
