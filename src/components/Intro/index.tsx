@@ -63,7 +63,7 @@ export default function Intro() {
           <div className="relative">
             <div
               id="letters"
-              className="relative z-[11]"
+              className="relative z-[11] font-heading"
               role="heading"
               aria-level={1}
             >
@@ -72,7 +72,7 @@ export default function Intro() {
             <span
               id="underline"
               role="none"
-              className="absolute top-0 left-0 z-10 origin-left scale-x-0 border-b border-b-white text-brand-navy"
+              className="absolute top-0 left-0 z-10 origin-left scale-x-0 border-b border-b-white font-heading text-brand-navy"
             >
               Your
             </span>
