@@ -168,7 +168,7 @@ export default function PortableTextRenderer({ content }: { content: any }) {
                 topText={value.topText}
                 columns={value.columns.map((x: any) => ({
                   title: x.title,
-                  cta: x.cta,
+                  cta: x.cta?.title ? x.cta : undefined,
                   content: <PortableTextRenderer content={x.content} />,
                 }))}
               />
