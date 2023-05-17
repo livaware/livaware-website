@@ -63,6 +63,9 @@ p {
   line-height: 23px;
   margin: 1em 0;
 }
+p:empty {
+  display: none;
+}
 
 footer a {
   text-decoration: none !important;

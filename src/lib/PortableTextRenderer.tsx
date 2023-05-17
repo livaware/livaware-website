@@ -142,6 +142,7 @@ export default function PortableTextRenderer({ content }: { content: any }) {
                 invert={value.invert}
                 items={value.items.map((item: any) => ({
                   title: item.title,
+                  titleAddition: item.titleAddition,
                   content: item.content ? (
                     <PortableTextRenderer content={item.content} />
                   ) : undefined,
