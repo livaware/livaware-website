@@ -9,6 +9,7 @@ import {
 } from 'livaware-react-components'
 import { useState } from 'react'
 import FinalStep from './DecisionTreeFinalStep'
+import analyticsEvent from '@/lib/analyticsEvent'
 
 export default function DecisionTreeColumn({
   treeData,
@@ -60,12 +61,14 @@ export default function DecisionTreeColumn({
         currentStepNumber={history.length + 1}
         onOptionSelected={(index, option) => {
           if (option.finalStep) {
+            analyticsEvent('decision-tree', 'final-step')
             setIsFinalStep(true)
           } else {
             const newState = selectOption(currentTree, index)
             if (newState.newState) {
               setCurrentTree(newState.newState)
             }
+            analyticsEvent('decision-tree', 'option-selected', option.text)
           }
           setHistory([
             ...history,
