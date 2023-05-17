@@ -82,14 +82,12 @@ footer a:hover {
 
 ol {
   max-width: 800px;
-  margin: 0 auto;
   list-style-type: circle;
 }
 
 ul {
   padding: 1em;
   max-width: 800px;
-  margin: 0 auto;
 }
 
 li {
