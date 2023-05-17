@@ -26,7 +26,7 @@ export default function ContactPage() {
         topText="Contact Livaware"
         mainText="Your journey to better healthcare starts now."
         subTitleText="Simply fill in the form below and we will call you at a convenient time. Alternatively, email us at hello@livaware.co.uk"
-        imageUrl="https://cdn.sanity.io/images/41p617pr/livaware-website/90ba9e8be269b3e2f47f1788d7824f8eaff9c305-8256x5504.jpg?w=1920&fit=max&auto=format"
+        imageUrl="/img/contact.jpg"
       />
       <p></p>
       <iframe

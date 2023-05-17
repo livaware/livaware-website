@@ -161,6 +161,7 @@ export default function PortableTextRenderer({ content }: { content: any }) {
             return (
               <ComparisonBlock
                 backgroundColor={value.backgroundColor}
+                invertText={value.invertText}
                 mainText={value.mainText}
                 bottomText={value.bottomText}
                 topText={value.topText}
