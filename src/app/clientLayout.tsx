@@ -22,6 +22,7 @@ export default function ClientRootLayout({
   const router = useRouter()
   const path = usePathname()
   const [loading, setLoading] = useState(false)
+  const [isInitialLoading, setIsInitialLoading] = useState(true)
 
   useEffect(() => {
     init({ url: MATOMO_URL, siteId: MATOMO_SITE_ID })
@@ -64,12 +65,13 @@ export default function ClientRootLayout({
   useEffect(() => {
     window.scrollTo(0, 0)
     setLoading(false)
+    setIsInitialLoading(false)
   }, [path])
 
   return (
     <>
       <PageLayout globalConfig={globalConfig}>
-        <Template loading={loading}>{children}</Template>
+        <Template loading={!isInitialLoading && loading}>{children}</Template>
       </PageLayout>
     </>
   )

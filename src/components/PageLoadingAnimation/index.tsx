@@ -4,8 +4,10 @@ import { useEffect } from 'react'
 
 export default function PageLoadingAnimation({
   loading,
+  onLoadingComplete,
 }: {
   loading: boolean
+  onLoadingComplete?: () => void
 }) {
   const [scope, animate] = useAnimate()
 
@@ -24,11 +26,12 @@ export default function PageLoadingAnimation({
       try {
         await animate('#logo, #container', { opacity: 0 }, { duration: 0.2 })
         await animate('#container', { display: 'none' }, { duration: 0 })
+        onLoadingComplete?.()
       } catch {}
     }
 
     loading ? startLoading() : stopLoading()
-  }, [animate, loading])
+  }, [animate, loading, onLoadingComplete])
 
   return (
     <div ref={scope}>
