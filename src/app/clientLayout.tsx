@@ -2,10 +2,10 @@
 
 import PageLayout from '@/components/Layout/PageLayout'
 import { GlobalConfiguration } from '@/lib/sanityClient'
-import { usePathname, useRouter } from 'next/navigation'
-import Template from './template'
 import { init } from '@socialgouv/matomo-next'
-import { useEffect } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import Template from './template'
 
 const MATOMO_URL = 'https://livaware.matomo.cloud/'
 const MATOMO_SITE_ID = '1'
@@ -19,28 +19,57 @@ export default function ClientRootLayout({
   children: React.ReactNode
   globalConfig: GlobalConfiguration
 }) {
-  const path = usePathname()
   const router = useRouter()
+  const path = usePathname()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     init({ url: MATOMO_URL, siteId: MATOMO_SITE_ID })
+  }, [])
 
+  useEffect(() => {
     // Bind react router navigation event to all a tags
-    window.addEventListener('click', (e) => {
+    const onClick = (e: any) => {
       const target = e.target as HTMLElement
-      if (target.tagName.toLowerCase() === 'a') {
-        const href = target.getAttribute('href')
+
+      var foundTarget = target
+
+      if (
+        target.tagName.toLowerCase() !== 'a' &&
+        target.tagName.toLowerCase() !== 'button'
+      ) {
+        const closestAnchor = target.closest('a')
+        if (closestAnchor) {
+          foundTarget = closestAnchor
+        }
+      }
+      const lcTagName = foundTarget.tagName.toLowerCase()
+
+      if (lcTagName === 'a' || lcTagName === 'button') {
+        const href = foundTarget.getAttribute('href')
         if (href && href.startsWith('/')) {
           e.preventDefault()
+          if (href !== path) {
+            setLoading(true)
+          }
           router.push(href)
         }
       }
-    })
-  }, [router])
+    }
+
+    window.addEventListener('click', onClick)
+    return () => window.removeEventListener('click', onClick)
+  }, [router, path])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    setLoading(false)
+  }, [path])
+
   return (
     <>
       <PageLayout globalConfig={globalConfig}>
-        <Template>{children}</Template>
+        <Template loading={loading}>{children}</Template>
       </PageLayout>
     </>
   )

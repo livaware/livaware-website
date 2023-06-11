@@ -1,29 +1,25 @@
 'use client'
 
-import { AnimatePresence, motion } from 'framer-motion'
-import { usePathname } from 'next/navigation'
+import PageLoadingAnimation from '@/components/PageLoadingAnimation'
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 
 export default function Template({
   // Layouts must accept a children prop.
   // This will be populated with nested layouts or pages
   children,
+  loading,
 }: {
   children: React.ReactNode
+  loading: boolean
 }) {
-  const path = usePathname()
   return (
-    <AnimatePresence
-      mode="wait"
-      initial={false}
-      onExitComplete={() => window.scrollTo(0, 0)}
-      key={`p-${path}`}
-    >
+    <>
+      <PageLoadingAnimation loading={loading} />
       <motion.div
-        key={`t-${path}`}
         style={{ height: '100%' }}
         initial={{ x: 300, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        exit={{ x: -300, opacity: 0 }}
+        animate={{ x: loading ? 300 : 0, opacity: loading ? 0 : 1 }}
         transition={{
           type: 'spring',
           duration: 0.5,
@@ -31,6 +27,6 @@ export default function Template({
       >
         {children}
       </motion.div>
-    </AnimatePresence>
+    </>
   )
 }
