@@ -2,7 +2,7 @@
 
 import PageLayout from '@/components/Layout/PageLayout'
 import { GlobalConfiguration } from '@/lib/sanityClient'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Template from './template'
 import { init } from '@socialgouv/matomo-next'
 import { useEffect } from 'react'
@@ -20,12 +20,26 @@ export default function ClientRootLayout({
   globalConfig: GlobalConfiguration
 }) {
   const path = usePathname()
+  const router = useRouter()
+
   useEffect(() => {
     init({ url: MATOMO_URL, siteId: MATOMO_SITE_ID })
-  }, [])
+
+    // Bind react router navigation event to all a tags
+    window.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement
+      if (target.tagName.toLowerCase() === 'a') {
+        const href = target.getAttribute('href')
+        if (href && href.startsWith('/')) {
+          e.preventDefault()
+          router.push(href)
+        }
+      }
+    })
+  }, [router])
   return (
     <>
-      <PageLayout globalConfig={globalConfig} key={`l-${path}`}>
+      <PageLayout globalConfig={globalConfig}>
         <Template>{children}</Template>
       </PageLayout>
     </>
