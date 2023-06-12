@@ -15,13 +15,17 @@ export default function Template({
   loading,
 }: {
   children: React.ReactNode
-  loading: boolean
+  loading?: boolean
 }) {
   const animationStartTime = useRef<Date>(new Date())
   const [internalLoading, setInternalLoading] = useState(false)
   const [scope, animate] = useAnimate()
 
   useEffect(() => {
+    if (loading === undefined) {
+      return
+    }
+
     const animateEntry = async () => {
       await animate(
         scope.current,
@@ -39,7 +43,7 @@ export default function Template({
           y: 0,
           opacity: 1,
         },
-        { duration: ANIMATE_ENTER_DURATION }
+        { duration: ANIMATE_ENTER_DURATION, ease: 'easeOut' }
       )
     }
 
@@ -72,6 +76,10 @@ export default function Template({
   }, [internalLoading, animate, scope])
 
   useEffect(() => {
+    if (loading === undefined) {
+      return
+    }
+
     if (!loading) {
       if (animationStartTime) {
         const timeDiff =

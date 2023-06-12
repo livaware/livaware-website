@@ -4,7 +4,7 @@ import PageLayout from '@/components/Layout/PageLayout'
 import { GlobalConfiguration } from '@/lib/sanityClient'
 import { init } from '@socialgouv/matomo-next'
 import { usePathname, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Template from './template'
 
 const MATOMO_URL = 'https://livaware.matomo.cloud/'
@@ -21,8 +21,8 @@ export default function ClientRootLayout({
 }) {
   const router = useRouter()
   const path = usePathname()
-  const [loading, setLoading] = useState(false)
-  const [isInitialLoading, setIsInitialLoading] = useState(true)
+  const prevPath = useRef<string | null>(path)
+  const [loading, setLoading] = useState<boolean | undefined>(undefined)
 
   useEffect(() => {
     init({ url: MATOMO_URL, siteId: MATOMO_SITE_ID })
@@ -51,7 +51,9 @@ export default function ClientRootLayout({
         if (href && href.startsWith('/')) {
           e.preventDefault()
           if (href !== path) {
-            setLoading(true)
+            if (href !== prevPath.current) {
+              setLoading(true)
+            }
           }
           router.push(href)
         }
@@ -64,14 +66,16 @@ export default function ClientRootLayout({
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    setLoading(false)
-    setIsInitialLoading(false)
+    if (path !== prevPath.current) {
+      setLoading(false)
+      prevPath.current = path
+    }
   }, [path])
 
   return (
     <>
       <PageLayout globalConfig={globalConfig}>
-        <Template loading={!isInitialLoading && loading}>{children}</Template>
+        <Template loading={loading}>{children}</Template>
       </PageLayout>
     </>
   )
