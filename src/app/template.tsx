@@ -1,10 +1,12 @@
 'use client'
 
 import PageLoadingAnimation from '@/components/PageLoadingAnimation'
-import { motion } from 'framer-motion'
+import { motion, useAnimate } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 
-const MIN_ANIMATE_TIME = 1000
+const MIN_ANIMATE_TIME = 1500
+const ANIMATE_EXIT_DURATION = 0.5
+const ANIMATE_ENTER_DURATION = 1
 
 export default function Template({
   // Layouts must accept a children prop.
@@ -17,13 +19,63 @@ export default function Template({
 }) {
   const animationStartTime = useRef<Date>(new Date())
   const [internalLoading, setInternalLoading] = useState(false)
+  const [scope, animate] = useAnimate()
+
+  useEffect(() => {
+    const animateEntry = async () => {
+      await animate(
+        scope.current,
+        {
+          y: 100,
+          x: 0,
+          opacity: 0,
+        },
+        { duration: 0 }
+      )
+      await animate(
+        scope.current,
+        {
+          x: 0,
+          y: 0,
+          opacity: 1,
+        },
+        { duration: ANIMATE_ENTER_DURATION }
+      )
+    }
+
+    const animateExit = async () => {
+      await animate(
+        scope.current,
+        {
+          x: 0,
+          y: 0,
+          opacity: 1,
+        },
+        { duration: 0 }
+      )
+      await animate(
+        scope.current,
+        {
+          x: 0,
+          y: 0,
+          opacity: 0,
+        },
+        { duration: ANIMATE_EXIT_DURATION }
+      )
+    }
+
+    if (internalLoading) {
+      animateExit()
+    } else {
+      animateEntry()
+    }
+  }, [internalLoading, animate, scope])
 
   useEffect(() => {
     if (!loading) {
       if (animationStartTime) {
         const timeDiff =
           new Date().getTime() - animationStartTime.current.getTime()
-        console.log(timeDiff)
         if (timeDiff < MIN_ANIMATE_TIME) {
           setTimeout(() => {
             setInternalLoading(false)
@@ -39,20 +91,9 @@ export default function Template({
   }, [loading, animationStartTime])
 
   return (
-    <div className="relative -z-20 bg-brand-navy" id="cont">
+    <div>
       <PageLoadingAnimation loading={internalLoading} />
-      <motion.div
-        style={{ height: '100%' }}
-        initial={{ x: 300, opacity: 0 }}
-        animate={{
-          x: internalLoading ? 300 : 0,
-          opacity: internalLoading ? 0 : 1,
-        }}
-        transition={{
-          type: 'spring',
-          duration: 0.5,
-        }}
-      >
+      <motion.div ref={scope} style={{ height: '100%' }}>
         {children}
       </motion.div>
     </div>

@@ -21,7 +21,7 @@ export default function ContactPage() {
   }, [])
 
   return (
-    <>
+    <div className="bg-white">
       <HeroHeader
         topText="Contact Livaware"
         mainText="Your journey to better healthcare starts now."
@@ -40,7 +40,7 @@ export default function ContactPage() {
           height,
         }}
       />
-      <p className="m-auto my-10 max-w-copy text-center text-xs">
+      <p className="m-auto max-w-copy py-10 text-center text-xs">
         Your data will be transmitted over an encrypted connection and held
         securely on Livaware systems. We collect this data for the sole purpose
         of contacting you about our services. We take information security
@@ -48,6 +48,6 @@ export default function ContactPage() {
         disinterest in our services following contact, or at your request,
         whichever is sooner.
       </p>
-    </>
+    </div>
   )
 }

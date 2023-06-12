@@ -24,8 +24,8 @@ export default function PageLoadingAnimation({
     }
     const stopLoading = async () => {
       try {
-        await animate('#logo, #container', { opacity: 0 }, { duration: 0.2 })
-        await animate('#container', { display: 'none' }, { duration: 0 })
+        await animate('#logo', { opacity: 0 }, { duration: 0.2 })
+        // await animate('#container', { display: 'none' }, { duration: 0 })
         onLoadingComplete?.()
       } catch {}
     }
@@ -37,7 +37,7 @@ export default function PageLoadingAnimation({
     <div ref={scope}>
       <div
         id="container"
-        className="fixed top-[var(--headerHeight)] left-0 h-screen w-screen bg-brand-navy opacity-0"
+        className="fixed top-[var(--headerHeight)] left-0 -z-20 h-screen w-screen bg-brand-navy"
       >
         <div
           id="logo"

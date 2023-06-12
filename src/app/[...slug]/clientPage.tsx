@@ -18,9 +18,10 @@ export default function ClientPage({ content }: { content: any }) {
 
   return (
     <>
-      <PortableTextRenderer content={content} />
-
-      <AskLivaware headingText="Ask Livaware" />
+      <div className="bg-white">
+        <PortableTextRenderer content={content} />
+        <AskLivaware headingText="Ask Livaware" />
+      </div>
     </>
   )
 }
