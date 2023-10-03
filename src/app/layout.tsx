@@ -1,5 +1,6 @@
 import '@/styles/globals.css'
 
+import Head from 'next/head'
 import { getGlobalConfiguration } from '@/lib/sanityClient'
 import ClientRootLayout from './clientLayout'
 
@@ -13,6 +14,9 @@ export default async function RootLayout({
   const globalConfig = await getGlobalConfiguration()
   return (
     <html lang="en">
+      <Head>
+        <meta name="format-detection" content="telephone=no" />
+      </Head>
       <body>
         <ClientRootLayout globalConfig={globalConfig}>
           {children}
