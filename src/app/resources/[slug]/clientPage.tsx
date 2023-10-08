@@ -14,7 +14,7 @@ export default function ClientPage({ data }: { data: ResourcePageData }) {
         </Link>
       </div>
       {data.coverImage && (
-        <SanityImage value={data.coverImage} className="max-h-[50vh]" />
+        <SanityImage value={data.coverImage} className="max-h-[50svh]" />
       )}
       <Heading variant="h1">{data.title}</Heading>
       {data.subTitle && <Heading variant="h2">{data.subTitle}</Heading>}

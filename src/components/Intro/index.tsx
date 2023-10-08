@@ -46,7 +46,7 @@ export default function Intro() {
         />
         <div
           id="gradient"
-          className="absolute bottom-0 left-0 h-[50vh] w-screen bg-gradient-to-t from-brand-navy opacity-90"
+          className="absolute bottom-0 left-0 h-[50svh] w-screen bg-gradient-to-t from-brand-navy opacity-90"
           role="none"
         />
         <div

@@ -35,7 +35,7 @@ export default function ClientHome({
     <>
       <Intro />
       <div className="relative grid grid-cols-1 justify-items-center bg-brand-navy bg-opacity-90 p-10 text-white">
-        <div className="grid min-h-[80vh] w-full max-w-copy grid-rows-[1fr_auto] items-start">
+        <div className="grid min-h-[80svh] w-full max-w-copy grid-rows-[1fr_auto] items-start">
           <ContentToggler
             initialContent={
               <>
