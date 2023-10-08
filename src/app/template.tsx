@@ -73,7 +73,7 @@ export default function Template({
     } else {
       animateEntry()
     }
-  }, [internalLoading, animate, scope])
+  }, [internalLoading, loading, animate, scope])
 
   useEffect(() => {
     if (loading === undefined) {

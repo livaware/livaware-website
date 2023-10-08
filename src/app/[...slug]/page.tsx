@@ -4,8 +4,8 @@ import { GenericPageData } from '@/lib/sanityTypes/genericPageData'
 import { Metadata } from 'next'
 import ClientPage from './clientPage'
 
-export interface GenericPageStaticParams {
-  slug: string
+export interface GenericPageStaticParams<T> {
+  slug: T
 }
 
 export async function generateStaticParams() {
@@ -13,14 +13,20 @@ export async function generateStaticParams() {
     `*[_type == "standardPage"]`
   )
 
+  console.log(pages.map((x) => x.slug))
+
   const paths = pages.map((page) => ({
-    slug: page.slug,
+    slug: [page.slug],
   }))
-  return paths as GenericPageStaticParams[]
+  return paths as GenericPageStaticParams<string[]>[]
 }
 
 async function getPageData(slug: string | string[]) {
-  const newSlug = Array.isArray(slug) ? slug.join('/') : slug
+  const newSlug = (Array.isArray(slug) ? slug.join('/') : slug).replaceAll(
+    '%2F',
+    ''
+  )
+
   try {
     const data = await sanityClient.fetch<GenericPageData[]>(
       `*[slug == "/${newSlug}"]`
@@ -35,13 +41,17 @@ async function getPageData(slug: string | string[]) {
 export async function generateMetadata({
   params,
 }: {
-  params: GenericPageStaticParams
+  params: GenericPageStaticParams<string[]>
 }): Promise<Metadata> {
   const data = await getPageData(params.slug)
   return { title: `Livaware - ${data?.title}`, description: data?.description }
 }
 
-const GenericPage = async ({ params }: { params: GenericPageStaticParams }) => {
+const GenericPage = async ({
+  params,
+}: {
+  params: GenericPageStaticParams<string[]>
+}) => {
   const data = await getPageData(params.slug)
 
   if (!data) {

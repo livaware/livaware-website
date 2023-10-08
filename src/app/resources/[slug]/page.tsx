@@ -12,7 +12,7 @@ export async function generateStaticParams() {
   const paths = pages.map((page) => ({
     slug: page.slug,
   }))
-  return paths as GenericPageStaticParams[]
+  return paths as GenericPageStaticParams<string>[]
 }
 
 async function getPageData(slug: string) {
@@ -30,7 +30,7 @@ async function getPageData(slug: string) {
 export async function generateMetadata({
   params,
 }: {
-  params: GenericPageStaticParams
+  params: GenericPageStaticParams<string>
 }): Promise<Metadata> {
   const data = await getPageData(params.slug)
   return { title: `Livaware - ${data?.title}` }
@@ -39,7 +39,7 @@ export async function generateMetadata({
 export default async function ResourcePage({
   params,
 }: {
-  params: GenericPageStaticParams
+  params: GenericPageStaticParams<string>
 }) {
   const data = await getPageData(params.slug)
 
