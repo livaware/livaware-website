@@ -2,7 +2,7 @@
   "routes": [
     {
       "route": "www.livaware.co.uk",
-      "redirect": "livaware.health",
+      "redirect": "www.livaware.health",
       "statusCode": 301
     }
   ]
